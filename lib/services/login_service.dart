@@ -17,13 +17,14 @@ class LoginService {
   LoginService() {
     _sub = _identityBloc.identityStream.listen((event) {
       this._user = event;
-      print("HEY $this._user");
+      print("HEY $_user");
     });
   }
 
   Future<void> login(LoginResponsePodo loginResponsePodo) async {
     await secureStorage.saveData(
         StorageKeys.TOKEN.value, loginResponsePodo.key);
+    await secureStorage.saveData(StorageKeys.USERNAME.value, loginResponsePodo.username);
     repo.updateDio();
   }
 

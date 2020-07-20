@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:ombiapp/model/request/login.dart';
+import 'package:ombiapp/model/network_error.dart';
 import 'package:ombiapp/model/response/LoginResponsePodo.dart';
+import 'package:ombiapp/pages/login/login_form.dart';
+import 'package:ombiapp/services/login_service.dart';
 import 'package:ombiapp/services/network/login_bloc.dart';
-import 'package:ombiapp/services/network/repository.dart';
-import 'package:ombiapp/utils/utilsImpl.dart';
+import 'package:ombiapp/services/router.dart';
+import 'package:ombiapp/services/secure_storage.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -13,10 +14,6 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  final _formKey = GlobalKey<FormState>();
-  final _usernameController = TextEditingController();
-  final _passwordController = TextEditingController();
-  bool _isLoading = false;
   LoginBloc _bloc;
 
   @override
@@ -27,94 +24,58 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   void dispose() {
-    _usernameController.dispose();
-    _passwordController.dispose();
+    print("disposing login page");
     _bloc.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Color.fromARGB(245, 31, 31, 31),
-      child: SafeArea(
-        child: Scaffold(
-          backgroundColor: Color.fromARGB(245, 31, 31, 31),
-          body: Center(
-              child: Column(
+    return Center(
+      child: Column(
+        children: <Widget>[
+          Flexible(
+            child: Container(
+              padding: EdgeInsets.fromLTRB(0, 100, 0, 20),
+              child: Text("Login",
+                  style: TextStyle(color: Colors.white, fontSize: 40)),
+            ),
+          ),
+          Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Text("Login Page",
-                  style: TextStyle(color: Colors.orange, fontSize: 40)),
-              SizedBox(height: 50),
-              Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5),
-                  color: Colors.white,
-                ),
-                width: UtilsImpl.getScreenWidth(context) * 0.85,
-                child: Form(
-                    key: _formKey,
-                    child: Column(
-                      children: <Widget>[
-                        TextField(
-                          controller: _usernameController,
-                          decoration: InputDecoration(
-                              prefixIcon: Icon(Icons.perm_identity),
-//                          border: InputBorder.none,
-                              hintText: 'Username'),
-                        ),
-                        TextField(
-                          controller: _passwordController,
-                          obscureText: true,
-                          decoration: InputDecoration(
-                              focusedBorder: InputBorder.none,
-                              prefixIcon: Icon(Icons.lock),
-                              hintText: 'Password'),
-                        )
-                      ],
-                    )),
-              ),
-              SizedBox(
-                height: 5,
-              ),
               StreamBuilder(
                   stream: _bloc.loginStream,
                   builder: (BuildContext context,
                       AsyncSnapshot<LoginResponsePodo> snapshot) {
-                    if (snapshot.hasError) {
-                      print(snapshot.error);
-                      _isLoading = false;
+                    switch (snapshot.connectionState) {
+                      case ConnectionState.active:
+                        if (snapshot.hasError) {
+                          NetworkError error = snapshot.error;
+                          WidgetsBinding.instance.addPostFrameCallback((_) =>
+                              Scaffold.of(context).showSnackBar(
+                                  SnackBar(content: Text(error.message))));
+                        }
+                        break;
+                      case ConnectionState.done:
+                        print(snapshot.data);
+                        login(snapshot.data);
+                        break;
+                      default:
+                        {}
                     }
-                    if (snapshot.hasData) print(snapshot.data);
-                    if (!_isLoading)
-                      return RaisedButton(
-                        onPressed: () {
-                          if (_formKey.currentState.validate()) {
-                            setState(() {
-                              _isLoading = true;
-                            });
-                            _bloc.login(LoginRequestPodo(
-                                _usernameController.text,
-                                _passwordController.text,
-                                true,
-                                false));
-                          }
-                        },
-                        color: Colors.orange,
-                        textColor: Colors.white,
-                        child: Text("Login"),
-                      );
-                    else
-                      return SpinKitThreeBounce(
-                        size: 40,
-                        color: Colors.white,
-                      );
+                    return LoginForm(_bloc);
                   }),
             ],
-          )),
-        ),
+          )
+        ],
       ),
     );
+  }
+
+  void login(LoginResponsePodo loginResponsePodo) async {
+    await loginManager.login(loginResponsePodo);
+    WidgetsBinding.instance.addPostFrameCallback(
+        (_) => RouterService.navigate(context, Routes.ROOT));
   }
 }

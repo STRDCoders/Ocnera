@@ -1,0 +1,7 @@
+{
+  "API_ADDRESS_PREFIX": "https://",
+  "API_ADDRESS_SUFFIX": "/ombi/api/v1/",
+  "API_LINK_LOGIN_LOGIN": "Token",
+  "API_LINK_IDENTITY_CURRENT": "Identity",
+  "API_LINK_CONNECTION_TEST": "CustomPage"
+}
