@@ -1,4 +1,7 @@
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:global_configuration/global_configuration.dart';
+import 'package:ombiapp/services/secure_storage.dart';
 
 class UtilsImpl {
   static num timestamp() =>
@@ -27,4 +30,9 @@ class UtilsImpl {
         .size
         .width;
   }
+
+  static String buildLink(String link) {
+    return "${GlobalConfiguration().getString('API_ADDRESS_PREFIX')}${link}${GlobalConfiguration().getString('API_ADDRESS_SUFFIX')}";
+  }
+
 }

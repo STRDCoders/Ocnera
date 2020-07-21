@@ -19,7 +19,7 @@ class RootPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    if(secureStorage.values[StorageKeys.ADDRESS] == null)
+    if(secureStorage.values[StorageKeys.ADDRESS.value] == null)
       return PageContainer(ServerConfig(), resizable: false,);
 
     loginManager.identify();

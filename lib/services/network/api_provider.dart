@@ -9,8 +9,9 @@ import 'package:ombiapp/model/response/LoginResponsePodo.dart';
 import 'package:ombiapp/model/response/user.dart';
 import 'package:ombiapp/services/network/repository.dart';
 import 'package:ombiapp/services/secure_storage.dart';
+import 'package:ombiapp/utils/utilsImpl.dart';
 
-class ApiProvider implements RepositoryAPI{
+class ApiProvider implements RepositoryAPI {
   Dio _dio;
 
   ApiProvider() {
@@ -18,8 +19,7 @@ class ApiProvider implements RepositoryAPI{
   }
 
   void updateDio() {
-    String url =
-        "${GlobalConfiguration().getString('API_ADDRESS_PREFIX')}${secureStorage.values[StorageKeys.ADDRESS]}${GlobalConfiguration().getString('API_ADDRESS_SUFFIX')}";
+    String url = UtilsImpl.buildLink(secureStorage.values[StorageKeys.ADDRESS.value]);
     print("Dio Using IP: $url");
     BaseOptions options = new BaseOptions(
         baseUrl: url,
@@ -37,13 +37,13 @@ class ApiProvider implements RepositoryAPI{
     try {
       print(
           "Logging in.. using link: ${GlobalConfiguration().getString('API_LINK_LOGIN_LOGIN')}");
-      _dio.options.baseUrl = loginRequestPodo.address;
       Response response = await _dio.post(
           GlobalConfiguration().getString('API_LINK_LOGIN_LOGIN'),
           data: loginRequestPodo);
       return LoginResponsePodo.fromJson(
           response.data, loginRequestPodo.username);
     } on DioError catch (e) {
+      print(e);
       switch (e.type) {
         case DioErrorType.RESPONSE:
           {
@@ -55,7 +55,6 @@ class ApiProvider implements RepositoryAPI{
           }
           break;
       }
-
     }
   }
 
@@ -81,12 +80,13 @@ class ApiProvider implements RepositoryAPI{
 
   Future<bool> testConnection(String address) async {
     try {
-      Response response = await _dio
+      Dio tmpClient = Dio();
+      tmpClient.options.baseUrl = UtilsImpl.buildLink(address);
+      Response response = await tmpClient
           .get(GlobalConfiguration().getString('API_LINK_CONNECTION_TEST'));
       return true;
     } on DioError catch (e) {
       return false;
     }
-    }
-
+  }
 }

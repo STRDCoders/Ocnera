@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ombiapp/pages/error.dart';
 import 'package:ombiapp/pages/login/login_page.dart';
+import 'package:ombiapp/pages/page_container.dart';
 import 'package:ombiapp/pages/root.dart';
 import 'package:ombiapp/pages/search/search.dart';
 
@@ -22,8 +23,6 @@ extension RoutesExtension on Routes {
       case Routes.ROOT:
         return '/root';
         break;
-      default:
-        return '/';
     }
   }
 
@@ -35,16 +34,16 @@ class RouterService {
   static navigate(context, Routes route) {
     switch (route) {
       case Routes.LOGIN:
-        Navigator.pushReplacementNamed(context, Routes.LOGIN.value);
+        Navigator.popAndPushNamed(context, Routes.LOGIN.value);
         break;
       case Routes.SETTINGS:
-        Navigator.pushNamed(context, Routes.SETTINGS.value);
+        Navigator.popAndPushNamed(context, Routes.SETTINGS.value);
         break;
       case Routes.SEARCH:
-        Navigator.pushReplacementNamed(context, Routes.SEARCH.value);
+        Navigator.popAndPushNamed(context, Routes.SEARCH.value);
         break;
       case Routes.ROOT:
-        Navigator.pushReplacementNamed(context, Routes.ROOT.value);
+        Navigator.popAndPushNamed(context, Routes.ROOT.value);
         break;
     }
   }
@@ -52,12 +51,12 @@ class RouterService {
 
 Route<dynamic> generateRoute(RouteSettings settings) {
   // Using if/else instead of switch/case since case expressions must be constant, which is not the case
-  if (settings.name == Routes.ROOT.value)
+  if (settings.name == Routes.ROOT.value || settings.name == "/")
     return MaterialPageRoute(builder: (context) => RootPage());
   else if (settings.name == Routes.LOGIN.value)
-    return MaterialPageRoute(builder: (context) => LoginPage());
+    return MaterialPageRoute(builder: (context) => PageContainer(LoginPage()));
   else if (settings.name == Routes.SEARCH.value)
-    return MaterialPageRoute(builder: (context) => SearchPage());
+    return MaterialPageRoute(builder: (context) => PageContainer(SearchPage()));
 
-  return MaterialPageRoute(builder: (context) => ErrorPage());
+  return MaterialPageRoute(builder: (context) => PageContainer(ErrorPage()));
 }

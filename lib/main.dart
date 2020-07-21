@@ -22,9 +22,8 @@ class OmbiApp extends StatelessWidget {
                   .copyWith(secondary: Colors.white),
               buttonColor: Colors.orange,
               textTheme: ButtonTextTheme.accent),
-          textTheme: TextTheme(bodyText2: TextStyle(color: Colors.white)),
+          textTheme: TextTheme(bodyText2: TextStyle(color: Colors.grey)),
           scaffoldBackgroundColor: const Color.fromARGB(245, 31, 31, 31)),
-      initialRoute: Routes.ROOT.value,
       onGenerateRoute: generateRoute,
     );
   }

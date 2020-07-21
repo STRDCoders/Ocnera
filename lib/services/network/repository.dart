@@ -12,6 +12,7 @@ import 'api_provider.dart';
 abstract class RepositoryAPI {
   Future<User> getIdentity();
   Future<LoginResponsePodo> login(LoginRequestPodo loginRequestPodo);
+  Future<bool> testConnection(String address);
   void updateDio();
 }
 

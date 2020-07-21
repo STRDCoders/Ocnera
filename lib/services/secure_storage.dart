@@ -12,6 +12,9 @@ extension RoutesExtension on StorageKeys {
       case StorageKeys.USERNAME:
         return "username";
         break;
+      case StorageKeys.ADDRESS:
+        return "address";
+        break;
     }
   }
   String get value => _value(this);
@@ -23,9 +26,11 @@ class SecureStorage {
 
   init() async {
     _values = await _storage.readAll();
+    print(_values);
   }
 
   saveData(String key, String val ) async {
+    print("Saving secure data '$key' as '$val'");
     _values[key] = val;
     await _storage.write(key: key, value: val);
   }
@@ -38,7 +43,11 @@ class SecureStorage {
 
   Map<String, String> get values => _values;
 
-
+  removeAllData() async{
+    print("Deleting all saved data");
+    _values = Map();
+    await _storage.deleteAll();
+  }
 }
 
 final secureStorage = new SecureStorage();

@@ -34,16 +34,14 @@ class _LoginPageState extends State<LoginPage> {
     return Center(
       child: Column(
         children: <Widget>[
-          Flexible(
-            child: Container(
-              padding: EdgeInsets.fromLTRB(0, 100, 0, 20),
-              child: Text("Login",
-                  style: TextStyle(color: Colors.white, fontSize: 40)),
-            ),
-          ),
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
+              Container(
+                padding: EdgeInsets.fromLTRB(0, 100, 0, 20),
+                child: Text("Login",
+                    style: TextStyle(color: Colors.white, fontSize: 40)),
+              ),
               StreamBuilder(
                   stream: _bloc.loginStream,
                   builder: (BuildContext context,
@@ -67,8 +65,16 @@ class _LoginPageState extends State<LoginPage> {
                     return LoginForm(_bloc);
                   }),
             ],
+          ),
+          FlatButton(
+            child: Text("Switch Server"),
+            onPressed: () async {
+              await loginManager.removeAddress();
+              RouterService.navigate(context, Routes.ROOT);
+            },
           )
         ],
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
       ),
     );
   }

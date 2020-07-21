@@ -21,9 +21,6 @@ class _LoginFormState extends State<LoginForm> {
   final _usernameController = TextEditingController(
       text: secureStorage.values[StorageKeys.USERNAME.value]);
   final _passwordController = TextEditingController();
-  final _addressController = TextEditingController(
-      text: secureStorage.values[StorageKeys.ADDRESS.value]);
-
   bool _loading = false;
 
   @override
@@ -35,7 +32,6 @@ class _LoginFormState extends State<LoginForm> {
   void dispose() {
     _usernameController.dispose();
     _passwordController.dispose();
-    _addressController.dispose();
     widget._bloc.dispose();
     super.dispose();
   }
@@ -58,7 +54,6 @@ class _LoginFormState extends State<LoginForm> {
                         controller: _usernameController,
                         decoration: InputDecoration(
                             prefixIcon: Icon(Icons.perm_identity),
-//                          border: InputBorder.none,
                             hintText: 'Username'),
                       ),
                       TextFormField(
@@ -67,18 +62,6 @@ class _LoginFormState extends State<LoginForm> {
                         decoration: InputDecoration(
                             prefixIcon: Icon(Icons.lock), hintText: 'Password'),
                       ),
-                      TextFormField(
-                        keyboardType: TextInputType.number,
-                        controller: _addressController,
-                        inputFormatters: <TextInputFormatter>[
-                          WhitelistingTextInputFormatter(
-                              RegExp(r"[\d\.]{1,15}$")),
-                        ],
-                        decoration: InputDecoration(
-                            focusedBorder: InputBorder.none,
-                            prefixIcon: Icon(Icons.cloud),
-                            hintText: 'Server Address'),
-                      )
                     ],
                   )),
             ),
@@ -103,7 +86,7 @@ class _LoginFormState extends State<LoginForm> {
       _loading = true;
     });
     if (_formKey.currentState.validate()) {
-      await widget._bloc.login(LoginRequestPodo(_addressController.text,
+      await widget._bloc.login(LoginRequestPodo(
           _usernameController.text, _passwordController.text, true, false));
       _loading = false;
       print("ended");
