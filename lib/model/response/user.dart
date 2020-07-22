@@ -1,4 +1,5 @@
 import 'package:ombiapp/contracts/network_response.dart';
+import 'package:ombiapp/utils/extentions.dart';
 
 class User extends NetworkResponse{
   String _id, _userName, _alias, _email;
@@ -25,7 +26,7 @@ class User extends NetworkResponse{
 
   get alias => _alias;
 
-  get userName => _userName;
+  String get userName => _userName;
 
   String get id => _id;
 

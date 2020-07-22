@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:global_configuration/global_configuration.dart';
-import 'package:ombiapp/services/secure_storage.dart';
+import 'package:ombiapp/services/secure_storage_service.dart';
 
 class UtilsImpl {
   static num timestamp() =>
@@ -36,3 +36,4 @@ class UtilsImpl {
   }
 
 }
+

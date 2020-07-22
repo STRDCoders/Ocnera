@@ -1,12 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:ombiapp/pages/content/movie.dart';
 import 'package:ombiapp/pages/error.dart';
 import 'package:ombiapp/pages/login/login_page.dart';
 import 'package:ombiapp/pages/page_container.dart';
 import 'package:ombiapp/pages/root.dart';
 import 'package:ombiapp/pages/search/search.dart';
 
-enum Routes { ROOT, LOGIN, SETTINGS, SEARCH }
+enum Routes { ROOT, LOGIN, SETTINGS, SEARCH, MOVIE_CONTENT }
 
 extension RoutesExtension on Routes {
   static String _value(Routes val) {
@@ -23,6 +24,9 @@ extension RoutesExtension on Routes {
       case Routes.ROOT:
         return '/root';
         break;
+      case Routes.MOVIE_CONTENT:
+        return '/movie';
+        break;
     }
   }
 
@@ -31,7 +35,7 @@ extension RoutesExtension on Routes {
 
 class RouterService {
 
-  static navigate(context, Routes route) {
+  static navigate(context, Routes route, {dynamic data}) {
     switch (route) {
       case Routes.LOGIN:
         Navigator.popAndPushNamed(context, Routes.LOGIN.value);
@@ -45,11 +49,15 @@ class RouterService {
       case Routes.ROOT:
         Navigator.popAndPushNamed(context, Routes.ROOT.value);
         break;
+      case Routes.MOVIE_CONTENT:
+        Navigator.pushNamed(context, Routes.MOVIE_CONTENT.value, arguments: data);
     }
   }
 }
 
 Route<dynamic> generateRoute(RouteSettings settings) {
+  print("Data passed: ${settings.arguments}");
+  print("Routing to: ${settings.name}");
   // Using if/else instead of switch/case since case expressions must be constant, which is not the case
   if (settings.name == Routes.ROOT.value || settings.name == "/")
     return MaterialPageRoute(builder: (context) => RootPage());
@@ -57,6 +65,7 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     return MaterialPageRoute(builder: (context) => PageContainer(LoginPage()));
   else if (settings.name == Routes.SEARCH.value)
     return MaterialPageRoute(builder: (context) => PageContainer(SearchPage()));
-
+  else if(settings.name == Routes.MOVIE_CONTENT.value)
+    return MaterialPageRoute(builder: (context) => PageContainer(MovieContentPage(data:settings.arguments)));
   return MaterialPageRoute(builder: (context) => PageContainer(ErrorPage()));
 }

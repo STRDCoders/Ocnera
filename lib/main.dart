@@ -3,12 +3,9 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:global_configuration/global_configuration.dart';
-import 'package:ombiapp/pages/login/login_page.dart';
-import 'package:ombiapp/pages/root.dart';
-import 'package:ombiapp/pages/search/search.dart';
 import 'package:ombiapp/services/network/http_override.dart';
 import 'package:ombiapp/services/router.dart';
-import 'package:ombiapp/services/secure_storage.dart';
+import 'package:ombiapp/services/secure_storage_service.dart';
 
 class OmbiApp extends StatelessWidget {
   @override
@@ -16,6 +13,13 @@ class OmbiApp extends StatelessWidget {
     print("MAIN APP");
     return MaterialApp(
       theme: ThemeData(
+          inputDecorationTheme: InputDecorationTheme(
+              hintStyle: TextStyle(color: Colors.grey),
+              border: InputBorder.none,
+              focusedBorder: InputBorder.none,
+              focusedErrorBorder: InputBorder.none,
+              enabledBorder: InputBorder.none),
+          iconTheme: IconThemeData(color: Colors.orange),
           buttonTheme: ButtonThemeData(
               colorScheme: Theme.of(context)
                   .colorScheme

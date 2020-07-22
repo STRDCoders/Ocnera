@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:ombiapp/model/response/LoginResponsePodo.dart';
 import 'package:ombiapp/model/response/user.dart';
 import 'package:ombiapp/services/network/identity_bloc.dart';
-import 'package:ombiapp/services/secure_storage.dart';
+import 'package:ombiapp/services/secure_storage_service.dart';
 
 import 'network/repository.dart';
 

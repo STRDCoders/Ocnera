@@ -7,7 +7,7 @@ import 'package:ombiapp/pages/page_container.dart';
 import 'package:ombiapp/pages/search/search.dart';
 import 'package:ombiapp/services/login_service.dart';
 import 'package:ombiapp/services/network/identity_bloc.dart';
-import 'package:ombiapp/services/secure_storage.dart';
+import 'package:ombiapp/services/secure_storage_service.dart';
 
 ///
 /// This widget determines whether the user is logged in,
@@ -56,47 +56,3 @@ class RootPage extends StatelessWidget {
         });
   }
 }
-//
-//class RootPage extends StatefulWidget {
-//  @override
-//  _RootPageState createState() => _RootPageState();
-//}
-//
-//class _RootPageState extends State<RootPage> {
-//
-//
-//
-//  //todo - decide if u want scaffold for each page or just this one and the others will be loaded here.
-//  @override
-//  Widget build(BuildContext context) {
-//    identityBloc.identify();
-//    return Container(
-//        color: Color.fromARGB(245, 31, 31, 31),
-//        child: SafeArea(
-//            child: Scaffold(
-//                body: Container(
-//          child: StreamBuilder(
-//            stream: identityBloc.identityStream,
-//            builder: (BuildContext context, AsyncSnapshot<User> snapshot) {
-//              switch (snapshot.connectionState) {
-//                case ConnectionState.active:
-//                  print('active');
-//                  if (snapshot.hasError) {
-//                    return LoginPage();
-//                  } else if (snapshot.hasData) {
-//                    print(snapshot.data);
-//                    return SearchPage();
-//                  }
-//                  break;
-//                default:
-//                  {}
-//              }
-//              return SpinKitFoldingCube(
-//                size: 50,
-//                color: Colors.white,
-//              );
-//            },
-//          ),
-//        ))));
-//  }
-//}

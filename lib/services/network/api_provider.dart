@@ -8,7 +8,7 @@ import 'package:ombiapp/model/request/token_refresh.dart';
 import 'package:ombiapp/model/response/LoginResponsePodo.dart';
 import 'package:ombiapp/model/response/user.dart';
 import 'package:ombiapp/services/network/repository.dart';
-import 'package:ombiapp/services/secure_storage.dart';
+import 'package:ombiapp/services/secure_storage_service.dart';
 import 'package:ombiapp/utils/utilsImpl.dart';
 
 class ApiProvider implements RepositoryAPI {
