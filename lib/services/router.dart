@@ -6,6 +6,7 @@ import 'package:ombiapp/pages/login/login_page.dart';
 import 'package:ombiapp/pages/page_container.dart';
 import 'package:ombiapp/pages/root.dart';
 import 'package:ombiapp/pages/search/search.dart';
+import 'package:ombiapp/pages/search/top_bar.dart';
 
 enum Routes { ROOT, LOGIN, SETTINGS, SEARCH, MOVIE_CONTENT }
 
@@ -66,6 +67,6 @@ Route<dynamic> generateRoute(RouteSettings settings) {
   else if (settings.name == Routes.SEARCH.value)
     return MaterialPageRoute(builder: (context) => PageContainer(SearchPage()));
   else if(settings.name == Routes.MOVIE_CONTENT.value)
-    return MaterialPageRoute(builder: (context) => PageContainer(MovieContentPage(data:settings.arguments)));
+    return MaterialPageRoute(builder: (context) => PageContainer(MovieContentPage(data:settings.arguments), ));
   return MaterialPageRoute(builder: (context) => PageContainer(ErrorPage()));
 }

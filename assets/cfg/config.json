@@ -3,5 +3,7 @@
   "API_ADDRESS_SUFFIX": "/ombi/api/v1/",
   "API_LINK_LOGIN_LOGIN": "Token",
   "API_LINK_IDENTITY_CURRENT": "Identity",
-  "API_LINK_CONNECTION_TEST": "CustomPage"
+  "API_LINK_CONNECTION_TEST": "LandingPage",
+  "API_LINK_SEARCH_QUERY_MOVIE": "search/movie/",
+  "API_LINK_SEARCH_QUERY_SERIES": "search/tv/"
 }
