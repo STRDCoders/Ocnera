@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:ombiapp/model/request/login.dart';
-import 'package:ombiapp/services/network/login_bloc.dart';
+import 'package:ombiapp/services/network/authorization/login_bloc.dart';
 import 'package:ombiapp/services/secure_storage_service.dart';
 import 'package:ombiapp/utils/utilsImpl.dart';
 

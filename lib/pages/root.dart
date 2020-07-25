@@ -6,23 +6,24 @@ import 'package:ombiapp/pages/login/server_config.dart';
 import 'package:ombiapp/pages/page_container.dart';
 import 'package:ombiapp/pages/search/search.dart';
 import 'package:ombiapp/services/login_service.dart';
-import 'package:ombiapp/services/network/identity_bloc.dart';
-import 'package:ombiapp/services/secure_storage_service.dart';
+import 'package:ombiapp/services/router.dart';
 
 ///
 /// This widget determines whether the user is logged in,
 /// and therefor which screen should be shown.
 ///
 
-class RootPage extends StatelessWidget {
+class RootPage extends StatefulWidget {
+  @override
+  _RootPageState createState() => _RootPageState();
+}
 
+class _RootPageState extends State<RootPage> {
   @override
   Widget build(BuildContext context) {
-
-    if(secureStorage.values[StorageKeys.ADDRESS.value] == null)
-      return PageContainer(ServerConfig(), resizable: false,);
-
-    loginManager.identify();
+    if (!loginManager.isServerConfigured())
+      WidgetsBinding.instance.addPostFrameCallback((_) =>RouterService.navigate(context, Routes.SERVER_LOGIN));
+    print("building");
     return StreamBuilder(
         stream: loginManager.identityStream,
         builder: (BuildContext context, AsyncSnapshot<User> snapshot) {
@@ -30,9 +31,14 @@ class RootPage extends StatelessWidget {
           switch (snapshot.connectionState) {
             case ConnectionState.active:
               if (snapshot.hasError) {
-                return PageContainer(LoginPage());
+                print('Switching to Login page');
+//                return PageContainer(LoginPage());
+                WidgetsBinding.instance.addPostFrameCallback((_) =>RouterService.navigate(context, Routes.LOGIN));
               } else if (snapshot.hasData) {
-                return PageContainer(SearchPage());
+                print('Switching to Search Page');
+//                return PageContainer(SearchPage());
+                WidgetsBinding.instance.addPostFrameCallback((_) =>RouterService.navigate(context, Routes.SEARCH));
+
               }
               break;
             default:
@@ -54,5 +60,18 @@ class RootPage extends StatelessWidget {
                 )
               ]));
         });
+  }
+
+  @override
+  void initState() {
+    print('init root ');
+    super.initState();
+    if (loginManager.isServerConfigured()) loginManager.identify();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    print('disposing root');
   }
 }

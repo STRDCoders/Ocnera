@@ -5,9 +5,9 @@ class AppTheme{
   static const APP_BACKGROUND = Color.fromARGB(245, 31, 31, 31);
   static const DATA_BACKGROUND = Colors.white12;
   static theme(BuildContext context) => ThemeData(
-
+//TODO - fix color of copy/paste buttons.
       popupMenuTheme: PopupMenuThemeData(
-          color: AppTheme.DATA_BACKGROUND,
+          color: AppTheme.APP_BACKGROUND,
               textStyle: TextStyle(color:Colors.white)
       ),
       inputDecorationTheme: InputDecorationTheme(

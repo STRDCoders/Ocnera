@@ -1,20 +1,21 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:ombiapp/pages/content/movie.dart';
+import 'package:ombiapp/pages/media_content/movie.dart';
 import 'package:ombiapp/pages/error.dart';
 import 'package:ombiapp/pages/login/login_page.dart';
+import 'package:ombiapp/pages/login/server_config.dart';
 import 'package:ombiapp/pages/page_container.dart';
 import 'package:ombiapp/pages/root.dart';
 import 'package:ombiapp/pages/search/search.dart';
 import 'package:ombiapp/pages/search/top_bar.dart';
 
-enum Routes { ROOT, LOGIN, SETTINGS, SEARCH, MOVIE_CONTENT }
+enum Routes { ROOT, LOGIN, SETTINGS, SEARCH, MOVIE_CONTENT, SERVER_LOGIN }
 
 extension RoutesExtension on Routes {
   static String _value(Routes val) {
     switch (val) {
       case Routes.LOGIN:
-        return '/intro';
+        return '/login';
         break;
       case Routes.SETTINGS:
         return '/settings';
@@ -27,6 +28,9 @@ extension RoutesExtension on Routes {
         break;
       case Routes.MOVIE_CONTENT:
         return '/movie';
+        break;
+      case Routes.SERVER_LOGIN:
+        return '/login/server';
         break;
     }
   }
@@ -41,6 +45,9 @@ class RouterService {
       case Routes.LOGIN:
         Navigator.popAndPushNamed(context, Routes.LOGIN.value);
         break;
+      case Routes.SERVER_LOGIN:
+        Navigator.popAndPushNamed(context, Routes.SERVER_LOGIN.value);
+        break;
       case Routes.SETTINGS:
         Navigator.popAndPushNamed(context, Routes.SETTINGS.value);
         break;
@@ -52,6 +59,7 @@ class RouterService {
         break;
       case Routes.MOVIE_CONTENT:
         Navigator.pushNamed(context, Routes.MOVIE_CONTENT.value, arguments: data);
+        break;
     }
   }
 }
@@ -68,5 +76,7 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     return MaterialPageRoute(builder: (context) => PageContainer(SearchPage()));
   else if(settings.name == Routes.MOVIE_CONTENT.value)
     return MaterialPageRoute(builder: (context) => PageContainer(MovieContentPage(data:settings.arguments), ));
+  else if(settings.name == Routes.SERVER_LOGIN.value)
+    return MaterialPageRoute(builder: (context) => PageContainer(ServerConfig()));
   return MaterialPageRoute(builder: (context) => PageContainer(ErrorPage()));
 }

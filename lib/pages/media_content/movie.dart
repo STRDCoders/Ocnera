@@ -31,7 +31,12 @@ class _MovieContentPageState extends State<MovieContentPage> {
     return CustomScrollView(
       slivers: <Widget>[
         SliverAppBar(
-          leading: IconButton(icon: Icon(Icons.arrow_back),onPressed: (){Navigator.pop(context);},),
+            leading: IconButton(
+              icon: Icon(Icons.arrow_back),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
             backgroundColor: AppTheme.APP_BACKGROUND,
             pinned: true,
             floating: true,
@@ -45,14 +50,16 @@ class _MovieContentPageState extends State<MovieContentPage> {
                 Stack(alignment: Alignment.bottomRight, children: <Widget>[
               Container(
                 width: UtilsImpl.getScreenWidth(context),
-                decoration: const BoxDecoration(
+                decoration: BoxDecoration(
                   image: DecorationImage(
-                      alignment: Alignment(-.2, 0),
-                      image: NetworkImage(
-                          "https://image.tmdb.org/t/p/w300/nRXO2SnOA75OsWhNhXstHB8ZmI3.jpg"),
+                    //TODO - implement the onError method.
+                      onError: (context, trace) =>
+                          Text("THIS IS HALLOWIERJKSJRKSJDFKJ"),
+                      image: CachedNetworkImageProvider(
+                          "${widget.data.content.background}"),
                       fit: BoxFit.cover),
                 ),
-                alignment: Alignment.bottomLeft,
+                alignment: Alignment.center,
               ),
               ClipRect(
                 child: BackdropFilter(
@@ -62,6 +69,20 @@ class _MovieContentPageState extends State<MovieContentPage> {
                   ),
                 ),
               ),
+              Container(
+                  width: UtilsImpl.getScreenWidth(context),
+                  padding: EdgeInsets.fromLTRB(0, 10, 0, 40),
+                  decoration: BoxDecoration(
+                    boxShadow: [
+                      BoxShadow(
+                        color: AppTheme.APP_BACKGROUND.withOpacity(0.4),
+                        spreadRadius: 15,
+                        blurRadius: 15,
+                        offset: Offset(0, 0), // changes position of shadow
+                      ),
+                    ],
+                  ),
+                  child: Text("")),
               Padding(
                 padding: EdgeInsets.all(15),
                 child: Stack(
@@ -75,8 +96,7 @@ class _MovieContentPageState extends State<MovieContentPage> {
                               size: 15,
                               color: Colors.white,
                             ),
-                            imageUrl:
-                                "https://image.tmdb.org/t/p/w300//dzBtMocZuJbjLOXvrl4zGYigDzh.jpg",
+                            imageUrl: "${widget.data.content.banner}",
                           ),
                         ),
                         Flexible(
@@ -87,7 +107,8 @@ class _MovieContentPageState extends State<MovieContentPage> {
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: <Widget>[
                                 Flexible(
-                                  child: Text("The Lion king 2",
+                                  flex: 3,
+                                  child: Text(widget.data.content.title,
                                       style: TextStyle(
                                         fontWeight: FontWeight.bold,
                                         color: Colors.white,
@@ -95,13 +116,20 @@ class _MovieContentPageState extends State<MovieContentPage> {
                                       )),
                                 ),
                                 Flexible(
+                                    flex: 1,
                                     child: Row(
-                                  children: <Widget>[
-                                    Text("2020"),
-                                    DataSeparator(),
-                                    ContentRating(rating: "7.5"),
-                                  ],
-                                ))
+                                      children: <Widget>[
+                                        Text("2020"),
+                                        (widget.data.content.voteRating == 0)
+                                            ? Container()
+                                            : DataSeparator(
+                                                ContentRating(
+                                                    rating: Text(widget
+                                                        .data.content.voteRating
+                                                        .toStringAsFixed(1))),
+                                              ),
+                                      ],
+                                    ))
                               ],
                             ),
                           ),
@@ -111,19 +139,6 @@ class _MovieContentPageState extends State<MovieContentPage> {
                   ],
                 ),
               ),
-              Container(
-                  padding: EdgeInsets.fromLTRB(20, 0, 10, 10),
-                  decoration: BoxDecoration(
-                    boxShadow: [
-                      BoxShadow(
-                        color: AppTheme.APP_BACKGROUND.withOpacity(0.4),
-                        spreadRadius: 55,
-                        blurRadius: 55,
-                        offset: Offset(0, 1), // changes position of shadow
-                      ),
-                    ],
-                  ),
-                  child: Text("")),
             ])),
         SliverList(
             delegate: SliverChildListDelegate([
@@ -131,9 +146,16 @@ class _MovieContentPageState extends State<MovieContentPage> {
               padding: EdgeInsets.all(15),
               child: Column(
                 children: <Widget>[
-                  Row(children: <Widget>[RaisedButton(child: Text("Test",))],),
+                  Row(
+                    children: <Widget>[
+                      RaisedButton(
+                          child: Text(
+                        "Test",
+                      ))
+                    ],
+                  ),
                   Text(
-                    "Simba idolizes his father, King Mufasa, and takes to heart his own royal destiny. But not everyone in the kingdom celebrates the new cub's arrival. Scar, Mufasa's brother—and former heir to the throne—has plans of his own. The battle for Pride Rock is ravaged with betrayal, tragedy and drama, ultimately resulting in Simba's exile. With help from a curious pair of newfound friends, Simba will have to figure out how to grow up and take back what is rightfully his.",
+                    "${widget.data.content.overview}${widget.data.content.overview}${widget.data.content.overview}${widget.data.content.overview}${widget.data.content.overview}${widget.data.content.overview}${widget.data.content.overview}",
                   ),
                 ],
               ))

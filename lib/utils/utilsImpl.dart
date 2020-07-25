@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:global_configuration/global_configuration.dart';
+import 'package:intl/intl.dart';
 import 'package:ombiapp/services/secure_storage_service.dart';
 
 class UtilsImpl {
@@ -35,5 +36,6 @@ class UtilsImpl {
     return "${GlobalConfiguration().getString('API_ADDRESS_PREFIX')}${link}${GlobalConfiguration().getString('API_ADDRESS_SUFFIX')}";
   }
 
+   static final DateFormat dateFormat = DateFormat('MM-yyyy');
 }
 

@@ -1,9 +1,13 @@
 import 'package:flutter/cupertino.dart';
 
 class DataSeparator extends StatelessWidget {
+  Widget child;
+
+  DataSeparator(this.child);
+
   @override
   Widget build(BuildContext context) {
-    return Container(padding: EdgeInsets.fromLTRB(5, 0, 5, 0), child: Text("•"));
+    return Row(children: <Widget>[Container(padding: EdgeInsets.fromLTRB(5, 0, 5, 0), child: Text("•")),child]);
 
   }
 }

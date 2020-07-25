@@ -2,9 +2,9 @@ import 'dart:async';
 
 import 'package:ombiapp/model/response/LoginResponsePodo.dart';
 import 'package:ombiapp/model/response/user.dart';
-import 'package:ombiapp/services/network/identity_bloc.dart';
 import 'package:ombiapp/services/secure_storage_service.dart';
 
+import 'network/authorization/identity_bloc.dart';
 import 'network/repository.dart';
 
 /// Responsible for Login system logic.
@@ -41,13 +41,16 @@ class LoginService {
   }
 
   Future<void> disconnect() async {
-    secureStorage.removeData(StorageKeys.TOKEN.value);
     await secureStorage.removeData(StorageKeys.TOKEN.value);
     repo.updateDio();
   }
 
   void identify() {
     _identityBloc.identify();
+  }
+
+  bool isServerConfigured() {
+    return secureStorage.values[StorageKeys.ADDRESS.value] != null;
   }
 
   void dispose() {

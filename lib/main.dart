@@ -22,6 +22,12 @@ class OmbiApp extends StatelessWidget {
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await GlobalConfiguration().loadFromAsset("config");
+  //TODO - let Amir test this option on his phone.
+  SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.top]);
+  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+    statusBarColor: Colors.transparent,
+  ));
+
 
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,

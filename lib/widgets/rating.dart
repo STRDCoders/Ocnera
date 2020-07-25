@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 class ContentRating extends StatelessWidget {
 
-  final String rating;
+  final Text rating;
   const ContentRating({
     Key key,
     @required this.rating,
@@ -21,7 +21,7 @@ class ContentRating extends StatelessWidget {
         SizedBox(
           width: 3,
         ),
-        Text(rating)
+        rating
       ],
     );
   }

@@ -1,9 +1,12 @@
 import 'package:dio/dio.dart';
 import 'package:global_configuration/global_configuration.dart';
-import 'package:ombiapp/contracts/content_type.dart';
+import 'package:ombiapp/contracts/media_content.dart';
+import 'package:ombiapp/contracts/media_content_type.dart';
 import 'package:ombiapp/model/request/login.dart';
 import 'package:ombiapp/model/response/LoginResponsePodo.dart';
-import 'file:///C:/Users/tomer/AndroidStudioProjects/ombi_app/ombi_app/lib/model/response/content/movie/movie.dart';
+import 'package:ombiapp/model/response/media_content/content_wrapper.dart';
+import 'package:ombiapp/model/response/media_content/movie/movie.dart';
+import 'package:ombiapp/model/response/media_content/series/series.dart';
 import 'package:ombiapp/model/response/user.dart';
 import 'package:ombiapp/services/network/repository.dart';
 import 'package:ombiapp/services/secure_storage_service.dart';
@@ -83,20 +86,68 @@ class ApiProvider implements RepositoryAPI {
       tmpClient.options.baseUrl = UtilsImpl.buildLink(address);
       Response response = await tmpClient
           .get(GlobalConfiguration().getString('API_LINK_CONNECTION_TEST'));
-      return true;
+      return response.statusCode == 200;
     } on DioError catch (e) {
       return false;
     }
   }
 
-  Future<List<Movie>> searchContent(String query, ContentType type) async {
+  /// Fetch search results for the given query
+  Future<ContentWrapper> contentQuerySearch(
+      String query, MediaContentType type) async {
+    try {
+      num s = DateTime.now().millisecondsSinceEpoch;
+      print("Sending request to: ${type.queryLink}/$query");
+      Response res = await _dio.get("${type.queryLink}/$query");
+      List<MediaContent> content = List();
+      //The API sometime returns string when no content found/something unknown happens
+      if (res.data is String) return ContentWrapper(200, List());
+
+      switch (type) {
+        case MediaContentType.MOVIE:
+          res.data.forEach((e) => content.add(MovieContent.fromJson(e)));
+          break;
+        case MediaContentType.SERIES:
+          res.data.forEach((e) => content.add(SeriesContent.fromJson(e)));
+          break;
+      }
+
+//      for (var contentJson in res.data) {
+//        Content c =
+//        await contentIdSearch(contentJson['id'],type);
+//        content.add(c);
+//      }
+
+      print(
+          "Search job took: ${(DateTime.now().millisecondsSinceEpoch - s) / 1000} seconds");
+
+      return ContentWrapper(200, content);
+    } on DioError catch (e) {
+      print(e);
+      switch (e.type) {
+        case DioErrorType.RESPONSE:
+          {
+            return ContentWrapper(e.response.statusCode, null);
+          }
+        default:
+          {
+            return ContentWrapper(-1, null);
+          }
+          break;
+      }
+    }
+  }
+
+  /// Fetch extended information on the given contentID
+  Future<MediaContent> contentIdSearch(num contentID, MediaContentType type) async {
+    Response res = await _dio.get("${type.infoLink}/$contentID");
+    print(res.data);
     switch (type) {
-      case ContentType.MOVIE:
-        Response res = await _dio.get(GlobalConfiguration().getString(ContentType.MOVIE.value));
-        print(res);
+      case MediaContentType.MOVIE:
+        return MovieContent.fromJson(res.data);
         break;
-      case ContentType.SERIES:
-        // TODO: Handle this case.
+      case MediaContentType.SERIES:
+        return SeriesContent.fromJson(res.data);
         break;
     }
   }

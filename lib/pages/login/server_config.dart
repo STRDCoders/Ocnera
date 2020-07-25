@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ombiapp/services/login_service.dart';
-import 'package:ombiapp/services/network/connection_test_bloc.dart';
+import 'package:ombiapp/services/network/authorization/connection_test_bloc.dart';
 import 'package:ombiapp/services/router.dart';
 import 'package:ombiapp/services/secure_storage_service.dart';
 import 'package:ombiapp/utils/utilsImpl.dart';
