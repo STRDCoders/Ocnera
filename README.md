@@ -1,16 +1,33 @@
-# ombiapp
+# Ocnera - Ombi Content Reqest Application
 
-A new Flutter application.
+This app allows you to connect to your's (or your friends) Ombi server in a comfterable UI with the Ombi API.
+It was created out of the bordem of quarantine and the laziness of a bored programer. 
+The app is written in Flutter in hope that one day i will get a Mac and publish it to IOS as well.
 
-## Getting Started
+## Requirments
+* 23 SDK
+* Ombi server user(The server should be V3)
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
+## Features
+The app is still in ongoing development. 
+You can catch up with the status of the first version at the "Projects" tab of the repository.
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+* ## Login system 
+  * [x] Allows you to configure your server Ip upon first time use(you can change it later).
+  * [x] The app requires a user on the server. Currently no support for plex login.
+* ## Search System
+  * [ ] Basic name search - Search content by its name.
+  * [ ] Actors search - Search content by naming an actor.
+  * [ ] Easy to access request button.
+  * [ ] Filtering 
+    * [ ] Release Date
+    * [ ] Movie score
+* ## Content View
+  - [ ] Content Page for episodes.
+  - [ ] "Watch on Plex" button on Available Content to allow redirection to Plex app.
+  
+* ## Request managing
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Screenshots 
+Soon enough :)
