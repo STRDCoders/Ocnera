@@ -1,6 +1,6 @@
 # Ocnera - Ombi Content Reqest Application
 
-This app allows you to connect to your's (or your friends) Ombi server in a comfterable UI with the Ombi API.
+This app allows you to connect to yours (or your friends) Ombi server in a comfterable UI with the Ombi API.
 It was created out of the bordem of quarantine and the laziness of a bored programer. 
 The app is written in Flutter in hope that one day i will get a Mac and publish it to IOS as well.
 
