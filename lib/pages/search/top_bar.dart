@@ -7,8 +7,7 @@ import 'package:ombiapp/services/search_service.dart';
 import 'package:ombiapp/widgets/popup_item.dart';
 
 class TopBar extends StatefulWidget {
-  final SearchManager _manager;
-  TopBar(this._manager);
+  TopBar();
 
   @override
   _TopBarState createState() => _TopBarState();
@@ -73,8 +72,9 @@ class _TopBarState extends State<TopBar> {
 
   void _search({bool categoryChange = false}) {
 
+
     if(_editingController.text.trim().isNotEmpty && (_lastSearchQuery != _editingController.text.trim() || categoryChange )) {
-      widget._manager.searchQuery(_editingController.text, _contentSearchType);
+      contentSearchManager.searchQuery(_editingController.text, _contentSearchType);
       _lastSearchQuery = _editingController.text.trim();
     }
   }

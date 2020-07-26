@@ -1,8 +1,10 @@
+import 'dart:async';
 import 'dart:ui';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:ombiapp/contracts/media_content.dart';
 import 'package:ombiapp/model/response/media_content/content_wrapper.dart';
 import 'package:ombiapp/pages/search/content_card.dart';
 import 'package:ombiapp/services/search_service.dart';
@@ -16,8 +18,7 @@ class SearchPage extends StatefulWidget {
 }
 
 class _SearchPageState extends State<SearchPage> {
-  SearchManager _manager;
-
+  StreamSubscription _subscription ;
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -29,7 +30,7 @@ class _SearchPageState extends State<SearchPage> {
                 alignment: Alignment(-.2, 0),
                 //TODO - Change this static image.
                 image: CachedNetworkImageProvider(
-                  "https://assets.fanart.tv/fanart/tv/280619/showbackground/the-expanse-56b63fb90c028.jpg",
+                  "https://image.tmdb.org/t/p/w500//pU1ULUq8D3iRxl1fdX2lZIzdHuI.jpg",
                 ),
                 fit: BoxFit.cover),
           ),
@@ -37,16 +38,14 @@ class _SearchPageState extends State<SearchPage> {
         ),
         CustomScrollView(
           slivers: <Widget>[
-            TopBar(_manager),
-            StreamBuilder<ContentWrapper>(
-                stream: _manager.querySearchStream,
-                builder: (context, snapshot) => SliverList(
+            TopBar(),
+            SliverList(
                         delegate: SliverChildBuilderDelegate(
                       (context, index) => ContentCard(
-                          index: index, content: snapshot.data.content[index]),
+                          index: index, content: contentSearchManager.searchItems[index]),
                       childCount:
-                          snapshot.hasData ? snapshot.data.content.length : 0,
-                    )))
+                          contentSearchManager.searchItems.length,
+                    ))
           ],
         )
       ],
@@ -55,7 +54,19 @@ class _SearchPageState extends State<SearchPage> {
 
   @override
   void initState() {
-    _manager = SearchManager();
+    _subscription = contentSearchManager.querySearchStream.listen((event) {
+      setState(() {
+
+      });
+    });
     super.initState();
   }
+
+  @override
+  void dispose() {
+    _subscription.cancel();
+    super.dispose();
+  }
+
+
 }

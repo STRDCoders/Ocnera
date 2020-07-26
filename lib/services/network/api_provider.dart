@@ -112,12 +112,6 @@ class ApiProvider implements RepositoryAPI {
           break;
       }
 
-//      for (var contentJson in res.data) {
-//        Content c =
-//        await contentIdSearch(contentJson['id'],type);
-//        content.add(c);
-//      }
-
       print(
           "Search job took: ${(DateTime.now().millisecondsSinceEpoch - s) / 1000} seconds");
 

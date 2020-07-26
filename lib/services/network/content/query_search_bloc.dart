@@ -7,14 +7,26 @@ import 'package:rxdart/rxdart.dart';
 
 class QuerySearchBloc {
 
-  final _searchSubject = PublishSubject<ContentWrapper>();
-  Stream <ContentWrapper> get searchStream => _searchSubject.stream;
+//  final _searchSubject = PublishSubject<ContentWrapper>();
+//  Stream <ContentWrapper> get searchStream => _searchSubject.stream;
+
+  final _searchSubject = PublishSubject<MediaContent>();
+  Stream <MediaContent> get searchStream => _searchSubject.stream;
+
 
   Future<void> search(String query, MediaContentType type) async{
     ContentWrapper res = await repo.contentQuerySearch(query, type);
     switch (res.statusCode){
       case 200: {
-        _searchSubject.sink.add(res);
+        for(var content in res.content){
+          MediaContent e = await repo.contentIdSearch(content.id, type);
+          // Some content items may be broken when fetching extended information.
+          // Therefor they need to be skipped.
+          if(e.id == 0)
+            continue;
+          _searchSubject.sink.add(e);
+        }
+//        _searchSubject.sink.add(res);
         // TODO - sink success.
       }
       break;

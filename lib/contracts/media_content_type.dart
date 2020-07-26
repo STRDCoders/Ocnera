@@ -49,8 +49,39 @@ extension ContentTypeExtention on MediaContentType {
         break;
     }
   }
+
+  static String _optimizedBanner(String url, MediaContentType type) {
+    switch (type) {
+      case MediaContentType.MOVIE:
+        return "${MediaContentType.MOVIE.imageLink}/$url";
+        break;
+      case MediaContentType.SERIES:
+        return "${MediaContentType.SERIES.imageLink}$url"
+            .replaceFirst("/medium_portrait/", "/small_portrait/");
+        break;
+    }
+  }
+
+  static DateTime _toDate(String date, MediaContentType type) {
+    try {
+      switch (type) {
+        case MediaContentType.MOVIE:
+          return DateTime.parse(date);
+          break;
+        case MediaContentType.SERIES:
+          return DateTime.parse(date);
+          break;
+      }
+    } catch (e) {
+      print(e);
+      return null;
+    }
+  }
+
   String get infoLink => _extendedInfoLink(this);
   String get imageLink => _prefixImageLink(this);
   String get queryLink => _querySearch(this);
+  String optimizedBanner(String url) => _optimizedBanner(url, this);
+  DateTime dateTime(String date) => _toDate(date,this);
   IconData get icon => _icon(this);
 }

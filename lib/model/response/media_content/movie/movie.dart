@@ -2,7 +2,6 @@ import 'package:global_configuration/global_configuration.dart';
 import 'package:ombiapp/contracts/media_content.dart';
 import 'package:ombiapp/contracts/media_content_status.dart';
 import 'package:ombiapp/contracts/media_content_type.dart';
-import 'package:ombiapp/utils/content_utilizer.dart';
 
 class MovieContent extends MediaContent {
   bool _adult, _available;
@@ -15,9 +14,10 @@ class MovieContent extends MediaContent {
   get language => _language;
 
   MovieContent.fromJson(Map<String, dynamic> json) {
+    
     this.title = json['originalTitle'];
-    this.banner = MediaContentConverter.optimizeBanner(json['posterPath'], MediaContentType.MOVIE);
-    this.releaseDate = MediaContentConverter.toDate(json['releaseDate'], MediaContentType.MOVIE);
+    this.banner = MediaContentType.MOVIE.optimizedBanner(json['posterPath']);
+    this.releaseDate = MediaContentType.MOVIE.dateTime(json['releaseDate']);
 
     this.overview = json['overview'];
     this.voteRating = json['voteAverage'] == null ? 0 : json['voteAverage'];

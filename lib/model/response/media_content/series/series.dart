@@ -1,4 +1,5 @@
 import 'package:ombiapp/contracts/media_content.dart';
+import 'package:ombiapp/contracts/media_content_status.dart';
 import 'package:ombiapp/contracts/media_content_type.dart';
 import 'package:ombiapp/model/response/media_content/series/seasone.dart';
 import 'package:ombiapp/utils/content_utilizer.dart';
@@ -20,15 +21,17 @@ class SeriesContent extends MediaContent {
   SeriesContent.fromJson(Map<String, dynamic> json) {
     this.title = json['title'];
     this.overview = json['overview'];
-    this.banner = MediaContentConverter.optimizeBanner(json['banner'], MediaContentType.SERIES);
-    this.background = MediaContentConverter.optimizeBanner(json['banner'], MediaContentType.SERIES);
+    this.banner = MediaContentType.SERIES.optimizedBanner(json['banner']);
+    this.background = MediaContentType.SERIES.optimizedBanner(json['banner']);
     this.id = json['id'];
     //TODO - Maybe load the background image when opening a series OR use the banner as the background as well.
 
 //    this.voteRating = double.parse(json['rating']) / 10;
     this._status = json['status'];
-//    this.contentStatus
-    this.releaseDate = MediaContentConverter.toDate(json['firstAired'], MediaContentType.SERIES) ;
+    if(json['fullyAvailable']) this.contentStatus = MediaContentStatus.AVAILABLE;
+    else if (json['partlyAvailable']) this.contentStatus = MediaContentStatus.PARTLY_AVAILABLE;
+    else this.contentStatus =  MediaContentStatus.MISSING;
+    this.releaseDate = MediaContentType.SERIES.dateTime(json['firstAired']);
     this._network = json['network'];
     this._runtime = json['runTime'];
     this._seasons = List();

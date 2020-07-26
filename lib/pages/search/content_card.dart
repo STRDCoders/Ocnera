@@ -105,7 +105,7 @@ class ContentCard extends StatelessWidget {
                                         children: <Widget>[
                                           Flexible(
                                               child: Text(
-                                                content.title,
+                                                content.title ,
                                                 overflow: TextOverflow.ellipsis,
                                                 maxLines: 2,
                                                 style: TextStyle(
@@ -165,7 +165,7 @@ class ContentCard extends StatelessWidget {
                                                 ),
 
                                                 Text(
-                                                  content.releaseDate != null ? UtilsImpl.dateFormat.format(content.releaseDate) : "---",
+                                                  content.releaseDate != null ? (content.releaseDate.year.toString()) : "---",
                                                   textAlign:
                                                   TextAlign
                                                       .right,

@@ -25,8 +25,8 @@ class MovieContentPage extends StatefulWidget {
 class _MovieContentPageState extends State<MovieContentPage> {
   @override
   Widget build(BuildContext context) {
-    //TODO - think about plex integration for openning the app.
-    //TODO - Load extra info on a file to get plex URL
+    //TODO - think about "Plex" integration for opening the app.
+    //TODO - Load extra info on a file to get "Plex"" URL
     // TODO - instead of having 2 copies of this widget(series+movies), make it more generic and get Row widgets as input for the different locations available(name items, buttons Row items, overview, etc)
     return CustomScrollView(
       slivers: <Widget>[
@@ -119,7 +119,7 @@ class _MovieContentPageState extends State<MovieContentPage> {
                                     flex: 1,
                                     child: Row(
                                       children: <Widget>[
-                                        Text("2020"),
+                                        Text(widget.data.content.releaseDate.year.toString()),
                                         (widget.data.content.voteRating == 0)
                                             ? Container()
                                             : DataSeparator(
@@ -155,7 +155,7 @@ class _MovieContentPageState extends State<MovieContentPage> {
                     ],
                   ),
                   Text(
-                    "${widget.data.content.overview}${widget.data.content.overview}${widget.data.content.overview}${widget.data.content.overview}${widget.data.content.overview}${widget.data.content.overview}${widget.data.content.overview}",
+                    "${widget.data.content.overview}",
                   ),
                 ],
               ))
