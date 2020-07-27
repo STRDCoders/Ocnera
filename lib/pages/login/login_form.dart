@@ -88,7 +88,6 @@ class _LoginFormState extends State<LoginForm> {
       await widget._bloc.login(LoginRequestPodo(
           _usernameController.text, _passwordController.text, true, false));
       _loading = false;
-      print("ended");
     }
   }
 }

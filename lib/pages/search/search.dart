@@ -18,7 +18,8 @@ class SearchPage extends StatefulWidget {
 }
 
 class _SearchPageState extends State<SearchPage> {
-  StreamSubscription _subscription ;
+  List<StreamSubscription> _subscription = List();
+
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -40,12 +41,12 @@ class _SearchPageState extends State<SearchPage> {
           slivers: <Widget>[
             TopBar(),
             SliverList(
-                        delegate: SliverChildBuilderDelegate(
-                      (context, index) => ContentCard(
-                          index: index, content: contentSearchManager.searchItems[index]),
-                      childCount:
-                          contentSearchManager.searchItems.length,
-                    ))
+                delegate: SliverChildBuilderDelegate(
+              (context, index) => ContentCard(
+                  index: index,
+                  content: contentSearchManager.searchItems[index]),
+              childCount: contentSearchManager.searchItems.length,
+            ))
           ],
         )
       ],
@@ -54,19 +55,21 @@ class _SearchPageState extends State<SearchPage> {
 
   @override
   void initState() {
-    _subscription = contentSearchManager.querySearchStream.listen((event) {
-      setState(() {
-
-      });
-    });
+    //We want to update the UI when the search query has finished its requests OR new content has been loaded.
+    _subscription.add(contentSearchManager.isSearching.listen((event) {
+      if (!event) setState(() {});
+    }));
+    _subscription.add(contentSearchManager.querySearchStream.listen((event) {
+      setState(() {});
+    }));
     super.initState();
   }
 
   @override
   void dispose() {
-    _subscription.cancel();
+    for(var sub in _subscription)
+      sub.cancel();
+
     super.dispose();
   }
-
-
 }

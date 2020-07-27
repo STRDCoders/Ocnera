@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:ombiapp/contracts/media_content.dart';
 import 'package:ombiapp/contracts/media_content_type.dart';
-import 'package:ombiapp/model/response/media_content/content_wrapper.dart';
 import 'package:ombiapp/services/network/content/query_search_bloc.dart';
 
 class SearchManager {
@@ -18,7 +17,7 @@ class SearchManager {
     });
   }
   Stream<MediaContent> get querySearchStream => _bloc.searchStream;
-
+  Stream<bool> get isSearching => _bloc.isSearching;
   List<MediaContent> get searchItems => _searchItems;
 
   void searchQuery(String query, MediaContentType type) {

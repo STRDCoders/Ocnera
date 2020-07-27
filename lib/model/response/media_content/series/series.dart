@@ -2,7 +2,6 @@ import 'package:ombiapp/contracts/media_content.dart';
 import 'package:ombiapp/contracts/media_content_status.dart';
 import 'package:ombiapp/contracts/media_content_type.dart';
 import 'package:ombiapp/model/response/media_content/series/seasone.dart';
-import 'package:ombiapp/utils/content_utilizer.dart';
 
 class SeriesContent extends MediaContent {
   /// Is show running

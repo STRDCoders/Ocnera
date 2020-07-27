@@ -96,24 +96,17 @@ class ApiProvider implements RepositoryAPI {
   Future<ContentWrapper> contentQuerySearch(
       String query, MediaContentType type) async {
     try {
-      num s = DateTime.now().millisecondsSinceEpoch;
+//      num s = DateTime.now().millisecondsSinceEpoch;
       print("Sending request to: ${type.queryLink}/$query");
       Response res = await _dio.get("${type.queryLink}/$query");
-      List<MediaContent> content = List();
+      List<num> content = List();
       //The API sometime returns string when no content found/something unknown happens
       if (res.data is String) return ContentWrapper(200, List());
+      //Save only the ID's of the data, everything else will be loaded later with contentIdSearch
+      res.data.forEach((e) => {if (e['id'] != 0) content.add(e['id'])});
 
-      switch (type) {
-        case MediaContentType.MOVIE:
-          res.data.forEach((e) => content.add(MovieContent.fromJson(e)));
-          break;
-        case MediaContentType.SERIES:
-          res.data.forEach((e) => content.add(SeriesContent.fromJson(e)));
-          break;
-      }
-
-      print(
-          "Search job took: ${(DateTime.now().millisecondsSinceEpoch - s) / 1000} seconds");
+//      print(
+//          "Search job took: ${(DateTime.now().millisecondsSinceEpoch - s) / 1000} seconds");
 
       return ContentWrapper(200, content);
     } on DioError catch (e) {
@@ -133,9 +126,9 @@ class ApiProvider implements RepositoryAPI {
   }
 
   /// Fetch extended information on the given contentID
-  Future<MediaContent> contentIdSearch(num contentID, MediaContentType type) async {
+  Future<MediaContent> contentIdSearch(
+      num contentID, MediaContentType type) async {
     Response res = await _dio.get("${type.infoLink}/$contentID");
-    print(res.data);
     switch (type) {
       case MediaContentType.MOVIE:
         return MovieContent.fromJson(res.data);

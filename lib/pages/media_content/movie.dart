@@ -28,6 +28,7 @@ class _MovieContentPageState extends State<MovieContentPage> {
     //TODO - think about "Plex" integration for opening the app.
     //TODO - Load extra info on a file to get "Plex"" URL
     // TODO - instead of having 2 copies of this widget(series+movies), make it more generic and get Row widgets as input for the different locations available(name items, buttons Row items, overview, etc)
+    // FIXME - The view in series is messed up around the banner.
     return CustomScrollView(
       slivers: <Widget>[
         SliverAppBar(

@@ -37,7 +37,6 @@ class ContentCard extends StatelessWidget {
                     RouterService.navigate(
                         context, Routes.MOVIE_CONTENT,
                         data: MovieContentArguments(index, content));
-                    print("test");
                   },
                   child:
 

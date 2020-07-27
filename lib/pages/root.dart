@@ -23,7 +23,6 @@ class _RootPageState extends State<RootPage> {
   Widget build(BuildContext context) {
     if (!loginManager.isServerConfigured())
       WidgetsBinding.instance.addPostFrameCallback((_) =>RouterService.navigate(context, Routes.SERVER_LOGIN));
-    print("building");
     return StreamBuilder(
         stream: loginManager.identityStream,
         builder: (BuildContext context, AsyncSnapshot<User> snapshot) {

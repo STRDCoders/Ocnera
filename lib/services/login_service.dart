@@ -17,7 +17,6 @@ class LoginService {
   LoginService() {
     _sub = _identityBloc.identityStream.listen((event) {
       this._user = event;
-      print("HEY $_user");
     });
   }
 
