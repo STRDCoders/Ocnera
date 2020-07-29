@@ -1,8 +1,10 @@
+import 'package:flutter/material.dart';
 import 'package:ombiapp/contracts/media_content.dart';
 import 'package:ombiapp/contracts/media_content_type.dart';
 import 'package:ombiapp/model/network_error.dart';
 import 'package:ombiapp/model/response/media_content/content_wrapper.dart';
 import 'package:ombiapp/services/network/repository.dart';
+import 'package:ombiapp/utils/logger.dart';
 import 'package:rxdart/rxdart.dart';
 
 class QuerySearchBloc {
@@ -15,11 +17,24 @@ class QuerySearchBloc {
 
   Stream<bool> get isSearching => _searching.stream;
 
-  Future<void> search(String query, MediaContentType type) async {
+  /// Sends a search request either by user's query, or by default content link.
+  ///
+  /// The function may get a [query] to be searched, or [defaultContent] to get content of [type]. Either way,
+  /// the API requires to send 1 request to fetch all of the content id's, and 1 request per id to fetch extra information
+  /// The function will wait for all of the requests to finish before returning any value.
+  ///
+  /// param -
+  Future<void> search(
+      {String query,
+      bool defaultContent = false,
+      @required MediaContentType type}) async {
     _searching.sink.add(true);
     num s = DateTime.now().millisecondsSinceEpoch;
-    print("Searching for query: $query");
-    ContentWrapper res = await repo.contentQuerySearch(query, type);
+    logger.d("Searching for query: $query");
+    ContentWrapper res;
+
+    res = await repo.contentSearch(
+        query: query, defaultSearch: defaultContent, type: type);
     switch (res.statusCode) {
       case 200:
         {
@@ -30,11 +45,11 @@ class QuerySearchBloc {
           for (MediaContent content in contentLise) {
             // Some content items may be broken when fetching extended information.
             // Therefor they need to be skipped.
-            if (content.id == 0) continue;
+            if (content.id == 0 ) continue;
             _searchSubject.sink.add(content);
           }
           _searching.sink.add(false);
-          print(
+          logger.d(
               "Search job took: ${(DateTime.now().millisecondsSinceEpoch - s) / 1000} seconds");
         }
         break;

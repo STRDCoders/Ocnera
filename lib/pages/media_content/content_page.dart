@@ -5,10 +5,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:ombiapp/model/screen_arguments/MovieContentArguments.dart';
+import 'package:ombiapp/services/animation/particle_painter.dart';
 import 'package:ombiapp/utils/theme.dart';
 import 'package:ombiapp/utils/utilsImpl.dart';
-import 'package:ombiapp/widgets/rating.dart';
 import 'package:ombiapp/widgets/data_seperator.dart';
+import 'package:ombiapp/contracts/media_content_status.dart';
 
 class MovieContentPage extends StatefulWidget {
   final MovieContentArguments data;
@@ -28,9 +29,9 @@ class _MovieContentPageState extends State<MovieContentPage> {
     //TODO - think about "Plex" integration for opening the app.
     //TODO - Load extra info on a file to get "Plex"" URL
     // TODO - instead of having 2 copies of this widget(series+movies), make it more generic and get Row widgets as input for the different locations available(name items, buttons Row items, overview, etc)
-    // FIXME - The view in series is messed up around the banner.
     return CustomScrollView(
       slivers: <Widget>[
+//SliverToBoxAdapter(child:AnimatedBackground(),),
         SliverAppBar(
             leading: IconButton(
               icon: Icon(Icons.arrow_back),
@@ -121,14 +122,9 @@ class _MovieContentPageState extends State<MovieContentPage> {
                                     child: Row(
                                       children: <Widget>[
                                         Text(widget.data.content.releaseDate.year.toString()),
-                                        (widget.data.content.voteRating == 0)
-                                            ? Container()
-                                            : DataSeparator(
-                                                ContentRating(
-                                                    rating: Text(widget
-                                                        .data.content.voteRating
-                                                        .toStringAsFixed(1))),
-                                              ),
+                                       DataSeparator(widget.data.content.contentPageTitle())
+
+
                                       ],
                                     ))
                               ],
@@ -143,18 +139,19 @@ class _MovieContentPageState extends State<MovieContentPage> {
             ])),
         SliverList(
             delegate: SliverChildListDelegate([
+              AnimatedBackground(),
           Padding(
               padding: EdgeInsets.all(15),
               child: Column(
                 children: <Widget>[
                   Row(
                     children: <Widget>[
-                      RaisedButton(
-                          child: Text(
-                        "Test",
-                      ))
+                      Flexible(
+                        child: widget.data.content.contentStatus.button(widget.data.content.contentType),
+                      ),
                     ],
                   ),
+                  SizedBox(height: 10,),
                   Text(
                     "${widget.data.content.overview}",
                   ),

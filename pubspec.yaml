@@ -38,6 +38,12 @@ dependencies:
   cupertino_icons: ^0.1.2
   ## For DateTime formatting
   intl: ^0.16.1
+  ## For background animation
+  simple_animations: ^2.2.1
+  ## For refresh view
+  pull_to_refresh: ^1.6.1
+  ## Logger
+  logger: ^0.9.2
 
 dev_dependencies:
   flutter_test:

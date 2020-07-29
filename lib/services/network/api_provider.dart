@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:global_configuration/global_configuration.dart';
 import 'package:ombiapp/contracts/media_content.dart';
 import 'package:ombiapp/contracts/media_content_type.dart';
@@ -93,20 +94,21 @@ class ApiProvider implements RepositoryAPI {
   }
 
   /// Fetch search results for the given query
-  Future<ContentWrapper> contentQuerySearch(
-      String query, MediaContentType type) async {
+  Future<ContentWrapper> contentSearch(
+      {String query,
+      bool defaultSearch = false,
+      @required MediaContentType type}) async {
     try {
-//      num s = DateTime.now().millisecondsSinceEpoch;
-      print("Sending request to: ${type.queryLink}/$query");
-      Response res = await _dio.get("${type.queryLink}/$query");
+      Response res;
+      if (defaultSearch)
+        res = await _dio.get(type.defaultContentLink);
+      else
+        res = await _dio.get("${type.queryLink}/$query");
       List<num> content = List();
       //The API sometime returns string when no content found/something unknown happens
       if (res.data is String) return ContentWrapper(200, List());
       //Save only the ID's of the data, everything else will be loaded later with contentIdSearch
       res.data.forEach((e) => {if (e['id'] != 0) content.add(e['id'])});
-
-//      print(
-//          "Search job took: ${(DateTime.now().millisecondsSinceEpoch - s) / 1000} seconds");
 
       return ContentWrapper(200, content);
     } on DioError catch (e) {
@@ -138,4 +140,6 @@ class ApiProvider implements RepositoryAPI {
         break;
     }
   }
+
+
 }

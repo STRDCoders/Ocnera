@@ -6,12 +6,14 @@ import 'package:global_configuration/global_configuration.dart';
 import 'package:ombiapp/services/network/http_override.dart';
 import 'package:ombiapp/services/router.dart';
 import 'package:ombiapp/services/secure_storage_service.dart';
+import 'package:ombiapp/utils/logger.dart';
 import 'package:ombiapp/utils/theme.dart';
+import 'package:ombiapp/utils/utilsImpl.dart';
 
 class OmbiApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    print("MAIN APP");
+    logger.d("MAIN APP");
     return MaterialApp(
       theme: AppTheme.theme(context),
       onGenerateRoute: generateRoute,
@@ -22,10 +24,9 @@ class OmbiApp extends StatelessWidget {
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await GlobalConfiguration().loadFromAsset("config");
-  //TODO - let Amir test this option on his phone.
   SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.top]);
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-    statusBarColor: Colors.transparent,
+    statusBarColor: AppTheme.APP_BACKGROUND.withOpacity(1),
   ));
 
 

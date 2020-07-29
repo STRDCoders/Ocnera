@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:ombiapp/contracts/media_content.dart';
 import 'package:ombiapp/model/request/login.dart';
 import 'package:ombiapp/model/response/LoginResponsePodo.dart';
@@ -15,7 +16,7 @@ abstract class RepositoryAPI {
   Future<User> getIdentity();
   Future<LoginResponsePodo> login(LoginRequestPodo loginRequestPodo);
   Future<bool> testConnection(String address);
-  Future<ContentWrapper> contentQuerySearch (String query, MediaContentType type);
+  Future<ContentWrapper> contentSearch ({String query, bool defaultSearch ,@required MediaContentType type});
   Future<MediaContent> contentIdSearch(num contentID, MediaContentType type);
   void updateDio();
 }

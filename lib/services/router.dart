@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:ombiapp/pages/media_content/movie.dart';
+import 'package:ombiapp/pages/media_content/content_page.dart';
 import 'package:ombiapp/pages/error.dart';
 import 'package:ombiapp/pages/login/login_page.dart';
 import 'package:ombiapp/pages/login/server_config.dart';
@@ -9,7 +9,7 @@ import 'package:ombiapp/pages/root.dart';
 import 'package:ombiapp/pages/search/search.dart';
 import 'package:ombiapp/pages/search/top_bar.dart';
 
-enum Routes { ROOT, LOGIN, SETTINGS, SEARCH, MOVIE_CONTENT, SERVER_LOGIN }
+enum Routes { ROOT, LOGIN, SETTINGS, SEARCH, MEDIA_CONTENT, SERVER_LOGIN }
 
 extension RoutesExtension on Routes {
   static String _value(Routes val) {
@@ -26,7 +26,7 @@ extension RoutesExtension on Routes {
       case Routes.ROOT:
         return '/root';
         break;
-      case Routes.MOVIE_CONTENT:
+      case Routes.MEDIA_CONTENT:
         return '/movie';
         break;
       case Routes.SERVER_LOGIN:
@@ -57,15 +57,14 @@ class RouterService {
       case Routes.ROOT:
         Navigator.popAndPushNamed(context, Routes.ROOT.value);
         break;
-      case Routes.MOVIE_CONTENT:
-        Navigator.pushNamed(context, Routes.MOVIE_CONTENT.value, arguments: data);
+      case Routes.MEDIA_CONTENT:
+        Navigator.pushNamed(context, Routes.MEDIA_CONTENT.value, arguments: data);
         break;
     }
   }
 }
 
 Route<dynamic> generateRoute(RouteSettings settings) {
-  print("Data passed: ${settings.arguments}");
   print("Routing to: ${settings.name}");
   // Using if/else instead of switch/case since case expressions must be constant, which is not the case
   if (settings.name == Routes.ROOT.value || settings.name == "/")
@@ -74,7 +73,7 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     return MaterialPageRoute(builder: (context) => PageContainer(LoginPage()));
   else if (settings.name == Routes.SEARCH.value)
     return MaterialPageRoute(builder: (context) => PageContainer(SearchPage()));
-  else if(settings.name == Routes.MOVIE_CONTENT.value)
+  else if(settings.name == Routes.MEDIA_CONTENT.value)
     return MaterialPageRoute(builder: (context) => PageContainer(MovieContentPage(data:settings.arguments), ));
   else if(settings.name == Routes.SERVER_LOGIN.value)
     return MaterialPageRoute(builder: (context) => PageContainer(ServerConfig()));

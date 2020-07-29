@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:global_configuration/global_configuration.dart';
 import 'package:intl/intl.dart';
-import 'package:ombiapp/services/secure_storage_service.dart';
+
+import 'grid.dart';
+import 'logger.dart';
 
 class UtilsImpl {
   static num timestamp() =>
@@ -21,7 +23,6 @@ class UtilsImpl {
           .padding;
       return height - padding.top - padding.bottom;
     }
-
     return height;
   }
 
@@ -32,10 +33,25 @@ class UtilsImpl {
         .width;
   }
 
-  static String buildLink(String link) {
-    return "${GlobalConfiguration().getString('API_ADDRESS_PREFIX')}${link}${GlobalConfiguration().getString('API_ADDRESS_SUFFIX')}";
+  static num getScreenRatio(BuildContext context){
+    return getScreenHeight(context, true)/getScreenWidth(context);
   }
 
-   static final DateFormat dateFormat = DateFormat('MM-yyyy');
-}
+  static String buildLink(String link) {
+    return "${GlobalConfiguration().getString(
+        'API_ADDRESS_PREFIX')}${link}${GlobalConfiguration().getString(
+        'API_ADDRESS_SUFFIX')}";
+  }
 
+  static final DateFormat dateFormat = DateFormat('MM-yyyy');
+
+  static ScreenSize getScreenType(BuildContext context) {
+    var height = getScreenHeight(context, false);
+    for (var i = 1; i < SCREEN_SIZE_RESOLUTION.length; i++) {
+      if (height < SCREEN_SIZE_RESOLUTION[i]) {
+       logger.d(ScreenSize.values[i-1]);
+        return ScreenSize.values[i - 1];
+      }
+    }
+  }
+}
