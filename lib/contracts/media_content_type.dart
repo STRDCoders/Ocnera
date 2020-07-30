@@ -6,7 +6,7 @@ enum MediaContentType { MOVIE, SERIES }
 
 extension ContentTypeExtention on MediaContentType {
   /// Choose correct API URL for query search.
-  static String _querySearch(MediaContentType val) {
+  String _querySearch(MediaContentType val) {
     switch (val) {
       case MediaContentType.MOVIE:
         return GlobalConfiguration().get('API_LINK_SEARCH_QUERY_MOVIE');
@@ -17,7 +17,7 @@ extension ContentTypeExtention on MediaContentType {
     }
   }
 
-  static IconData _icon(MediaContentType val) {
+  IconData _icon(MediaContentType val) {
     switch (val) {
       case MediaContentType.MOVIE:
         return Icons.movie;
@@ -29,7 +29,7 @@ extension ContentTypeExtention on MediaContentType {
   }
 
   /// Fetch prefix URL to banner images.
-  static String _prefixImageLink(MediaContentType val) {
+  String _prefixImageLink(MediaContentType val) {
     switch (val) {
       case MediaContentType.MOVIE:
         return GlobalConfiguration().get('API_LINK_CONTENT_MOVIE_POSTER');
@@ -41,7 +41,7 @@ extension ContentTypeExtention on MediaContentType {
   }
 
   /// Choose correct API link for extended information.
-  static String _extendedInfoLink(MediaContentType val) {
+  String _extendedInfoLink(MediaContentType val) {
     switch (val) {
       case MediaContentType.MOVIE:
         return GlobalConfiguration().get('API_LINK_SEARCH_INFO_MOVIE');
@@ -54,7 +54,7 @@ extension ContentTypeExtention on MediaContentType {
 
   /// Build banner link for content.
   /// Here you might manipulate the URL to get different resolutions of images.
-  static String _optimizedBanner(String url, MediaContentType type) {
+  String _optimizedBanner(String url, MediaContentType type) {
     switch (type) {
       case MediaContentType.MOVIE:
         return "${MediaContentType.MOVIE.imageLink}/$url";
@@ -65,7 +65,7 @@ extension ContentTypeExtention on MediaContentType {
     }
   }
 
-  static DateTime _toDate(String date, MediaContentType type) {
+  DateTime _toDate(String date, MediaContentType type) {
     try {
       switch (type) {
         case MediaContentType.MOVIE:
@@ -82,7 +82,7 @@ extension ContentTypeExtention on MediaContentType {
   }
 
   /// Choose correct link for default content search
-  static String _defaultSearchContent(MediaContentType type) {
+  String _defaultSearchContent(MediaContentType type) {
     switch (type) {
       case MediaContentType.MOVIE:
         return GlobalConfiguration()
@@ -94,6 +94,19 @@ extension ContentTypeExtention on MediaContentType {
     }
   }
 
+  String _requestLink(MediaContentType type){
+    switch(type){
+
+      case MediaContentType.MOVIE:
+        return GlobalConfiguration()
+            .get('API_LINK_REQUEST_NEW_MOVIE');
+        break;
+      case MediaContentType.SERIES:
+        // TODO: Handle this case.
+        break;
+    }
+  }
+
   String get infoLink => _extendedInfoLink(this);
 
   String get imageLink => _prefixImageLink(this);
@@ -101,6 +114,8 @@ extension ContentTypeExtention on MediaContentType {
   String get queryLink => _querySearch(this);
 
   String get defaultContentLink => _defaultSearchContent(this);
+
+  String get requestLink => _requestLink(this);
 
   String optimizedBanner(String url) => _optimizedBanner(url, this);
 

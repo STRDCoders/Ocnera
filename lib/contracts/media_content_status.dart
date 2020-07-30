@@ -1,14 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:ombiapp/contracts/media_content.dart';
 import 'package:ombiapp/pages/media_content/request_buttons.dart';
 
-import 'media_content_type.dart';
 
 enum MediaContentStatus { AVAILABLE, PARTLY_AVAILABLE, REQUESTED, MISSING }
 
 extension ContentStatusExtention on MediaContentStatus {
-  static Widget _button(MediaContentStatus val, MediaContentType type) {
-    switch (val) {
+  Widget _button(MediaContent content) {
+    switch (content.contentStatus) {
       case MediaContentStatus.AVAILABLE:
         return StatusButton(
           text: "Available",
@@ -28,7 +28,7 @@ extension ContentStatusExtention on MediaContentStatus {
         );
         break;
       case MediaContentStatus.MISSING:
-        return RequestButton();
+        return RequestButton(content: content);
       default:
         return StatusButton(
           text: "UNKNOWN",
@@ -37,5 +37,5 @@ extension ContentStatusExtention on MediaContentStatus {
     }
   }
 
-  Widget button(MediaContentType type) => _button(this, type);
+  Widget button(MediaContent content) => _button(content);
 }

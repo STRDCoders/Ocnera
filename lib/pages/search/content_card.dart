@@ -7,6 +7,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:ombiapp/contracts/media_content.dart';
 import 'package:ombiapp/model/screen_arguments/MovieContentArguments.dart';
 import 'package:ombiapp/services/router.dart';
+import 'package:ombiapp/services/search_service.dart';
 import 'package:ombiapp/utils/logger.dart';
 import 'package:ombiapp/utils/utilsImpl.dart';
 import 'package:ombiapp/utils/grid.dart';
@@ -14,7 +15,7 @@ import 'package:ombiapp/utils/grid.dart';
 import 'package:ombiapp/widgets/card.dart';
 import 'package:ombiapp/contracts/media_content_status.dart';
 
-class ContentCard extends StatelessWidget {
+class ContentCard extends StatefulWidget {
   final num index;
   final MediaContent content;
   final double ratio;
@@ -27,9 +28,14 @@ class ContentCard extends StatelessWidget {
       : super(key: key);
 
   @override
+  _ContentCardState createState() => _ContentCardState();
+}
+
+class _ContentCardState extends State<ContentCard> {
+  @override
   Widget build(BuildContext context) {
     return CardTemplate(
-      ratio: ratio,
+      ratio: widget.ratio,
       child: Padding(
           padding: EdgeInsets.all(10),
           child: Row(
@@ -45,15 +51,15 @@ class ContentCard extends StatelessWidget {
                       Flexible(
                         flex: 4,
                         child: Hero(
-                          tag: index,
-                          child: (content.banner != null)
+                          tag: widget.index,
+                          child: (widget.content.banner != null)
                               ? CachedNetworkImage(
                                   placeholder: (context, url) =>
                                       SpinKitFoldingCube(
                                     size: 20,
                                     color: Colors.white,
                                   ),
-                                  imageUrl: content.banner,
+                                  imageUrl: widget.content.banner,
                                   fit: BoxFit.fitWidth,
                                 )
                               : Container(child: Text("No image")),
@@ -65,7 +71,7 @@ class ContentCard extends StatelessWidget {
                       Flexible(
                         flex: 1,
                         child:
-                            content.contentStatus.button(content.contentType),
+                            widget.content.contentStatus.button(widget.content),
                       ),
                     ],
                   )),
@@ -82,13 +88,13 @@ class ContentCard extends StatelessWidget {
                           children: <Widget>[
                             Flexible(
                                 child: Text(
-                              content.title,
+                                  widget.content.title,
                               overflow: TextOverflow.ellipsis,
                               maxLines: 2,
                               style:
                                   TextStyle(fontSize: 24, color: Colors.orange),
                             )),
-                            content.cardTopRight()
+                            widget.content.cardTopRight()
                           ],
                         ),
                         Divider(
@@ -98,7 +104,7 @@ class ContentCard extends StatelessWidget {
                           fit: FlexFit.tight,
                           flex: 5,
                           child: Text(
-                            content.overview,
+                            widget.content.overview,
                             overflow: TextOverflow.ellipsis,
                             maxLines: 8,
                             style: TextStyle(fontSize: 12, color: Colors.white),
@@ -115,10 +121,10 @@ class ContentCard extends StatelessWidget {
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: <Widget>[
-                                      content.cardLeftBottom(),
+                                      widget.content.cardLeftBottom(),
                                       Text(
-                                        content.releaseDate != null
-                                            ? (content.releaseDate.year
+                                        widget.content.releaseDate != null
+                                            ? (widget.content.releaseDate.year
                                                 .toString())
                                             : "---",
                                         textAlign: TextAlign.right,
@@ -136,8 +142,20 @@ class ContentCard extends StatelessWidget {
           )),
       onTap: () {
         RouterService.navigate(context, Routes.MEDIA_CONTENT,
-            data: MovieContentArguments(index, content));
+            data: MovieContentArguments(widget.index, widget.content));
       },
     );
   }
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
+
 }

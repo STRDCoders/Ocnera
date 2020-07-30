@@ -42,4 +42,9 @@ abstract class MediaContent {
 
   Widget contentPageTitle();
 
+  @override
+  String toString() {
+    return 'MediaContent{title: $title, banner: $banner, background: $background, overview: $overview, releaseDate: $releaseDate, voteRating: $voteRating, voteCount: $voteCount, id: $id, contentStatus: $contentStatus, contentType: $contentType}';
+  }
+
 }

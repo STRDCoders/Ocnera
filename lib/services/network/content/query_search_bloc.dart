@@ -12,7 +12,6 @@ class QuerySearchBloc {
 
   //Notify the subscribers when a search job is finished.
   final _searching = PublishSubject<bool>();
-
   Stream<MediaContent> get searchStream => _searchSubject.stream;
 
   Stream<bool> get isSearching => _searching.stream;
@@ -23,7 +22,6 @@ class QuerySearchBloc {
   /// the API requires to send 1 request to fetch all of the content id's, and 1 request per id to fetch extra information
   /// The function will wait for all of the requests to finish before returning any value.
   ///
-  /// param -
   Future<void> search(
       {String query,
       bool defaultContent = false,

@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:global_configuration/global_configuration.dart';
 import 'package:ombiapp/contracts/media_content.dart';
 import 'package:ombiapp/contracts/media_content_status.dart';
@@ -11,11 +12,10 @@ class MovieContent extends MediaContent {
 
   bool get adult => _adult;
 
-
   get language => _language;
 
   MovieContent.fromJson(Map<String, dynamic> json) {
-  var contentStatus;
+    var contentStatus;
     if (json['available'])
       contentStatus = MediaContentStatus.AVAILABLE;
     else if (json['requested'])
@@ -34,20 +34,9 @@ class MovieContent extends MediaContent {
         releaseDate: MediaContentType.MOVIE.dateTime(json['releaseDate']),
         id: json['id'],
         contentStatus: contentStatus,
-    voteRating:  json['voteAverage'] == null ? 0 : json['voteAverage'],
-    voteCount: json['voteCount']);
-//    this.title = json['originalTitle'];
-//    this.banner = MediaContentType.MOVIE.optimizedBanner(json['posterPath']);
-//    this.releaseDate = MediaContentType.MOVIE.dateTime(json['releaseDate']);
-//            this.id = json['id'];
-//    this.overview = json['overview'];
-    //    this.background = (json['backdropPath'] != null)
-//        ? "${GlobalConfiguration().get('API_LINK_CONTENT_MOVIE_POSTER')}/${json['backdropPath']}"
-//        : this.banner;
+        voteRating: json['voteAverage'] == null ? 0 : json['voteAverage'],
+        voteCount: json['voteCount']);
 
-//
-//    this.voteRating = json['voteAverage'] == null ? 0 : json['voteAverage'];
-//    this.voteCount = json['voteCount'];
     this._adult = json['adult'];
     this._language = json['originalLanguage'];
   }
@@ -59,7 +48,12 @@ class MovieContent extends MediaContent {
 
   @override
   Widget cardLeftBottom() {
-    return Text(this._language.toUpperCase());
+    return Row(
+      children: <Widget>[
+        Text(this._language.toUpperCase()),
+//        (_adult) ? Container(color: Colors.red,child: Text("18+"),) : Container()
+      ],
+    );
   }
 
   @override

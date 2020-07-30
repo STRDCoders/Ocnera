@@ -8,7 +8,6 @@ import 'package:ombiapp/services/router.dart';
 import 'package:ombiapp/services/secure_storage_service.dart';
 import 'package:ombiapp/utils/logger.dart';
 import 'package:ombiapp/utils/theme.dart';
-import 'package:ombiapp/utils/utilsImpl.dart';
 
 class OmbiApp extends StatelessWidget {
   @override

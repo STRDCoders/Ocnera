@@ -2,11 +2,13 @@ import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:global_configuration/global_configuration.dart';
 import 'package:ombiapp/contracts/media_content.dart';
+import 'package:ombiapp/contracts/media_content_request.dart';
 import 'package:ombiapp/contracts/media_content_type.dart';
 import 'package:ombiapp/model/request/login.dart';
 import 'package:ombiapp/model/response/LoginResponsePodo.dart';
 import 'package:ombiapp/model/response/media_content/content_wrapper.dart';
 import 'package:ombiapp/model/response/media_content/movie/movie.dart';
+import 'package:ombiapp/model/response/media_content/requests/media_content_request.dart';
 import 'package:ombiapp/model/response/media_content/series/series.dart';
 import 'package:ombiapp/model/response/user.dart';
 import 'package:ombiapp/services/network/repository.dart';
@@ -93,7 +95,11 @@ class ApiProvider implements RepositoryAPI {
     }
   }
 
-  /// Fetch search results for the given query
+  /// Fetch search results for the given parameters.
+  ///
+  /// if [defaultSearch] set to true, a request will be sent to the default content link of the [type] without any parameters.
+  /// else, a search request for the [query] will be sent to the corresponding [type] link.
+  ///
   Future<ContentWrapper> contentSearch(
       {String query,
       bool defaultSearch = false,
@@ -140,6 +146,27 @@ class ApiProvider implements RepositoryAPI {
         break;
     }
   }
-
-
+  /// Sends a request to the API for new content request.
+  Future<MediaContentRequestResponse> requestContent(
+      MediaContentRequest request, MediaContentType type) async {
+    try {
+      Response response =
+          await _dio.post(type.requestLink, data: request.toJson());
+      print(response.data);
+      return MediaContentRequestResponse.fromJson(response.data, request.id);
+    } on DioError catch (e) {
+      print(e);
+      switch (e.type) {
+        case DioErrorType.RESPONSE:
+          {
+            return MediaContentRequestResponse(e.response.statusCode);
+          }
+        default:
+          {
+            return MediaContentRequestResponse(-1);
+          }
+          break;
+      }
+    }
+  }
 }

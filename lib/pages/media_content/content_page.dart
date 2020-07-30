@@ -4,6 +4,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:ombiapp/contracts/media_content.dart';
 import 'package:ombiapp/model/screen_arguments/MovieContentArguments.dart';
 import 'package:ombiapp/services/animation/particle_painter.dart';
 import 'package:ombiapp/utils/theme.dart';
@@ -54,7 +55,7 @@ class _MovieContentPageState extends State<MovieContentPage> {
                 width: UtilsImpl.getScreenWidth(context),
                 decoration: BoxDecoration(
                   image: DecorationImage(
-                    //TODO - implement the onError method.
+                      //TODO - implement the onError method.
                       onError: (context, trace) =>
                           Text("THIS IS HALLOWIERJKSJRKSJDFKJ"),
                       image: CachedNetworkImageProvider(
@@ -121,10 +122,11 @@ class _MovieContentPageState extends State<MovieContentPage> {
                                     flex: 1,
                                     child: Row(
                                       children: <Widget>[
-                                        Text(widget.data.content.releaseDate.year.toString()),
-                                       DataSeparator(widget.data.content.contentPageTitle())
-
-
+                                        Text(widget
+                                            .data.content.releaseDate.year
+                                            .toString()),
+                                        DataSeparator(widget.data.content
+                                            .contentPageTitle())
                                       ],
                                     ))
                               ],
@@ -139,7 +141,7 @@ class _MovieContentPageState extends State<MovieContentPage> {
             ])),
         SliverList(
             delegate: SliverChildListDelegate([
-              AnimatedBackground(),
+          AnimatedBackground(),
           Padding(
               padding: EdgeInsets.all(15),
               child: Column(
@@ -147,11 +149,14 @@ class _MovieContentPageState extends State<MovieContentPage> {
                   Row(
                     children: <Widget>[
                       Flexible(
-                        child: widget.data.content.contentStatus.button(widget.data.content.contentType),
+                        child: widget.data.content.contentStatus
+                            .button(widget.data.content),
                       ),
                     ],
                   ),
-                  SizedBox(height: 10,),
+                  SizedBox(
+                    height: 10,
+                  ),
                   Text(
                     "${widget.data.content.overview}",
                   ),
@@ -160,5 +165,15 @@ class _MovieContentPageState extends State<MovieContentPage> {
         ]))
       ],
     );
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
+  @override
+  void initState() {
+    super.initState();
   }
 }
