@@ -17,9 +17,11 @@ You can catch up with the status of the first version at the "Projects" tab of t
   * [x] Allows you to configure your server Ip upon first time use(you can change it later).
   * [x] The app requires a user on the server. Currently no support for plex login.
 * ## Search System
-  * [ ] Basic name search - Search content by its name.
+  * [x] Basic name search - Search content by its name.
   * [ ] Actors search - Search content by naming an actor.
   * [ ] Easy to access request button.
+   * [x] Movie Requestes
+   * [] Custom Series request
   * [ ] Filtering 
     * [ ] Release Date
     * [ ] Movie score
