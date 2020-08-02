@@ -21,7 +21,7 @@ You can catch up with the status of the first version at the "Projects" tab of t
   * [ ] Actors search - Search content by naming an actor.
   * [ ] Easy to access request button.
    * [x] Movie Requestes
-   * [] Custom Series request
+   * [ ] Custom Series request
   * [ ] Filtering 
     * [ ] Release Date
     * [ ] Movie score
