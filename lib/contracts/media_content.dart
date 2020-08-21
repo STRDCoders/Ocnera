@@ -34,7 +34,7 @@ abstract class MediaContent {
     this.voteRating = voteRating;
     this.voteCount = voteCount;
   }
-
+  //TODO - Consider creating a dict of extra info for each implementation of media content & create getExtra()
   // Each content type might show different information(Ex. rating is only used for movies, series has network name, etc.)
   Widget cardTopRight();
 

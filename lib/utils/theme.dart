@@ -26,5 +26,5 @@ class AppTheme{
 
           textTheme: ButtonTextTheme.accent),
       textTheme: TextTheme(bodyText2: TextStyle(color: Colors.grey)),
-      scaffoldBackgroundColor: APP_BACKGROUND);
+      scaffoldBackgroundColor: APP_BACKGROUND,);
 }

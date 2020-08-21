@@ -4,12 +4,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:ombiapp/contracts/media_content.dart';
-import 'package:ombiapp/contracts/media_content_status.dart';
 import 'package:ombiapp/contracts/media_content_type.dart';
 import 'package:ombiapp/model/request/content/requests/movie.dart';
 import 'package:ombiapp/model/response/media_content/requests/media_content_request.dart';
+import 'package:ombiapp/model/response/media_content/series/series.dart';
 
 import 'package:ombiapp/services/request_service.dart';
+import 'package:ombiapp/services/router.dart';
 
 class StatusButton extends StatelessWidget {
   final String text;
@@ -32,8 +33,10 @@ class StatusButton extends StatelessWidget {
 
 class RequestButton extends StatefulWidget {
   final MediaContent content;
+  final String text;
+  final Color color;
 
-  const RequestButton({Key key, this.content}) : super(key: key);
+  const RequestButton({Key key,@required this.content,this.text="Request", this.color=Colors.orange}) : super(key: key);
 
   @override
   _RequestButtonState createState() => _RequestButtonState();
@@ -63,12 +66,12 @@ class _RequestButtonState extends State<RequestButton> {
         return (!_searching)
             ? RaisedButton(
                 elevation: 15,
-                color: Colors.orange,
+                color: widget.color,
                 child: Text(
-                  "Request",
+                  widget.text,
                   style: TextStyle(fontSize: 12),
                 ),
-                onPressed: () => handleRequest(context),
+                onPressed: handleRequest,
               )
             : SpinKitCircle(
                 size: 20,
@@ -78,21 +81,24 @@ class _RequestButtonState extends State<RequestButton> {
     );
   }
 
-  void handleRequest(BuildContext context) {
-    print("Working on: ${widget.content.id}");
-    setState(() {
-      _searching = true;
-    });
+  void handleRequest() {
+
     switch (widget.content.contentType) {
       case MediaContentType.MOVIE:
+        setState(() {
+          _searching = true;
+        });
         requestManager.requestContent(
             widget.content, MovieRequestPodo(widget.content.id));
         break;
       case MediaContentType.SERIES:
-        // TODO: Handle this case.
+        RouterService.navigate(context, Routes.SERIES_REQUEST, data: (widget.content as SeriesContent));
         break;
     }
   }
+
+
+
 
   @override
   void initState() {

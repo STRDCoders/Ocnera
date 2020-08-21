@@ -13,6 +13,7 @@ import 'package:ombiapp/model/response/media_content/series/series.dart';
 import 'package:ombiapp/model/response/user.dart';
 import 'package:ombiapp/services/network/repository.dart';
 import 'package:ombiapp/services/secure_storage_service.dart';
+import 'package:ombiapp/utils/logger.dart';
 import 'package:ombiapp/utils/utilsImpl.dart';
 
 class ApiProvider implements RepositoryAPI {
@@ -22,20 +23,25 @@ class ApiProvider implements RepositoryAPI {
     updateDio();
   }
 
-  void updateDio() {
-    String url =
-        UtilsImpl.buildLink(secureStorage.values[StorageKeys.ADDRESS.value]);
-    print("Dio Using IP: $url");
+  BaseOptions fetchBaseOptions(String url) {
     BaseOptions options = new BaseOptions(
         baseUrl: url,
         connectTimeout: 8000,
         receiveTimeout: 8000,
+        sendTimeout: 8000,
         headers: {
           'Content-Type': "application/json-patch+json",
           'Authorization':
-              "Bearer ${secureStorage.values[StorageKeys.TOKEN.value]}"
+          "Bearer ${secureStorage.values[StorageKeys.TOKEN.value]}"
         });
-    this._dio = new Dio(options);
+    return options;
+  }
+  
+  void updateDio() {
+    String url =
+        UtilsImpl.buildLink(secureStorage.values[StorageKeys.ADDRESS.value]);
+    print("Dio Using IP: $url");
+    this._dio = new Dio(fetchBaseOptions(url));
   }
 
   Future<LoginResponsePodo> login(LoginRequestPodo loginRequestPodo) async {
@@ -85,7 +91,7 @@ class ApiProvider implements RepositoryAPI {
 
   Future<bool> testConnection(String address) async {
     try {
-      Dio tmpClient = Dio();
+      Dio tmpClient = Dio(fetchBaseOptions(address));
       tmpClient.options.baseUrl = UtilsImpl.buildLink(address);
       Response response = await tmpClient
           .get(GlobalConfiguration().getString('API_LINK_CONNECTION_TEST'));
@@ -137,6 +143,10 @@ class ApiProvider implements RepositoryAPI {
   Future<MediaContent> contentIdSearch(
       num contentID, MediaContentType type) async {
     Response res = await _dio.get("${type.infoLink}/$contentID");
+    if(res.statusCode != 200) {
+      logger.e("Content search: ${contentID}(${type}) returned status code: ${res.statusCode}");
+      return null;
+    }
     switch (type) {
       case MediaContentType.MOVIE:
         return MovieContent.fromJson(res.data);

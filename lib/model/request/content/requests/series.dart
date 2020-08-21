@@ -1,10 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:ombiapp/contracts/media_content_request.dart';
-import 'package:ombiapp/model/response/media_content/series/seasone.dart';
+import 'package:ombiapp/model/request/content/requests/season.dart';
 
 class SeriesContentRequestPodo extends MediaContentRequest {
   final bool requestAll, lastSeason, firstSeason;
-  List<Season> seasons;
+  List<SeasonRequest> seasons;
 
   SeriesContentRequestPodo(
       {@required num id,

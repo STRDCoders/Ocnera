@@ -4,7 +4,6 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:ombiapp/contracts/media_content_type.dart';
 import 'package:ombiapp/pages/search/content_card.dart';
 import 'package:ombiapp/services/animation/particle_painter.dart';
 import 'package:ombiapp/services/request_service.dart';
@@ -89,14 +88,12 @@ class _SearchPageState extends State<SearchPage> {
 
   @override
   void initState() {
-    // Default search on page load
-    contentSearchManager.search(
-        type: MediaContentType.MOVIE, defaultContent: true);
 
     _subscription.add(requestManager.requestStream.listen((data) {
       setState(() {});
       WidgetsBinding.instance.addPostFrameCallback((_) => Scaffold.of(context)
           .showSnackBar(SnackBar(content: Text(data.message))));
+
     }));
 
     super.initState();

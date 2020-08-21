@@ -5,7 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:ombiapp/contracts/media_content.dart';
-import 'package:ombiapp/model/screen_arguments/MovieContentArguments.dart';
+import 'package:ombiapp/model/screen_arguments/content_page_args.dart';
 import 'package:ombiapp/services/router.dart';
 import 'package:ombiapp/services/search_service.dart';
 import 'package:ombiapp/utils/logger.dart';

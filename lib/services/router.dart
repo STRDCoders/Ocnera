@@ -4,12 +4,12 @@ import 'package:ombiapp/pages/media_content/content_page.dart';
 import 'package:ombiapp/pages/error.dart';
 import 'package:ombiapp/pages/login/login_page.dart';
 import 'package:ombiapp/pages/login/server_config.dart';
+import 'package:ombiapp/pages/media_content/series_request/test.dart';
 import 'package:ombiapp/pages/page_container.dart';
 import 'package:ombiapp/pages/root.dart';
 import 'package:ombiapp/pages/search/search.dart';
-import 'package:ombiapp/pages/search/top_bar.dart';
 
-enum Routes { ROOT, LOGIN, SETTINGS, SEARCH, MEDIA_CONTENT, SERVER_LOGIN }
+enum Routes { ROOT, LOGIN, SETTINGS, SEARCH, MEDIA_CONTENT, SERVER_LOGIN, SERIES_REQUEST }
 
 extension RoutesExtension on Routes {
   static String _value(Routes val) {
@@ -32,6 +32,8 @@ extension RoutesExtension on Routes {
       case Routes.SERVER_LOGIN:
         return '/login/server';
         break;
+      case Routes.SERIES_REQUEST:
+        return '/request/series/new';
     }
   }
 
@@ -60,10 +62,13 @@ class RouterService {
       case Routes.MEDIA_CONTENT:
         Navigator.pushNamed(context, Routes.MEDIA_CONTENT.value, arguments: data);
         break;
+      case Routes.SERIES_REQUEST:
+        Navigator.pushNamed(context, Routes.SERIES_REQUEST.value, arguments: data);
     }
   }
 }
 
+/// Register routes to main app
 Route<dynamic> generateRoute(RouteSettings settings) {
   print("Routing to: ${settings.name}");
   // Using if/else instead of switch/case since case expressions must be constant, which is not the case
@@ -77,5 +82,7 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     return MaterialPageRoute(builder: (context) => PageContainer(MovieContentPage(data:settings.arguments), ));
   else if(settings.name == Routes.SERVER_LOGIN.value)
     return MaterialPageRoute(builder: (context) => PageContainer(ServerConfig()));
+  else if(settings.name == Routes.SERIES_REQUEST.value)
+    return MaterialPageRoute(builder: (context) => (SeriesRequestPage(seriesContent: settings.arguments,)));
   return MaterialPageRoute(builder: (context) => PageContainer(ErrorPage()));
 }

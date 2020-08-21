@@ -1,12 +1,13 @@
+import 'dart:async';
 import 'dart:ui';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:ombiapp/contracts/media_content.dart';
-import 'package:ombiapp/model/screen_arguments/MovieContentArguments.dart';
+import 'package:ombiapp/model/screen_arguments/content_page_args.dart';
 import 'package:ombiapp/services/animation/particle_painter.dart';
+import 'package:ombiapp/services/request_service.dart';
 import 'package:ombiapp/utils/theme.dart';
 import 'package:ombiapp/utils/utilsImpl.dart';
 import 'package:ombiapp/widgets/data_seperator.dart';
@@ -25,6 +26,8 @@ class MovieContentPage extends StatefulWidget {
 }
 
 class _MovieContentPageState extends State<MovieContentPage> {
+  StreamSubscription _requestStreamSubscription;
+
   @override
   Widget build(BuildContext context) {
     //TODO - think about "Plex" integration for opening the app.
@@ -32,7 +35,6 @@ class _MovieContentPageState extends State<MovieContentPage> {
     // TODO - instead of having 2 copies of this widget(series+movies), make it more generic and get Row widgets as input for the different locations available(name items, buttons Row items, overview, etc)
     return CustomScrollView(
       slivers: <Widget>[
-//SliverToBoxAdapter(child:AnimatedBackground(),),
         SliverAppBar(
             leading: IconButton(
               icon: Icon(Icons.arrow_back),
@@ -169,11 +171,16 @@ class _MovieContentPageState extends State<MovieContentPage> {
 
   @override
   void dispose() {
+    _requestStreamSubscription.cancel();
     super.dispose();
   }
 
   @override
   void initState() {
+    _requestStreamSubscription = requestManager.requestStream.listen((data) {
+      setState(() {
+      });
+    });
     super.initState();
   }
 }

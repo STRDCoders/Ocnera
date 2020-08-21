@@ -12,8 +12,7 @@ class TopBar extends StatefulWidget {
 }
 
 class _TopBarState extends State<TopBar> {
-  GlobalKey btnKey = GlobalKey();
-  MediaContentType _contentSearchType = MediaContentType.MOVIE;
+  MediaContentType _contentSearchType = MediaContentType.SERIES;
 
   // Used to avoid requests spam while typing in search bar.
   Timer timer;
@@ -111,6 +110,10 @@ class _TopBarState extends State<TopBar> {
 
   @override
   void initState() {
+    // Default search on page load
+    contentSearchManager.search(
+        type: _contentSearchType, defaultContent: true);
+
     _editingController.addListener(() {
       if (_editingController.text.isNotEmpty) {
         if (timer != null) {

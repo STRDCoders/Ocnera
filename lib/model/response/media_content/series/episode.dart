@@ -1,13 +1,12 @@
+import 'package:ombiapp/contracts/media_content_status.dart';
+
 class Episode {
   num _number;
   String _title, _date;
-  bool _available, _requested, _approved;
+  MediaContentStatus _status;
 
-  get approved => _approved;
 
-  get requested => _requested;
-
-  bool get available => _available;
+  MediaContentStatus get status => _status;
 
   get date => _date;
 
@@ -19,8 +18,16 @@ class Episode {
     this._number = json['episodeNumber'];
     this._title = json['title'];
     this._date = json['airDate'];
-    this._available = json['available'];
-    this._requested = json['requested'];
-    this._approved = json['approved'];
+    if(json['available']) _status = MediaContentStatus.AVAILABLE;
+    else if(json['approved']) _status = MediaContentStatus.APPROVED;
+    else if(json['requested']) _status = MediaContentStatus.REQUESTED;
+    else _status = MediaContentStatus.MISSING;
   }
+
+  @override
+  String toString() {
+    return 'Episode{_number: $_number, _title: $_title, _date: $_date, _status: $_status}';
+  }
+
+
 }
