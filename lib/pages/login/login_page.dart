@@ -4,9 +4,8 @@ import 'package:ombiapp/model/network_error.dart';
 import 'package:ombiapp/model/response/LoginResponsePodo.dart';
 import 'package:ombiapp/pages/login/login_form.dart';
 import 'package:ombiapp/services/login_service.dart';
-import 'package:ombiapp/services/network/login_bloc.dart';
+import 'package:ombiapp/services/network/authorization/login_bloc.dart';
 import 'package:ombiapp/services/router.dart';
-import 'package:ombiapp/services/secure_storage.dart';
 
 class LoginPage extends StatefulWidget {
   @override

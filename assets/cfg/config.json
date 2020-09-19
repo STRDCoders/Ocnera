@@ -3,5 +3,13 @@
   "API_ADDRESS_SUFFIX": "/ombi/api/v1/",
   "API_LINK_LOGIN_LOGIN": "Token",
   "API_LINK_IDENTITY_CURRENT": "Identity",
-  "API_LINK_CONNECTION_TEST": "CustomPage"
+  "API_LINK_CONNECTION_TEST": "LandingPage",
+  "API_LINK_SEARCH_QUERY_MOVIE": "search/movie/",
+  "API_LINK_SEARCH_QUERY_SERIES": "search/tv/",
+  "API_LINK_SEARCH_INFO_MOVIE" : "search/movie/info/",
+  "API_LINK_SEARCH_INFO_SERIES" : "search/tv/info/",
+  "API_LINK_CONTENT_MOVIE_POSTER": "https://image.tmdb.org/t/p/w200/",
+  "API_LINK_SEARCH_TV_DEFAULT_CONTENT": "search/tv/popular",
+  "API_LINK_SEARCH_MOVIE_DEFAULT_CONTENT": "search/movie/popular",
+  "API_LINK_REQUEST_NEW_MOVIE": "request/movie"
 }

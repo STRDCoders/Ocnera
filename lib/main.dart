@@ -3,27 +3,18 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:global_configuration/global_configuration.dart';
-import 'package:ombiapp/pages/login/login_page.dart';
-import 'package:ombiapp/pages/root.dart';
-import 'package:ombiapp/pages/search/search.dart';
 import 'package:ombiapp/services/network/http_override.dart';
 import 'package:ombiapp/services/router.dart';
-import 'package:ombiapp/services/secure_storage.dart';
+import 'package:ombiapp/services/secure_storage_service.dart';
+import 'package:ombiapp/utils/logger.dart';
+import 'package:ombiapp/utils/theme.dart';
 
 class OmbiApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    print("MAIN APP");
+    logger.d("MAIN APP");
     return MaterialApp(
-      theme: ThemeData(
-          buttonTheme: ButtonThemeData(
-              colorScheme: Theme.of(context)
-                  .colorScheme
-                  .copyWith(secondary: Colors.white),
-              buttonColor: Colors.orange,
-              textTheme: ButtonTextTheme.accent),
-          textTheme: TextTheme(bodyText2: TextStyle(color: Colors.grey)),
-          scaffoldBackgroundColor: const Color.fromARGB(245, 31, 31, 31)),
+      theme: AppTheme.theme(context),
       onGenerateRoute: generateRoute,
     );
   }
@@ -32,6 +23,16 @@ class OmbiApp extends StatelessWidget {
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await GlobalConfiguration().loadFromAsset("config");
+  SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.top]);
+  // SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+  //   statusBarColor: AppTheme.APP_BACKGROUND.withOpacity(1),
+  // ));
+
+  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark.copyWith(
+      statusBarColor: Colors.white, // Color for Android
+      statusBarBrightness: Brightness.dark // Dark == white status bar -- for IOS.
+  ));
+
 
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,

@@ -2,6 +2,7 @@ import 'package:ombiapp/contracts/network_response.dart';
 import 'package:ombiapp/model/network_error.dart';
 import 'package:ombiapp/model/response/user.dart';
 import 'package:ombiapp/services/network/repository.dart';
+import 'package:ombiapp/utils/logger.dart';
 import 'package:rxdart/rxdart.dart';
 
 class IdentityBloc {
@@ -10,6 +11,7 @@ class IdentityBloc {
 
   identify() async{
     User res = await repo.getIdentity();
+    logger.d("response for login: ${res}");
     switch (res.statusCode){
       case 200: {
         _identitySubject.sink.add(res);

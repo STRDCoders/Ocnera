@@ -1,38 +1,38 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:ombiapp/model/response/user.dart';
-import 'package:ombiapp/pages/login/login_page.dart';
-import 'package:ombiapp/pages/login/server_config.dart';
 import 'package:ombiapp/pages/page_container.dart';
-import 'package:ombiapp/pages/search/search.dart';
 import 'package:ombiapp/services/login_service.dart';
-import 'package:ombiapp/services/network/identity_bloc.dart';
-import 'package:ombiapp/services/secure_storage.dart';
+import 'package:ombiapp/services/router.dart';
+import 'package:ombiapp/utils/grid.dart';
+import 'package:ombiapp/utils/utilsImpl.dart';
 
 ///
 /// This widget determines whether the user is logged in,
 /// and therefor which screen should be shown.
 ///
 
-class RootPage extends StatelessWidget {
+class RootPage extends StatefulWidget {
+  @override
+  _RootPageState createState() => _RootPageState();
+}
 
+class _RootPageState extends State<RootPage> {
   @override
   Widget build(BuildContext context) {
-
-    if(secureStorage.values[StorageKeys.ADDRESS.value] == null)
-      return PageContainer(ServerConfig(), resizable: false,);
-
-    loginManager.identify();
+    if (!loginManager.isServerConfigured())
+      WidgetsBinding.instance.addPostFrameCallback((_) =>RouterService.navigate(context, Routes.SERVER_LOGIN));
     return StreamBuilder(
         stream: loginManager.identityStream,
         builder: (BuildContext context, AsyncSnapshot<User> snapshot) {
-          print(snapshot.connectionState);
           switch (snapshot.connectionState) {
             case ConnectionState.active:
               if (snapshot.hasError) {
-                return PageContainer(LoginPage());
+                print('Switching to Login page');
+                WidgetsBinding.instance.addPostFrameCallback((_) =>RouterService.navigate(context, Routes.LOGIN));
               } else if (snapshot.hasData) {
-                return PageContainer(SearchPage());
+                print('Switching to Search Page');
+                WidgetsBinding.instance.addPostFrameCallback((_) =>RouterService.navigate(context, Routes.SEARCH));
               }
               break;
             default:
@@ -55,48 +55,17 @@ class RootPage extends StatelessWidget {
               ]));
         });
   }
+
+  @override
+  void initState() {
+    print('init root ');
+    super.initState();
+    if (loginManager.isServerConfigured()) loginManager.identify();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    print('disposing root');
+  }
 }
-//
-//class RootPage extends StatefulWidget {
-//  @override
-//  _RootPageState createState() => _RootPageState();
-//}
-//
-//class _RootPageState extends State<RootPage> {
-//
-//
-//
-//  //todo - decide if u want scaffold for each page or just this one and the others will be loaded here.
-//  @override
-//  Widget build(BuildContext context) {
-//    identityBloc.identify();
-//    return Container(
-//        color: Color.fromARGB(245, 31, 31, 31),
-//        child: SafeArea(
-//            child: Scaffold(
-//                body: Container(
-//          child: StreamBuilder(
-//            stream: identityBloc.identityStream,
-//            builder: (BuildContext context, AsyncSnapshot<User> snapshot) {
-//              switch (snapshot.connectionState) {
-//                case ConnectionState.active:
-//                  print('active');
-//                  if (snapshot.hasError) {
-//                    return LoginPage();
-//                  } else if (snapshot.hasData) {
-//                    print(snapshot.data);
-//                    return SearchPage();
-//                  }
-//                  break;
-//                default:
-//                  {}
-//              }
-//              return SpinKitFoldingCube(
-//                size: 50,
-//                color: Colors.white,
-//              );
-//            },
-//          ),
-//        ))));
-//  }
-//}

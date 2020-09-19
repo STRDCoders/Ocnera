@@ -26,7 +26,6 @@ class SecureStorage {
 
   init() async {
     _values = await _storage.readAll();
-    print(_values);
   }
 
   saveData(String key, String val ) async {
