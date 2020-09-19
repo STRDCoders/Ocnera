@@ -77,7 +77,7 @@ Route<dynamic> generateRoute(RouteSettings settings) {
   else if (settings.name == Routes.LOGIN.value)
     return MaterialPageRoute(builder: (context) => PageContainer(LoginPage()));
   else if (settings.name == Routes.SEARCH.value)
-    return MaterialPageRoute(builder: (context) => PageContainer(SearchPage()));
+    return MaterialPageRoute(builder: (context) => PageContainer(SearchPage(),safeAreaTop: false,));
   else if(settings.name == Routes.MEDIA_CONTENT.value)
     return MaterialPageRoute(builder: (context) => PageContainer(MovieContentPage(data:settings.arguments), ));
   else if(settings.name == Routes.SERVER_LOGIN.value)

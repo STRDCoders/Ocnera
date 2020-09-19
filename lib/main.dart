@@ -24,8 +24,13 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await GlobalConfiguration().loadFromAsset("config");
   SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.top]);
-  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-    statusBarColor: AppTheme.APP_BACKGROUND.withOpacity(1),
+  // SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+  //   statusBarColor: AppTheme.APP_BACKGROUND.withOpacity(1),
+  // ));
+
+  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark.copyWith(
+      statusBarColor: Colors.white, // Color for Android
+      statusBarBrightness: Brightness.dark // Dark == white status bar -- for IOS.
   ));
 
 
