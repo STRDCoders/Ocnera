@@ -30,8 +30,7 @@ class _SeasonExpansionTileState extends State<SeasonExpansionTile> {
         textAlign: TextAlign.left,
         style: TextStyle(color: Colors.green),
       );
-    return (widget.episodeRequests.isNotEmpty &&
-            widget.episodeRequests.length == widget.item.missingEpisodes.length)
+    return (widget.episodeRequests.isNotEmpty)
         ? RaisedButton(
             child: Text("Cancel"),
             color: Colors.cyan,
