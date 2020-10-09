@@ -168,7 +168,8 @@ class _SeriesRequestSelectionState extends State<SeriesRequestPage> {
 
   /// Handle new episode request, add/remove from request list & update state.
   void addRequestItem(EpisodeRequestAction event) {
-    if (!event.remove)
+    if (!event.remove &&
+        (!episodeRequests[event.seasonId].contains(event.episodeId)))
       episodeRequests[event.seasonId].add(event.episodeId);
     else
       episodeRequests[event.seasonId].remove(event.episodeId);
@@ -176,8 +177,8 @@ class _SeriesRequestSelectionState extends State<SeriesRequestPage> {
     setState(() {});
   }
 
-  void submitRequest(){
-    print (episodeRequests);
-print(widget.seriesContent.id);
+  void submitRequest() {
+    print(episodeRequests);
+    print(widget.seriesContent.id);
   }
 }
