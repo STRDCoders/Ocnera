@@ -18,7 +18,7 @@ class SeasonExpansionTile extends StatefulWidget {
 class _SeasonExpansionTileState extends State<SeasonExpansionTile> {
   @override
   Widget build(BuildContext context) {
-    return ListTile(title: widget.item.header, trailing: _buildButton());
+    return ListTile(title: widget.item.header,subtitle: (widget.episodeRequests.isNotEmpty) ? Text("${widget.episodeRequests.length} episodes selected") : null, trailing: _buildButton());
   }
 
   Widget _buildButton() {
