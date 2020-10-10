@@ -4,7 +4,7 @@ import 'package:ombiapp/pages/media_content/content_page.dart';
 import 'package:ombiapp/pages/error.dart';
 import 'package:ombiapp/pages/login/login_page.dart';
 import 'package:ombiapp/pages/login/server_config.dart';
-import 'package:ombiapp/pages/media_content/series_request/test.dart';
+import 'package:ombiapp/pages/media_content/series_request/series_request_page.dart';
 import 'package:ombiapp/pages/page_container.dart';
 import 'package:ombiapp/pages/root.dart';
 import 'package:ombiapp/pages/search/search.dart';

@@ -2,15 +2,19 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:ombiapp/contracts/media_content_status.dart';
+import 'package:ombiapp/model/request/content/requests/episode.dart';
+import 'package:ombiapp/model/request/content/requests/season.dart';
+import 'package:ombiapp/model/request/content/requests/series.dart';
 import 'package:ombiapp/model/response/media_content/series/series.dart';
 import 'package:ombiapp/model/screen_arguments/series_requests_episode.dart';
 import 'package:ombiapp/pages/media_content/series_request/season_panel.dart';
 import 'package:ombiapp/pages/media_content/series_request/season_panel_tile.dart';
+import 'package:ombiapp/services/request_service.dart';
 import 'package:ombiapp/utils/theme.dart';
 import 'package:rxdart/rxdart.dart';
 
-//TODO - change file name
 class SeriesRequestPage extends StatefulWidget {
   final SeriesContent seriesContent;
 
@@ -27,7 +31,8 @@ class _SeriesRequestSelectionState extends State<SeriesRequestPage> {
   Map<num, List<num>> episodeRequests = Map();
   PublishSubject<EpisodeRequestAction> _requests;
 
-  StreamSubscription _streamSubscription;
+  List<StreamSubscription> _streamSubscription = List();
+  bool inProcess = false;
 
   @override
   void initState() {
@@ -43,14 +48,15 @@ class _SeriesRequestSelectionState extends State<SeriesRequestPage> {
           notifyRequest: _requests));
     });
 
-    _streamSubscription = _requests.stream.listen(addRequestItem);
+    _streamSubscription.add(_requests.stream.listen(addRequestItem));
+    _streamSubscription.add(requestManager.requestStream.listen(postSubmit));
   }
 
   @override
   void dispose() {
     super.dispose();
     print("Disposing series requests");
-    _streamSubscription.cancel();
+    _streamSubscription.forEach((sub) => sub.cancel());
     _requests.close();
   }
 
@@ -101,13 +107,18 @@ class _SeriesRequestSelectionState extends State<SeriesRequestPage> {
                           Container(
                               width: 90,
                               height: 30,
-                              child: FlatButton(
-                                child: Text(
-                                  "Submit",
-                                  style: TextStyle(fontSize: 10),
-                                ),
-                                onPressed: submitRequest,
-                              ))
+                              child: this.inProcess
+                                  ? SpinKitCircle(
+                                      color: Colors.white,
+                                      size: 13,
+                                    )
+                                  : FlatButton(
+                                      child: Text(
+                                        "Submit",
+                                        style: TextStyle(fontSize: 10),
+                                      ),
+                                      onPressed: submitRequest,
+                                    ))
                         ],
                       ),
                     )
@@ -168,16 +179,43 @@ class _SeriesRequestSelectionState extends State<SeriesRequestPage> {
 
   /// Handle new episode request, add/remove from request list & update state.
   void addRequestItem(EpisodeRequestAction event) {
-    if (!event.remove)
+    if (!event.remove &&
+        (!episodeRequests[event.seasonId].contains(event.episodeId)))
       episodeRequests[event.seasonId].add(event.episodeId);
     else
       episodeRequests[event.seasonId].remove(event.episodeId);
-
     setState(() {});
   }
 
-  void submitRequest(){
-    print (episodeRequests);
-print(widget.seriesContent.id);
+  void submitRequest() {
+    bool isEmptyRequest = true;
+    episodeRequests.entries.any((element) {
+      if (element.value.isNotEmpty) {
+        isEmptyRequest = false;
+        return true;
+      }
+      return false;
+    });
+    if (isEmptyRequest) {
+      return;
+    }
+    setState(() {
+      inProcess = true;
+    });
+    List<SeasonRequest> sRequest = List();
+    episodeRequests.forEach((key, value) {
+      sRequest.add(
+          SeasonRequest(key, value.map((e) => EpisodeRequest(e)).toList()));
+    });
+    SeriesContentRequestPodo request = SeriesContentRequestPodo(
+        id: widget.seriesContent.id, seasons: sRequest);
+    requestManager.requestContent(widget.seriesContent, request);
+  }
+
+  void postSubmit(event) {
+    setState(() {
+      inProcess = false;
+    });
+    Navigator.pop(context);
   }
 }

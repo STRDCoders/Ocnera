@@ -94,15 +94,13 @@ extension ContentTypeExtention on MediaContentType {
     }
   }
 
-  String _requestLink(MediaContentType type){
-    switch(type){
-
+  String _requestLink(MediaContentType type) {
+    switch (type) {
       case MediaContentType.MOVIE:
-        return GlobalConfiguration()
-            .get('API_LINK_REQUEST_NEW_MOVIE');
+        return GlobalConfiguration().get('API_LINK_REQUEST_NEW_MOVIE');
         break;
       case MediaContentType.SERIES:
-        // TODO: Handle this case.
+        return GlobalConfiguration().get('API_LINK_REQUEST_NEW_SERIES');
         break;
     }
   }

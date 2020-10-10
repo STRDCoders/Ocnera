@@ -18,7 +18,12 @@ class SeriesContentRequestPodo extends MediaContentRequest {
         'requestAll': requestAll,
         'latestSeason': lastSeason,
         'firstSeason': firstSeason,
-        'id': id,
+        'tvDbId': id,
         'seasons': seasons
       };
+
+  @override
+  String toString() {
+    return 'SeriesContentRequestPodo{id: ${id}, requestAll: $requestAll, lastSeason: $lastSeason, firstSeason: $firstSeason, seasons: $seasons}';
+  }
 }
