@@ -15,13 +15,13 @@ class AppTheme {
             focusedBorder: InputBorder.none,
             focusedErrorBorder: InputBorder.none,
             enabledBorder: InputBorder.none),
-        iconTheme: IconThemeData(color: Colors.orange),
+        iconTheme: IconThemeData(color: Colors.orangeAccent),
         buttonTheme: ButtonThemeData(
             colorScheme:
                 Theme.of(context).colorScheme.copyWith(secondary: Colors.white),
             buttonColor: Colors.orange,
             disabledColor: Colors.grey.withOpacity(0.7),
             textTheme: ButtonTextTheme.accent),
-        textTheme: TextTheme(bodyText2: TextStyle(color: Colors.grey)),
+        textTheme: TextTheme(bodyText1: TextStyle(color: Colors.white),bodyText2: TextStyle(color: Colors.grey), ),
         scaffoldBackgroundColor: APP_BACKGROUND,);
 }
