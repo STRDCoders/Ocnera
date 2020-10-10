@@ -33,8 +33,8 @@ class AppDrawer extends StatelessWidget {
                 },
               )
             ],
-            accountName: Text("Test"),
-            accountEmail: Text("tomer.blecher.brolix@gmail.com"),
+            accountName: Text(loginManager.user.userName),
+            accountEmail: Text(loginManager.user?.email),
           )
         ],
       ),
