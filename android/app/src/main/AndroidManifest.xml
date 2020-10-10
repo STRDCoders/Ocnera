@@ -11,8 +11,8 @@
          FlutterApplication and put your custom class here. -->
     <application
         android:name="io.flutter.app.FlutterApplication"
-        android:label="ombiapp"
-        android:icon="@mipmap/ic_launcher">
+        android:label="Ocnera"
+        android:icon="@mipmap/logo_v1">
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
