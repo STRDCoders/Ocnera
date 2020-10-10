@@ -11,5 +11,6 @@
   "API_LINK_CONTENT_MOVIE_POSTER": "https://image.tmdb.org/t/p/w200/",
   "API_LINK_SEARCH_TV_DEFAULT_CONTENT": "search/tv/popular",
   "API_LINK_SEARCH_MOVIE_DEFAULT_CONTENT": "search/movie/popular",
-  "API_LINK_REQUEST_NEW_MOVIE": "request/movie"
+  "API_LINK_REQUEST_NEW_MOVIE": "request/movie",
+  "API_LINK_REQUEST_NEW_SERIES": "request/tv"
 }

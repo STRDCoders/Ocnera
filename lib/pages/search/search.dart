@@ -88,12 +88,13 @@ class _SearchPageState extends State<SearchPage> {
 
   @override
   void initState() {
-
     _subscription.add(requestManager.requestStream.listen((data) {
       setState(() {});
       WidgetsBinding.instance.addPostFrameCallback((_) => Scaffold.of(context)
-          .showSnackBar(SnackBar(content: Text(data.message))));
-
+          .showSnackBar(SnackBar(
+              content: Text(data.message != null
+                  ? data.message
+                  : "Content has been requested!"))));
     }));
 
     super.initState();

@@ -2,18 +2,15 @@ import 'dart:async';
 
 import 'package:ombiapp/contracts/media_content.dart';
 import 'package:ombiapp/contracts/media_content_request.dart';
-import 'package:ombiapp/contracts/media_content_status.dart';
 import 'package:ombiapp/model/response/media_content/requests/media_content_request.dart';
 import 'package:ombiapp/services/network/repository.dart';
-import 'package:ombiapp/services/search_service.dart';
-import 'package:ombiapp/utils/logger.dart';
 import 'package:rxdart/rxdart.dart';
 
 class RequestContentBloc {
-  final _requestSubject = PublishSubject <MediaContentRequestResponse>();
+  final _requestSubject = PublishSubject<MediaContentRequestResponse>();
+
   Stream<MediaContentRequestResponse> get requestStream =>
       _requestSubject.stream;
-
 
   Future<void> requestContent(
       MediaContent content, MediaContentRequest request) async {

@@ -6,6 +6,5 @@ class SeasonRequest {
 
   SeasonRequest(this._id, this._episodes);
 
-
+  Map<String, dynamic> toJson() => {'seasonNumber': _id, 'episodes': _episodes};
 }
-
