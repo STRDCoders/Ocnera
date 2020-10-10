@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:ombiapp/contracts/media_content_status.dart';
 import 'package:ombiapp/model/request/content/requests/episode.dart';
 import 'package:ombiapp/model/request/content/requests/season.dart';
@@ -30,7 +31,8 @@ class _SeriesRequestSelectionState extends State<SeriesRequestPage> {
   Map<num, List<num>> episodeRequests = Map();
   PublishSubject<EpisodeRequestAction> _requests;
 
-  StreamSubscription _streamSubscription;
+  List<StreamSubscription> _streamSubscription = List();
+  bool inProcess = false;
 
   @override
   void initState() {
@@ -46,14 +48,15 @@ class _SeriesRequestSelectionState extends State<SeriesRequestPage> {
           notifyRequest: _requests));
     });
 
-    _streamSubscription = _requests.stream.listen(addRequestItem);
+    _streamSubscription.add(_requests.stream.listen(addRequestItem));
+    _streamSubscription.add(requestManager.requestStream.listen(postSubmit));
   }
 
   @override
   void dispose() {
     super.dispose();
     print("Disposing series requests");
-    _streamSubscription.cancel();
+    _streamSubscription.forEach((sub) => sub.cancel());
     _requests.close();
   }
 
@@ -104,13 +107,18 @@ class _SeriesRequestSelectionState extends State<SeriesRequestPage> {
                           Container(
                               width: 90,
                               height: 30,
-                              child: FlatButton(
-                                child: Text(
-                                  "Submit",
-                                  style: TextStyle(fontSize: 10),
-                                ),
-                                onPressed: submitRequest,
-                              ))
+                              child: this.inProcess
+                                  ? SpinKitCircle(
+                                      color: Colors.white,
+                                      size: 13,
+                                    )
+                                  : FlatButton(
+                                      child: Text(
+                                        "Submit",
+                                        style: TextStyle(fontSize: 10),
+                                      ),
+                                      onPressed: submitRequest,
+                                    ))
                         ],
                       ),
                     )
@@ -176,13 +184,24 @@ class _SeriesRequestSelectionState extends State<SeriesRequestPage> {
       episodeRequests[event.seasonId].add(event.episodeId);
     else
       episodeRequests[event.seasonId].remove(event.episodeId);
-
     setState(() {});
   }
 
   void submitRequest() {
-    print(episodeRequests);
-    print(widget.seriesContent.id);
+    bool isEmptyRequest = true;
+    episodeRequests.entries.any((element) {
+      if (element.value.isNotEmpty) {
+        isEmptyRequest = false;
+        return true;
+      }
+      return false;
+    });
+    if (isEmptyRequest) {
+      return;
+    }
+    setState(() {
+      inProcess = true;
+    });
     List<SeasonRequest> sRequest = List();
     episodeRequests.forEach((key, value) {
       sRequest.add(
@@ -191,5 +210,12 @@ class _SeriesRequestSelectionState extends State<SeriesRequestPage> {
     SeriesContentRequestPodo request = SeriesContentRequestPodo(
         id: widget.seriesContent.id, seasons: sRequest);
     requestManager.requestContent(widget.seriesContent, request);
+  }
+
+  void postSubmit(event) {
+    setState(() {
+      inProcess = false;
+    });
+    Navigator.pop(context);
   }
 }

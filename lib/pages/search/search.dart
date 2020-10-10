@@ -83,7 +83,7 @@ class _SearchPageState extends State<SearchPage> {
           ],
         )
       ],
-    ); //    return Column(
+    );
   }
 
   @override
