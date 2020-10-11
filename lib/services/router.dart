@@ -8,6 +8,7 @@ import 'package:ombiapp/pages/media_content/series_request/series_request_page.d
 import 'package:ombiapp/pages/page_container.dart';
 import 'package:ombiapp/pages/root.dart';
 import 'package:ombiapp/pages/search/search.dart';
+import 'package:ombiapp/pages/settings/settings_page.dart';
 
 enum Routes { ROOT, LOGIN, SETTINGS, SEARCH, MEDIA_CONTENT, SERVER_LOGIN, SERIES_REQUEST }
 
@@ -84,5 +85,7 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     return MaterialPageRoute(builder: (context) => PageContainer(ServerConfig()));
   else if(settings.name == Routes.SERIES_REQUEST.value)
     return MaterialPageRoute(builder: (context) => (SeriesRequestPage(seriesContent: settings.arguments,)));
-  return MaterialPageRoute(builder: (context) => PageContainer(ErrorPage()));
+  else if(settings.name == Routes.SETTINGS.value)
+    return MaterialPageRoute(builder: (context) => PageContainer(SettingsPage()));
+    return MaterialPageRoute(builder: (context) => PageContainer(ErrorPage()));
 }

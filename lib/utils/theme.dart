@@ -22,6 +22,11 @@ class AppTheme {
             buttonColor: Colors.orange,
             disabledColor: Colors.grey.withOpacity(0.7),
             textTheme: ButtonTextTheme.accent),
-        textTheme: TextTheme(bodyText1: TextStyle(color: Colors.white),bodyText2: TextStyle(color: Colors.grey), ),
-        scaffoldBackgroundColor: APP_BACKGROUND,);
+        textTheme: TextTheme(
+          bodyText1: TextStyle(color: Colors.white),
+          bodyText2: TextStyle(color: Colors.grey),
+        ),
+        appBarTheme: AppBarTheme(color: APP_BACKGROUND),
+        scaffoldBackgroundColor: APP_BACKGROUND,
+      );
 }
