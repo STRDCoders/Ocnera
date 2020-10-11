@@ -7,7 +7,9 @@ class DataSeparator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(children: <Widget>[Container(padding: EdgeInsets.fromLTRB(5, 0, 5, 0), child: Text("•")),child]);
-
+    return Row(children: <Widget>[
+      Container(padding: EdgeInsets.fromLTRB(5, 0, 5, 0), child: Text("•")),
+      child
+    ]);
   }
 }

@@ -73,9 +73,7 @@ class _ServerConfigState extends State<ServerConfig> {
                                   TextFormField(
                                     enabled: !_loading,
                                     controller: _addressController,
-
                                     decoration: InputDecoration(
-
                                         focusedBorder: InputBorder.none,
                                         prefixIcon: Icon(Icons.cloud),
 //                          border: InputBorder.none,
@@ -112,15 +110,15 @@ class _ServerConfigState extends State<ServerConfig> {
     );
   }
 
-  void handleStream(bool res) async{
+  void handleStream(bool res) async {
     if (res) {
       await loginManager.saveAddress(_addressController.text);
       RouterService.navigate(context, Routes.ROOT);
     } else
       setState(() {
         _loading = false;
-        Scaffold.of(context).showSnackBar(
-            SnackBar(content: Text("Server connection could not be established!")));
+        Scaffold.of(context).showSnackBar(SnackBar(
+            content: Text("Server connection could not be established!")));
       });
   }
 }

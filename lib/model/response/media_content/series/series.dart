@@ -19,7 +19,6 @@ class SeriesContent extends MediaContent {
 
   //TODO - Check if another wrapper class "SeriesExtended" is required to fetch the second part of data(extended) or just leave it here(does the api request contains those values via search query).
   SeriesContent.fromJson(Map<String, dynamic> json) {
-
     var contentStatus;
     if (json['fullyAvailable'])
       contentStatus = MediaContentStatus.AVAILABLE;
@@ -28,7 +27,8 @@ class SeriesContent extends MediaContent {
     else
       contentStatus = MediaContentStatus.MISSING;
 
-    this.setData(contentType: MediaContentType.SERIES,
+    this.setData(
+        contentType: MediaContentType.SERIES,
         title: json['title'],
         banner: MediaContentType.SERIES.optimizedBanner(json['banner']),
         background: MediaContentType.SERIES.optimizedBanner(json['banner']),

@@ -5,24 +5,23 @@ import 'package:ombiapp/contracts/media_content_type.dart';
 abstract class MediaContent {
   String title, banner, background, overview;
   DateTime releaseDate;
-  num voteRating ,
-      voteCount ;
+  num voteRating, voteCount;
   num id;
   MediaContentStatus contentStatus;
   MediaContentType contentType;
 
   /// Initialize the shared media data. It is required for each mediaContent!
-  setData({
-    @required contentType,
-    @required title,
-    @required banner,
-    @required background,
-    @required overview,
-    @required releaseDate,
-    voteRating = 0 ,
-    voteCount = 0,
-    @required id,
-    @required contentStatus}) {
+  setData(
+      {@required contentType,
+      @required title,
+      @required banner,
+      @required background,
+      @required overview,
+      @required releaseDate,
+      voteRating = 0,
+      voteCount = 0,
+      @required id,
+      @required contentStatus}) {
     this.contentType = contentType;
     this.title = title;
     this.banner = banner;
@@ -34,6 +33,7 @@ abstract class MediaContent {
     this.voteRating = voteRating;
     this.voteCount = voteCount;
   }
+
   //TODO - Consider creating a dict of extra info for each implementation of media content & create getExtra()
   // Each content type might show different information(Ex. rating is only used for movies, series has network name, etc.)
   Widget cardTopRight();
@@ -46,5 +46,4 @@ abstract class MediaContent {
   String toString() {
     return 'MediaContent{title: $title, banner: $banner, background: $background, overview: $overview, releaseDate: $releaseDate, voteRating: $voteRating, voteCount: $voteCount, id: $id, contentStatus: $contentStatus, contentType: $contentType}';
   }
-
 }

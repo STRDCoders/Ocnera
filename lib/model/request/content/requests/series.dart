@@ -11,7 +11,8 @@ class SeriesContentRequestPodo extends MediaContentRequest {
       this.requestAll = false,
       this.lastSeason = false,
       this.firstSeason = false,
-      this.seasons}): super(id);
+      this.seasons})
+      : super(id);
 
   @override
   Map<String, dynamic> toJson() => {

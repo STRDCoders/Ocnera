@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:ombiapp/contracts/media_content_status.dart';
 import 'package:ombiapp/model/response/media_content/series/episode.dart';
 import 'package:ombiapp/model/response/media_content/series/seasone.dart';

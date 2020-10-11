@@ -17,6 +17,4 @@ enum ScreenSize {
 // Desktops and TVs 4K
 }
 
-extension ScreenSizeExtention on ScreenSize {
-
-}
+extension ScreenSizeExtention on ScreenSize {}

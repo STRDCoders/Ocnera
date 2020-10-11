@@ -32,11 +32,11 @@ class ApiProvider implements RepositoryAPI {
         headers: {
           'Content-Type': "application/json-patch+json",
           'Authorization':
-          "Bearer ${secureStorage.values[StorageKeys.TOKEN.value]}"
+              "Bearer ${secureStorage.values[StorageKeys.TOKEN.value]}"
         });
     return options;
   }
-  
+
   void updateDio() {
     String url =
         UtilsImpl.buildLink(secureStorage.values[StorageKeys.ADDRESS.value]);
@@ -143,8 +143,9 @@ class ApiProvider implements RepositoryAPI {
   Future<MediaContent> contentIdSearch(
       num contentID, MediaContentType type) async {
     Response res = await _dio.get("${type.infoLink}/$contentID");
-    if(res.statusCode != 200) {
-      logger.e("Content search: ${contentID}(${type}) returned status code: ${res.statusCode}");
+    if (res.statusCode != 200) {
+      logger.e(
+          "Content search: ${contentID}(${type}) returned status code: ${res.statusCode}");
       return null;
     }
     switch (type) {
@@ -156,6 +157,7 @@ class ApiProvider implements RepositoryAPI {
         break;
     }
   }
+
   /// Sends a request to the API for new content request.
   Future<MediaContentRequestResponse> requestContent(
       MediaContentRequest request, MediaContentType type) async {

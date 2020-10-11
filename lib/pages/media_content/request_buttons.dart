@@ -8,7 +8,6 @@ import 'package:ombiapp/contracts/media_content_type.dart';
 import 'package:ombiapp/model/request/content/requests/movie.dart';
 import 'package:ombiapp/model/response/media_content/requests/media_content_request.dart';
 import 'package:ombiapp/model/response/media_content/series/series.dart';
-
 import 'package:ombiapp/services/request_service.dart';
 import 'package:ombiapp/services/router.dart';
 
@@ -36,7 +35,12 @@ class RequestButton extends StatefulWidget {
   final String text;
   final Color color;
 
-  const RequestButton({Key key,@required this.content,this.text="Request", this.color=Colors.orange}) : super(key: key);
+  const RequestButton(
+      {Key key,
+      @required this.content,
+      this.text = "Request",
+      this.color = Colors.orange})
+      : super(key: key);
 
   @override
   _RequestButtonState createState() => _RequestButtonState();
@@ -53,7 +57,6 @@ class _RequestButtonState extends State<RequestButton> {
       builder: (BuildContext context,
           AsyncSnapshot<MediaContentRequestResponse> snapshot) {
         if (snapshot.hasData) {
-
         } else if (snapshot.hasError) {
           MediaContentRequestResponse res = snapshot.error;
           WidgetsBinding.instance.addPostFrameCallback((_) =>
@@ -82,7 +85,6 @@ class _RequestButtonState extends State<RequestButton> {
   }
 
   void handleRequest() {
-
     switch (widget.content.contentType) {
       case MediaContentType.MOVIE:
         setState(() {
@@ -92,13 +94,11 @@ class _RequestButtonState extends State<RequestButton> {
             widget.content, MovieRequestPodo(widget.content.id));
         break;
       case MediaContentType.SERIES:
-        RouterService.navigate(context, Routes.SERIES_REQUEST, data: (widget.content as SeriesContent));
+        RouterService.navigate(context, Routes.SERIES_REQUEST,
+            data: (widget.content as SeriesContent));
         break;
     }
   }
-
-
-
 
   @override
   void initState() {

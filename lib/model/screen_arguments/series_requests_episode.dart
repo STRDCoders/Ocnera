@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:ombiapp/model/response/media_content/series/episode.dart';
 
 /// Representing a single episode request.
 ///

@@ -4,8 +4,6 @@ import 'package:ombiapp/model/response/user.dart';
 import 'package:ombiapp/pages/page_container.dart';
 import 'package:ombiapp/services/login_service.dart';
 import 'package:ombiapp/services/router.dart';
-import 'package:ombiapp/utils/grid.dart';
-import 'package:ombiapp/utils/utilsImpl.dart';
 
 ///
 /// This widget determines whether the user is logged in,
@@ -21,7 +19,8 @@ class _RootPageState extends State<RootPage> {
   @override
   Widget build(BuildContext context) {
     if (!loginManager.isServerConfigured())
-      WidgetsBinding.instance.addPostFrameCallback((_) =>RouterService.navigate(context, Routes.SERVER_LOGIN));
+      WidgetsBinding.instance.addPostFrameCallback(
+          (_) => RouterService.navigate(context, Routes.SERVER_LOGIN));
     return StreamBuilder(
         stream: loginManager.identityStream,
         builder: (BuildContext context, AsyncSnapshot<User> snapshot) {
@@ -29,10 +28,12 @@ class _RootPageState extends State<RootPage> {
             case ConnectionState.active:
               if (snapshot.hasError) {
                 print('Switching to Login page');
-                WidgetsBinding.instance.addPostFrameCallback((_) =>RouterService.navigate(context, Routes.LOGIN));
+                WidgetsBinding.instance.addPostFrameCallback(
+                    (_) => RouterService.navigate(context, Routes.LOGIN));
               } else if (snapshot.hasData) {
                 print('Switching to Search Page');
-                WidgetsBinding.instance.addPostFrameCallback((_) =>RouterService.navigate(context, Routes.SEARCH));
+                WidgetsBinding.instance.addPostFrameCallback(
+                    (_) => RouterService.navigate(context, Routes.SEARCH));
               }
               break;
             default:
