@@ -9,7 +9,7 @@ import 'package:ombiapp/services/secure_storage_service.dart';
 import 'package:ombiapp/utils/logger.dart';
 import 'package:ombiapp/utils/theme.dart';
 
-class OmbiApp extends StatelessWidget {
+class OcneraApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     logger.d("MAIN APP");
@@ -43,5 +43,5 @@ Future<void> main() async {
   HttpOverrides.global = MyHttpOverrides();
   //Initialize secure configuration
   await secureStorage.init();
-  runApp(OmbiApp());
+  runApp(OcneraApp());
 }
