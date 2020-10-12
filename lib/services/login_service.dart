@@ -28,7 +28,7 @@ class LoginService {
 
   /// In case the user wants to disconnect from the server, remove all saved data.
   ///
-  void removeAddress() async {
+  Future<void> removeAddress() async {
     await secureStorage.removeAllData();
   }
 
