@@ -146,7 +146,7 @@ class ApiProvider implements RepositoryAPI {
     Response res = await _dio.get("${type.infoLink}/$contentID");
     if (res.statusCode != 200) {
       logger.e(
-          "Content search: ${contentID}(${type}) returned status code: ${res.statusCode}");
+          "Content search: $contentID($type) returned status code: ${res.statusCode}");
       return null;
     }
     switch (type) {

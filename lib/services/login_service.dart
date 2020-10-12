@@ -21,7 +21,7 @@ class LoginService {
   }
 
   Future<void> saveAddress(String address) async {
-    print("Saving ${address}");
+    print("Saving $address");
     await secureStorage.saveData(StorageKeys.ADDRESS.value, address);
     repo.updateDio();
   }

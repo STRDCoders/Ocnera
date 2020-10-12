@@ -25,6 +25,6 @@ class SeriesContentRequestPodo extends MediaContentRequest {
 
   @override
   String toString() {
-    return 'SeriesContentRequestPodo{id: ${id}, requestAll: $requestAll, lastSeason: $lastSeason, firstSeason: $firstSeason, seasons: $seasons}';
+    return 'SeriesContentRequestPodo{id: $id, requestAll: $requestAll, lastSeason: $lastSeason, firstSeason: $firstSeason, seasons: $seasons}';
   }
 }

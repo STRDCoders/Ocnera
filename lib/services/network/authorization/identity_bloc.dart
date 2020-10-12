@@ -10,7 +10,7 @@ class IdentityBloc {
 
   identify() async {
     User res = await repo.getIdentity();
-    logger.d("response for login: ${res}");
+    logger.d("response for login: $res");
     switch (res.statusCode) {
       case 200:
         {

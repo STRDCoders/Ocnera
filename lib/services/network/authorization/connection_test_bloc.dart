@@ -8,7 +8,7 @@ class ConnectionTestBloc {
 
   connect(String address) async {
     bool res = await repo.testConnection(address);
-    print("Server status response is ${res}");
+    print("Server status response is $res");
     _connectionTestSubject.sink.add(res);
   }
 
