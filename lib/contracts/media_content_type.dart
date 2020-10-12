@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:global_configuration/global_configuration.dart';
+import 'package:ombiapp/utils/unsupported_exception.dart';
 
 enum MediaContentType { MOVIE, SERIES }
 
@@ -14,6 +15,8 @@ extension ContentTypeExtention on MediaContentType {
       case MediaContentType.SERIES:
         return GlobalConfiguration().get('API_LINK_SEARCH_QUERY_SERIES');
         break;
+      default:
+        throw UnsupportedException();
     }
   }
 
@@ -25,6 +28,8 @@ extension ContentTypeExtention on MediaContentType {
       case MediaContentType.SERIES:
         return Icons.tv;
         break;
+      default:
+        throw UnsupportedException();
     }
   }
 
@@ -37,6 +42,8 @@ extension ContentTypeExtention on MediaContentType {
       case MediaContentType.SERIES:
         return "";
         break;
+      default:
+        throw UnsupportedException();
     }
   }
 
@@ -49,6 +56,8 @@ extension ContentTypeExtention on MediaContentType {
       case MediaContentType.SERIES:
         return GlobalConfiguration().get('API_LINK_SEARCH_INFO_SERIES');
         break;
+      default:
+        throw UnsupportedException();
     }
   }
 
@@ -62,6 +71,8 @@ extension ContentTypeExtention on MediaContentType {
       case MediaContentType.SERIES:
         return "${MediaContentType.SERIES.imageLink}$url";
         break;
+      default:
+        throw UnsupportedException();
     }
   }
 
@@ -74,6 +85,8 @@ extension ContentTypeExtention on MediaContentType {
         case MediaContentType.SERIES:
           return DateTime.parse(date);
           break;
+        default:
+          throw UnsupportedException();
       }
     } catch (e) {
       print(e);
@@ -91,6 +104,8 @@ extension ContentTypeExtention on MediaContentType {
       case MediaContentType.SERIES:
         return GlobalConfiguration().get('API_LINK_SEARCH_TV_DEFAULT_CONTENT');
         break;
+      default:
+        throw UnsupportedException();
     }
   }
 
@@ -102,6 +117,8 @@ extension ContentTypeExtention on MediaContentType {
       case MediaContentType.SERIES:
         return GlobalConfiguration().get('API_LINK_REQUEST_NEW_SERIES');
         break;
+      default:
+        throw UnsupportedException();
     }
   }
 

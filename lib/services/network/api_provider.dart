@@ -14,6 +14,7 @@ import 'package:ombiapp/model/response/user.dart';
 import 'package:ombiapp/services/network/repository.dart';
 import 'package:ombiapp/services/secure_storage_service.dart';
 import 'package:ombiapp/utils/logger.dart';
+import 'package:ombiapp/utils/unsupported_exception.dart';
 import 'package:ombiapp/utils/utilsImpl.dart';
 
 class ApiProvider implements RepositoryAPI {
@@ -155,6 +156,8 @@ class ApiProvider implements RepositoryAPI {
       case MediaContentType.SERIES:
         return SeriesContent.fromJson(res.data);
         break;
+      default:
+        throw UnsupportedException();
     }
   }
 

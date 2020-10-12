@@ -2,8 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ombiapp/contracts/media_content.dart';
 import 'package:ombiapp/pages/media_content/request_buttons.dart';
-
-import 'media_content_type.dart';
+import 'package:ombiapp/utils/unsupported_exception.dart';
 
 enum MediaContentStatus {
   AVAILABLE,
@@ -32,6 +31,8 @@ extension ContentStatusExtention on MediaContentStatus {
       case MediaContentStatus.APPROVED:
         return "Proccessing";
         break;
+      default:
+        throw UnsupportedException();
     }
   }
 
@@ -44,7 +45,6 @@ extension ContentStatusExtention on MediaContentStatus {
         );
         break;
       case MediaContentStatus.PARTLY_AVAILABLE:
-        if (content.contentType == MediaContentType.SERIES)
           return RequestButton(
             content: content,
             text: _title(content.contentStatus),

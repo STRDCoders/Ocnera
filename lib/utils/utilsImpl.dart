@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:global_configuration/global_configuration.dart';
 import 'package:intl/intl.dart';
+import 'package:ombiapp/utils/unsupported_exception.dart';
 
 import 'grid.dart';
 import 'logger.dart';
@@ -40,5 +41,6 @@ class UtilsImpl {
         return ScreenSize.values[i - 1];
       }
     }
+    throw UnsupportedException();
   }
 }
