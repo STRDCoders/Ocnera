@@ -22,6 +22,7 @@ class StatusButton extends StatelessWidget {
     return RaisedButton(
       elevation: 15,
       disabledColor: color,
+      onPressed: null,
       child: Text(
         text,
         style: TextStyle(color: Colors.white, fontSize: 12),
