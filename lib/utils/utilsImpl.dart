@@ -28,7 +28,7 @@ class UtilsImpl {
   }
 
   static String buildLink(String link) {
-    return "${GlobalConfiguration().getString('API_ADDRESS_PREFIX')}${link}${GlobalConfiguration().getString('API_ADDRESS_SUFFIX')}";
+    return "${GlobalConfiguration().getValue('API_ADDRESS_PREFIX')}${link}${GlobalConfiguration().getValue('API_ADDRESS_SUFFIX')}";
   }
 
   static final DateFormat dateFormat = DateFormat('MM-yyyy');

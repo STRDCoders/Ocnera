@@ -48,9 +48,9 @@ class ApiProvider implements RepositoryAPI {
   Future<LoginResponsePodo> login(LoginRequestPodo loginRequestPodo) async {
     try {
       print(
-          "Logging in.. using link: ${GlobalConfiguration().getString('API_LINK_LOGIN_LOGIN')}");
+          "Logging in.. using link: ${GlobalConfiguration().getValue('API_LINK_LOGIN_LOGIN')}");
       Response response = await _dio.post(
-          GlobalConfiguration().getString('API_LINK_LOGIN_LOGIN'),
+          GlobalConfiguration().getValue('API_LINK_LOGIN_LOGIN'),
           data: loginRequestPodo);
       return LoginResponsePodo.fromJson(
           response.data, loginRequestPodo.username);
@@ -73,7 +73,7 @@ class ApiProvider implements RepositoryAPI {
   Future<User> getIdentity() async {
     try {
       Response response = await _dio
-          .get(GlobalConfiguration().getString('API_LINK_IDENTITY_CURRENT'));
+          .get(GlobalConfiguration().getValue('API_LINK_IDENTITY_CURRENT'));
       return User.fromJson(response.data);
     } on DioError catch (e) {
       switch (e.type) {
@@ -95,7 +95,7 @@ class ApiProvider implements RepositoryAPI {
       Dio tmpClient = Dio(fetchBaseOptions(address));
       tmpClient.options.baseUrl = UtilsImpl.buildLink(address);
       Response response = await tmpClient
-          .get(GlobalConfiguration().getString('API_LINK_CONNECTION_TEST'));
+          .get(GlobalConfiguration().getValue('API_LINK_CONNECTION_TEST'));
       return response.statusCode == 200;
     } on DioError catch (e) {
       return false;
