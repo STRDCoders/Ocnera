@@ -97,7 +97,7 @@ class ApiProvider implements RepositoryAPI {
       Response response = await tmpClient
           .get(GlobalConfiguration().getValue('API_LINK_CONNECTION_TEST'));
       return response.statusCode == 200;
-    } on DioError catch (e) {
+    } on DioError {
       return false;
     }
   }
