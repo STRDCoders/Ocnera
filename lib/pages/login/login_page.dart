@@ -17,6 +17,7 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   void initState() {
+    super.initState();
     print("Init login bloc");
     _bloc = LoginBloc();
   }

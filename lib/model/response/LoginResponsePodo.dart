@@ -24,9 +24,9 @@ class LoginResponsePodo extends NetworkResponse {
 
   String get expireDate => _expireDate;
 
-  @override
-  getObject() {
-    // TODO: implement getObject
-    throw UnimplementedError();
-  }
+// @override
+// getObject() {
+//   // TODO: implement getObject
+//   throw UnimplementedError();
+// }
 }

@@ -14,6 +14,7 @@ import 'package:ombiapp/model/response/user.dart';
 import 'package:ombiapp/services/network/repository.dart';
 import 'package:ombiapp/services/secure_storage_service.dart';
 import 'package:ombiapp/utils/logger.dart';
+import 'package:ombiapp/utils/unsupported_exception.dart';
 import 'package:ombiapp/utils/utilsImpl.dart';
 
 class ApiProvider implements RepositoryAPI {
@@ -47,9 +48,9 @@ class ApiProvider implements RepositoryAPI {
   Future<LoginResponsePodo> login(LoginRequestPodo loginRequestPodo) async {
     try {
       print(
-          "Logging in.. using link: ${GlobalConfiguration().getString('API_LINK_LOGIN_LOGIN')}");
+          "Logging in.. using link: ${GlobalConfiguration().getValue('API_LINK_LOGIN_LOGIN')}");
       Response response = await _dio.post(
-          GlobalConfiguration().getString('API_LINK_LOGIN_LOGIN'),
+          GlobalConfiguration().getValue('API_LINK_LOGIN_LOGIN'),
           data: loginRequestPodo);
       return LoginResponsePodo.fromJson(
           response.data, loginRequestPodo.username);
@@ -72,7 +73,7 @@ class ApiProvider implements RepositoryAPI {
   Future<User> getIdentity() async {
     try {
       Response response = await _dio
-          .get(GlobalConfiguration().getString('API_LINK_IDENTITY_CURRENT'));
+          .get(GlobalConfiguration().getValue('API_LINK_IDENTITY_CURRENT'));
       return User.fromJson(response.data);
     } on DioError catch (e) {
       switch (e.type) {
@@ -94,9 +95,9 @@ class ApiProvider implements RepositoryAPI {
       Dio tmpClient = Dio(fetchBaseOptions(address));
       tmpClient.options.baseUrl = UtilsImpl.buildLink(address);
       Response response = await tmpClient
-          .get(GlobalConfiguration().getString('API_LINK_CONNECTION_TEST'));
+          .get(GlobalConfiguration().getValue('API_LINK_CONNECTION_TEST'));
       return response.statusCode == 200;
-    } on DioError catch (e) {
+    } on DioError {
       return false;
     }
   }
@@ -145,7 +146,7 @@ class ApiProvider implements RepositoryAPI {
     Response res = await _dio.get("${type.infoLink}/$contentID");
     if (res.statusCode != 200) {
       logger.e(
-          "Content search: ${contentID}(${type}) returned status code: ${res.statusCode}");
+          "Content search: $contentID($type) returned status code: ${res.statusCode}");
       return null;
     }
     switch (type) {
@@ -155,6 +156,8 @@ class ApiProvider implements RepositoryAPI {
       case MediaContentType.SERIES:
         return SeriesContent.fromJson(res.data);
         break;
+      default:
+        throw UnsupportedException();
     }
   }
 

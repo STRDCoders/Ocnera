@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 
 class DataSeparator extends StatelessWidget {
-  Widget child;
+  final Widget child;
 
   DataSeparator(this.child);
 

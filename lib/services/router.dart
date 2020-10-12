@@ -8,6 +8,7 @@ import 'package:ombiapp/pages/media_content/series_request/series_request_page.d
 import 'package:ombiapp/pages/page_container.dart';
 import 'package:ombiapp/pages/root.dart';
 import 'package:ombiapp/pages/search/search.dart';
+import 'package:ombiapp/utils/unsupported_exception.dart';
 
 enum Routes {
   ROOT,
@@ -42,6 +43,8 @@ extension RoutesExtension on Routes {
         break;
       case Routes.SERIES_REQUEST:
         return '/request/series/new';
+      default:
+        throw UnsupportedException();
     }
   }
 

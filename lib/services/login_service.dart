@@ -21,14 +21,14 @@ class LoginService {
   }
 
   Future<void> saveAddress(String address) async {
-    print("Saving ${address}");
+    print("Saving $address");
     await secureStorage.saveData(StorageKeys.ADDRESS.value, address);
     repo.updateDio();
   }
 
   /// In case the user wants to disconnect from the server, remove all saved data.
   ///
-  void removeAddress() async {
+  Future<void> removeAddress() async {
     await secureStorage.removeAllData();
   }
 

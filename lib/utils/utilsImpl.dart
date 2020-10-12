@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:global_configuration/global_configuration.dart';
 import 'package:intl/intl.dart';
+import 'package:ombiapp/utils/unsupported_exception.dart';
 
 import 'grid.dart';
 import 'logger.dart';
@@ -27,7 +28,7 @@ class UtilsImpl {
   }
 
   static String buildLink(String link) {
-    return "${GlobalConfiguration().getString('API_ADDRESS_PREFIX')}${link}${GlobalConfiguration().getString('API_ADDRESS_SUFFIX')}";
+    return "${GlobalConfiguration().getValue('API_ADDRESS_PREFIX')}$link${GlobalConfiguration().getValue('API_ADDRESS_SUFFIX')}";
   }
 
   static final DateFormat dateFormat = DateFormat('MM-yyyy');
@@ -40,5 +41,6 @@ class UtilsImpl {
         return ScreenSize.values[i - 1];
       }
     }
+    throw UnsupportedException();
   }
 }

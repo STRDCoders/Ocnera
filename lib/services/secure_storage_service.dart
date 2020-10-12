@@ -1,4 +1,5 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:ombiapp/utils/unsupported_exception.dart';
 
 enum StorageKeys { TOKEN, USERNAME, ADDRESS }
 
@@ -14,6 +15,8 @@ extension RoutesExtension on StorageKeys {
       case StorageKeys.ADDRESS:
         return "address";
         break;
+      default:
+        throw UnsupportedException();
     }
   }
 
