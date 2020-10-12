@@ -43,7 +43,7 @@ class QuerySearchBloc {
           for (MediaContent content in contentLise) {
             // Some content items may be broken when fetching extended information.
             // Therefor they need to be skipped.
-            if (content == null || content.id == 0 ) continue;
+            if (content == null || content.id == 0) continue;
             _searchSubject.sink.add(content);
           }
           _searching.sink.add(false);

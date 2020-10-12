@@ -1,5 +1,3 @@
 import 'package:logger/logger.dart';
 
-final logger = Logger(
-  level: Level.debug
-);
+final logger = Logger(level: Level.debug);

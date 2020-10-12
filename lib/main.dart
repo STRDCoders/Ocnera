@@ -31,9 +31,9 @@ Future<void> main() async {
 
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark.copyWith(
       statusBarColor: Colors.white, // Color for Android
-      statusBarBrightness: Brightness.dark // Dark == white status bar -- for IOS.
-  ));
-
+      statusBarBrightness:
+          Brightness.dark // Dark == white status bar -- for IOS.
+      ));
 
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,

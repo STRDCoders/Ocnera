@@ -3,15 +3,13 @@ class LoginRequestPodo {
   bool rememberMe;
   bool usePlexOAuth;
 
-  LoginRequestPodo(this.username, this.password, this.rememberMe, this.usePlexOAuth);
+  LoginRequestPodo(
+      this.username, this.password, this.rememberMe, this.usePlexOAuth);
 
-
-  Map<String, dynamic> toJson() =>
-      {
+  Map<String, dynamic> toJson() => {
         'username': username,
         'password': password,
         'rememberMe': rememberMe,
         'usePlexOAuth': usePlexOAuth
       };
-
 }

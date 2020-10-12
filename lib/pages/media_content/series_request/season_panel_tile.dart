@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:ombiapp/contracts/media_content_status.dart';
 import 'package:ombiapp/model/screen_arguments/series_requests_episode.dart';
 import 'package:ombiapp/pages/media_content/series_request/season_panel.dart';
-import 'package:ombiapp/contracts/media_content_status.dart';
 
 class SeasonExpansionTile extends StatefulWidget {
   final SeasonExpansionPanel item;
@@ -18,7 +18,12 @@ class SeasonExpansionTile extends StatefulWidget {
 class _SeasonExpansionTileState extends State<SeasonExpansionTile> {
   @override
   Widget build(BuildContext context) {
-    return ListTile(title: widget.item.header,subtitle: (widget.episodeRequests.isNotEmpty) ? Text("${widget.episodeRequests.length} episodes selected") : null, trailing: _buildButton());
+    return ListTile(
+        title: widget.item.header,
+        subtitle: (widget.episodeRequests.isNotEmpty)
+            ? Text("${widget.episodeRequests.length} episodes selected")
+            : null,
+        trailing: _buildButton());
   }
 
   Widget _buildButton() {

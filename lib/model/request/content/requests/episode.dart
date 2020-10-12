@@ -4,6 +4,6 @@ class EpisodeRequest {
   EpisodeRequest(this._id);
 
   Map<String, dynamic> toJson() => {
-    'episodeNumber': _id,
-  };
+        'episodeNumber': _id,
+      };
 }

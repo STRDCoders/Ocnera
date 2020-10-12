@@ -35,7 +35,8 @@ class LoginService {
   Future<void> login(LoginResponsePodo loginResponsePodo) async {
     await secureStorage.saveData(
         StorageKeys.TOKEN.value, loginResponsePodo.key);
-    await secureStorage.saveData(StorageKeys.USERNAME.value, loginResponsePodo.username);
+    await secureStorage.saveData(
+        StorageKeys.USERNAME.value, loginResponsePodo.username);
     repo.updateDio();
   }
 

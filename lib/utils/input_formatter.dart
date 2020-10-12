@@ -8,13 +8,18 @@ class DigitTextInputFormatter extends TextInputFormatter {
   DigitTextInputFormatter(this._min, this._max);
 
   @override
-  TextEditingValue formatEditUpdate(TextEditingValue oldValue,TextEditingValue newValue,) {
+  TextEditingValue formatEditUpdate(
+    TextEditingValue oldValue,
+    TextEditingValue newValue,
+  ) {
     int val = int.parse(newValue.text);
-    if(newValue.text == '')
+    if (newValue.text == '')
       return TextEditingValue().copyWith(text: _min.toString());
-    else if(val < _min)
+    else if (val < _min)
       return TextEditingValue().copyWith(text: _min.toString());
 
-    return val > _max ? TextEditingValue().copyWith(text:(val%10).toString()) : newValue;
+    return val > _max
+        ? TextEditingValue().copyWith(text: (val % 10).toString())
+        : newValue;
   }
 }

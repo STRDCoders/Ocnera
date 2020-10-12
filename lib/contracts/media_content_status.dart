@@ -5,13 +5,18 @@ import 'package:ombiapp/pages/media_content/request_buttons.dart';
 
 import 'media_content_type.dart';
 
-
-enum MediaContentStatus { AVAILABLE, PARTLY_AVAILABLE, REQUESTED, MISSING, APPROVED, PROCESSING }
+enum MediaContentStatus {
+  AVAILABLE,
+  PARTLY_AVAILABLE,
+  REQUESTED,
+  MISSING,
+  APPROVED,
+  PROCESSING
+}
 
 extension ContentStatusExtention on MediaContentStatus {
-
-  String _title(MediaContentStatus status){
-    switch(status){
+  String _title(MediaContentStatus status) {
+    switch (status) {
       case MediaContentStatus.AVAILABLE:
         return "Available";
         break;
@@ -39,8 +44,12 @@ extension ContentStatusExtention on MediaContentStatus {
         );
         break;
       case MediaContentStatus.PARTLY_AVAILABLE:
-        if(content.contentType == MediaContentType.SERIES)
-          return RequestButton(content: content,text: _title(content.contentStatus),color: Colors.cyan,);
+        if (content.contentType == MediaContentType.SERIES)
+          return RequestButton(
+            content: content,
+            text: _title(content.contentStatus),
+            color: Colors.cyan,
+          );
 
         break;
 
@@ -53,7 +62,9 @@ extension ContentStatusExtention on MediaContentStatus {
         );
         break;
       case MediaContentStatus.MISSING:
-        return RequestButton(content: content,);
+        return RequestButton(
+          content: content,
+        );
       default:
         return StatusButton(
           text: "UNKNOWN",
@@ -61,6 +72,7 @@ extension ContentStatusExtention on MediaContentStatus {
         );
     }
   }
+
   String get title => _title(this);
   Widget button(MediaContent content) => _button(content);
 }
