@@ -18,6 +18,7 @@ class ParticleModel {
     _shuffle();
   }
 
+  // ignore: unused_element
   _restart({Duration time = Duration.zero}) {
     final startPosition = Offset(-0.2 + 1.4 * random.nextDouble(), 1.2);
     final endPosition = Offset(-0.2 + 1.4 * random.nextDouble(), -0.2);

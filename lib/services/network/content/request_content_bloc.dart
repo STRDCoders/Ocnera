@@ -27,6 +27,6 @@ class RequestContentBloc {
 
   void dispose() {
     //TODO - decide whether to call this method or keep stream alive for good.
-    this._requestSubject.close();
+    _requestSubject.close();
   }
 }
