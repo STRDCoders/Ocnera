@@ -31,7 +31,7 @@ class _DigitInputFieldState extends State<DigitInputField> {
         keyboardType: TextInputType.number,
         inputFormatters: <TextInputFormatter>[
           WhitelistingTextInputFormatter.digitsOnly,
-          WhitelistingTextInputFormatter(RegExp(r"\d+$")),
+          FilteringTextInputFormatter.allow(RegExp(r"\d+$")),
           widget.formatter
         ],
         decoration: widget.decoration);
