@@ -33,11 +33,20 @@ class AppDrawer extends StatelessWidget {
                 },
               )
             ],
-            accountName: Text(loginManager.user.userName, style: TextStyle(fontWeight: FontWeight.bold),),
-            accountEmail: Text(loginManager.user?.email, style: TextStyle(fontWeight: FontWeight.w300),),
+            accountName: Text(
+              loginManager.user.userName,
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+            accountEmail: Text(
+              loginManager.user?.email,
+              style: TextStyle(fontWeight: FontWeight.w300),
+            ),
           ),
           ListTile(
-            leading: Icon(Icons.search, color: Colors.white70,),
+            leading: Icon(
+              Icons.search,
+              color: Colors.white70,
+            ),
             title: Text('Search Page'),
             onTap: () {
               // Update the state of the app
@@ -48,7 +57,10 @@ class AppDrawer extends StatelessWidget {
             },
           ),
           ListTile(
-            leading: Icon(Icons.settings, color: Colors.white70,),
+            leading: Icon(
+              Icons.settings,
+              color: Colors.white70,
+            ),
             title: Text('Settings'),
             onTap: () {
               // Update the state of the app

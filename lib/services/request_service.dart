@@ -5,7 +5,6 @@ import 'package:ombiapp/contracts/media_content_request.dart';
 import 'package:ombiapp/contracts/media_content_status.dart';
 import 'package:ombiapp/services/network/content/request_content_bloc.dart';
 import 'package:ombiapp/services/search_service.dart';
-import 'package:ombiapp/utils/logger.dart';
 
 class RequestManager {
   RequestContentBloc _requestContentBloc = RequestContentBloc();

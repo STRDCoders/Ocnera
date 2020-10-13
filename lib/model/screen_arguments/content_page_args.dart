@@ -7,7 +7,6 @@ class MovieContentArguments {
   final MediaContent _content;
   MovieContentArguments(this._index, this._content);
 
-
   MediaContent get content => _content;
 
   num get id => _index;

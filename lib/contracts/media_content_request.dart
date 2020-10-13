@@ -1,4 +1,4 @@
-abstract class MediaContentRequest{
+abstract class MediaContentRequest {
   final num id;
 
   MediaContentRequest(this.id);

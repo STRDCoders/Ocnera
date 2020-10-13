@@ -11,7 +11,8 @@ class SeriesContentRequestPodo extends MediaContentRequest {
       this.requestAll = false,
       this.lastSeason = false,
       this.firstSeason = false,
-      this.seasons}): super(id);
+      this.seasons})
+      : super(id);
 
   @override
   Map<String, dynamic> toJson() => {
@@ -24,6 +25,6 @@ class SeriesContentRequestPodo extends MediaContentRequest {
 
   @override
   String toString() {
-    return 'SeriesContentRequestPodo{id: ${id}, requestAll: $requestAll, lastSeason: $lastSeason, firstSeason: $firstSeason, seasons: $seasons}';
+    return 'SeriesContentRequestPodo{id: $id, requestAll: $requestAll, lastSeason: $lastSeason, firstSeason: $firstSeason, seasons: $seasons}';
   }
 }

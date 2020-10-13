@@ -18,6 +18,7 @@ class ParticleModel {
     _shuffle();
   }
 
+  // ignore: unused_element
   _restart({Duration time = Duration.zero}) {
     final startPosition = Offset(-0.2 + 1.4 * random.nextDouble(), 1.2);
     final endPosition = Offset(-0.2 + 1.4 * random.nextDouble(), -0.2);
@@ -61,7 +62,7 @@ class ParticlePainter extends CustomPainter {
     particles.forEach((particle) {
       final progress = particle.progress();
       final MultiTweenValues<_OffsetProps> animation =
-      particle.tween.transform(progress);
+          particle.tween.transform(progress);
       final position = Offset(
         animation.get<double>(_OffsetProps.x) * size.width,
         animation.get<double>(_OffsetProps.y) * size.height,
@@ -75,7 +76,6 @@ class ParticlePainter extends CustomPainter {
 }
 
 enum _ColorTween { color1, color2 }
-
 
 class Particles extends StatefulWidget {
   final int numberOfParticles;
@@ -114,11 +114,6 @@ class _ParticlesState extends State<Particles> {
     particles
         .forEach((particle) => particle.checkIfParticleNeedsToBeRestarted());
   }
-
-
-
-
-
 }
 //COLOR BACKGROUND
 
@@ -147,9 +142,9 @@ class AnimatedBackground extends StatelessWidget {
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                   colors: [
-                    value.get<Color>(_ColorTween.color1),
-                    value.get<Color>(_ColorTween.color2)
-                  ])),
+                value.get<Color>(_ColorTween.color1),
+                value.get<Color>(_ColorTween.color2)
+              ])),
         );
       },
     );

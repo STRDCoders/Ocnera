@@ -6,17 +6,19 @@ import 'package:ombiapp/widgets/drawer.dart';
 ///
 class PageContainer extends StatelessWidget {
   final Widget _widget;
-  bool resizable = false;
-  Widget appbar;
-  bool safeAreaTop;
-  PageContainer(this._widget, {this.resizable, this.appbar, this.safeAreaTop : true});
+  final bool resizable;
+  final Widget appbar;
+  final bool safeAreaTop;
+
+  PageContainer(this._widget,
+      {this.resizable: false, this.appbar, this.safeAreaTop: true});
 
   @override
   Widget build(BuildContext context) {
     return Container(
         color: Color.fromARGB(245, 31, 31, 31),
         child: SafeArea(
-          bottom: false,
+            bottom: false,
             top: this.safeAreaTop,
             child: Scaffold(
                 appBar: appbar,

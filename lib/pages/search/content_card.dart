@@ -5,15 +5,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:ombiapp/contracts/media_content.dart';
+import 'package:ombiapp/contracts/media_content_status.dart';
 import 'package:ombiapp/model/screen_arguments/content_page_args.dart';
 import 'package:ombiapp/services/router.dart';
-import 'package:ombiapp/services/search_service.dart';
-import 'package:ombiapp/utils/logger.dart';
-import 'package:ombiapp/utils/utilsImpl.dart';
-import 'package:ombiapp/utils/grid.dart';
-
 import 'package:ombiapp/widgets/card.dart';
-import 'package:ombiapp/contracts/media_content_status.dart';
 
 class ContentCard extends StatefulWidget {
   final num index;
@@ -88,7 +83,7 @@ class _ContentCardState extends State<ContentCard> {
                           children: <Widget>[
                             Flexible(
                                 child: Text(
-                                  widget.content.title,
+                              widget.content.title,
                               overflow: TextOverflow.ellipsis,
                               maxLines: 2,
                               style:
@@ -156,6 +151,4 @@ class _ContentCardState extends State<ContentCard> {
   void dispose() {
     super.dispose();
   }
-
-
 }

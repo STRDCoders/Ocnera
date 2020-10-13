@@ -6,23 +6,28 @@ import 'package:rxdart/rxdart.dart';
 
 class LoginBloc {
   final _loginSubject = PublishSubject<LoginResponsePodo>();
-  Stream <LoginResponsePodo> get loginStream => _loginSubject.stream;
+  Stream<LoginResponsePodo> get loginStream => _loginSubject.stream;
 
-  login(LoginRequestPodo loginRequestPodo) async{
+  login(LoginRequestPodo loginRequestPodo) async {
     LoginResponsePodo res = await repo.login(loginRequestPodo);
-    switch (res.statusCode){
-      case 200: {
-        _loginSubject.sink.add(res);
-        _loginSubject.sink.close();
-      }
-      break;
-      case 401: {
-        _loginSubject.sink.addError(NetworkError(res.statusCode, "One of the credentials is incorrect!"));
-      }
-      break;
-      default: {
-        _loginSubject.sink.addError(NetworkError(res.statusCode, "An unknown error has occurred."));
-      }
+    switch (res.statusCode) {
+      case 200:
+        {
+          _loginSubject.sink.add(res);
+          _loginSubject.sink.close();
+        }
+        break;
+      case 401:
+        {
+          _loginSubject.sink.addError(NetworkError(
+              res.statusCode, "One of the credentials is incorrect!"));
+        }
+        break;
+      default:
+        {
+          _loginSubject.sink.addError(
+              NetworkError(res.statusCode, "An unknown error has occurred."));
+        }
     }
   }
 

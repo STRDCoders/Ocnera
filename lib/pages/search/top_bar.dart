@@ -111,8 +111,7 @@ class _TopBarState extends State<TopBar> {
   @override
   void initState() {
     // Default search on page load
-    contentSearchManager.search(
-        type: _contentSearchType, defaultContent: true);
+    contentSearchManager.search(type: _contentSearchType, defaultContent: true);
 
     _editingController.addListener(() {
       if (_editingController.text.isNotEmpty) {

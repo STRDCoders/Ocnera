@@ -5,13 +5,13 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:ombiapp/contracts/media_content_status.dart';
 import 'package:ombiapp/model/screen_arguments/content_page_args.dart';
 import 'package:ombiapp/services/animation/particle_painter.dart';
 import 'package:ombiapp/services/request_service.dart';
 import 'package:ombiapp/utils/theme.dart';
 import 'package:ombiapp/utils/utilsImpl.dart';
 import 'package:ombiapp/widgets/data_seperator.dart';
-import 'package:ombiapp/contracts/media_content_status.dart';
 
 class MovieContentPage extends StatefulWidget {
   final MovieContentArguments data;
@@ -178,8 +178,7 @@ class _MovieContentPageState extends State<MovieContentPage> {
   @override
   void initState() {
     _requestStreamSubscription = requestManager.requestStream.listen((data) {
-      setState(() {
-      });
+      setState(() {});
     });
     super.initState();
   }
