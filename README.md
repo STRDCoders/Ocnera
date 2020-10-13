@@ -1,10 +1,10 @@
-# Ocnera - Ombi Content Reqest Application
+# Ocnera - Ombi Content Request Application
 
-This app allows you to connect to yours (or your friends) Ombi server in a comfterable UI with the Ombi API.
-It was created out of the bordem of quarantine and the laziness of a bored programer. 
+This app allows you to connect to yours (or your friends) Ombi server in a comfortable UI with the Ombi API.
+It was created out of the boredom of quarantine and the laziness of a bored programmer.
 The app is written in Flutter in hope that one day i will get a Mac and publish it to IOS as well.
 
-## Requirments
+## Requirements
 * 23 SDK
 * Ombi server user(The server should be V3)
 
@@ -20,7 +20,7 @@ You can catch up with the status of the first version at the "Projects" tab of t
   * [x] Basic name search - Search content by its name.
   * [ ] Actors search - Search content by naming an actor.
   * [ ] Easy to access request button.
-   * [x] Movie Requestes
+   * [x] Movie Requests
    * [ ] Custom Series request
   * [ ] Filtering 
     * [ ] Release Date

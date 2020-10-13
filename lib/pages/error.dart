@@ -14,10 +14,10 @@ class ErrorPage extends StatelessWidget {
           color: Colors.orangeAccent,
         ),
         Text(
-          "Well thats Awkward but.. You shoulden't be here.",
+          "Well that's Awkward but.. You should not be here.",
           style: TextStyle(fontSize: 17),
         ),
-        Text("I propebly messed up somewhere, like I always do...")
+        Text("I probably messed up somewhere, like I always do...")
       ],
     ));
   }
