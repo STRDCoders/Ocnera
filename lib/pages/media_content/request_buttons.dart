@@ -63,7 +63,7 @@ class _RequestButtonState extends State<RequestButton> {
           WidgetsBinding.instance.addPostFrameCallback((_) =>
               Scaffold.of(context).showSnackBar(SnackBar(
                   content: Text((res.statusCode != 200)
-                      ? "An unexpected error has occured!"
+                      ? "An unexpected error has occurred!"
                       : res.errorMessage))));
           _searching = false;
         }
@@ -114,7 +114,7 @@ class _RequestButtonState extends State<RequestButton> {
 //        WidgetsBinding.instance.addPostFrameCallback((_) =>
 //            Scaffold.of(context).showSnackBar(SnackBar(
 //                content: Text((res.statusCode != 200)
-//                    ? "An unexpected error has occured!"
+//                    ? "An unexpected error has occurred!"
 //                    : res.errorMessage))));
 //        _searching = false;
 //      }
