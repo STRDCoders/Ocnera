@@ -29,7 +29,7 @@ extension ContentStatusExtention on MediaContentStatus {
       case MediaContentStatus.PROCESSING:
       case MediaContentStatus.REQUESTED:
       case MediaContentStatus.APPROVED:
-        return "Proccessing";
+        return "Processing";
         break;
       default:
         throw UnsupportedException();
