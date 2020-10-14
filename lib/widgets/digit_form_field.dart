@@ -30,7 +30,7 @@ class _DigitInputFieldState extends State<DigitInputField> {
         controller: widget.controller,
         keyboardType: TextInputType.number,
         inputFormatters: <TextInputFormatter>[
-          WhitelistingTextInputFormatter.digitsOnly,
+          FilteringTextInputFormatter.digitsOnly,
           FilteringTextInputFormatter.allow(RegExp(r"\d+$")),
           widget.formatter
         ],
