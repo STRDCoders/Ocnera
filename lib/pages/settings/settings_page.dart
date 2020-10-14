@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:list_tile_more_customizable/list_tile_more_customizable.dart';
+import 'package:ombiapp/services/local_settings.dart';
 import 'package:ombiapp/services/settings_service.dart';
 import 'package:ombiapp/utils/input_formatter.dart';
 import 'package:ombiapp/utils/utilsImpl.dart';
@@ -63,8 +64,7 @@ class _SettingsPageState extends State<SettingsPage> {
                       trailing: Container(
                           width: UtilsImpl.getScreenWidth(context) * 0.15,
                           child: DigitInputField(
-                            decoration: null,
-                            callback: (v) => null,
+                            callback: _updateLearnImgCount,
                             controller: _searchDelayController,
                             formatter: DigitTextInputFormatter(1, 5),
                           ))),
@@ -74,5 +74,9 @@ class _SettingsPageState extends State<SettingsPage> {
             height: 5,
           ),
         ])));
+  }
+
+  Future<void> _updateLearnImgCount(v) async {
+    await localSettings.updateSearchDelay(int.parse(v));
   }
 }

@@ -13,13 +13,7 @@ class DigitTextInputFormatter extends TextInputFormatter {
     TextEditingValue newValue,
   ) {
     int val = int.parse(newValue.text);
-    if (newValue.text == '')
-      return TextEditingValue().copyWith(text: _min.toString());
-    else if (val < _min)
-      return TextEditingValue().copyWith(text: _min.toString());
-
-    return val > _max
-        ? TextEditingValue().copyWith(text: (val % 10).toString())
-        : newValue;
+    if (newValue.text == '' || val < _min || val > _max) return oldValue;
+    return newValue;
   }
 }

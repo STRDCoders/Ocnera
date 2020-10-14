@@ -12,7 +12,7 @@ class DigitInputField extends StatefulWidget {
       {Key key,
         @required this.controller,
         @required this.formatter,
-        @required this.decoration,
+        this.decoration,
         this.callback})
       : super(key: key);
 
