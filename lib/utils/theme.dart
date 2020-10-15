@@ -26,6 +26,7 @@ class AppTheme {
           bodyText1: TextStyle(color: Colors.white),
           bodyText2: TextStyle(color: Colors.grey),
         ),
+        appBarTheme: AppBarTheme(color: APP_BACKGROUND),
         scaffoldBackgroundColor: APP_BACKGROUND,
       );
 }
