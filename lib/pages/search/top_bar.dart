@@ -1,11 +1,10 @@
 import 'dart:async';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ombiapp/contracts/media_content_type.dart';
+import 'package:ombiapp/pages/search/content_type_popup.dart';
 import 'package:ombiapp/services/local_settings.dart';
 import 'package:ombiapp/services/search_service.dart';
-import 'package:ombiapp/widgets/popup_item.dart';
 
 class TopBar extends StatefulWidget {
   @override
@@ -13,7 +12,7 @@ class TopBar extends StatefulWidget {
 }
 
 class _TopBarState extends State<TopBar> {
-  MediaContentType _contentSearchType = MediaContentType.SERIES;
+  MediaContentType _contentSearchType = localSettings.contentType;
 
   // Used to avoid requests spam while typing in search bar.
   Timer timer;
@@ -34,31 +33,17 @@ class _TopBarState extends State<TopBar> {
       snap: true,
       title: Row(
         children: <Widget>[
-          PopupMenuButton<MediaContentType>(
-              icon: Icon(_contentSearchType.icon),
-              itemBuilder: (BuildContext context) {
-                return <PopupMenuEntry<MediaContentType>>[
-                  PopupMenuItem<MediaContentType>(
-                    value: MediaContentType.MOVIE,
-                    child: PopupItem(
-                        icon: Icon(MediaContentType.MOVIE.icon),
-                        text: "Movies"),
-                  ),
-                  PopupMenuItem<MediaContentType>(
-                      value: MediaContentType.SERIES,
-                      child: PopupItem(
-                          icon: Icon(MediaContentType.SERIES.icon),
-                          text: "Series"))
-                ];
-              },
-              onSelected: (res) {
-                setState(() {
-                  if (_contentSearchType != res) {
-                    _contentSearchType = res;
-                    _search(categoryChange: true);
-                  }
-                });
-              }),
+          ContentTypePopUp(
+            defaultType: _contentSearchType,
+            onSelected: (res) {
+              setState(() {
+                if (_contentSearchType != res) {
+                  _contentSearchType = res;
+                  _search(categoryChange: true);
+                }
+              });
+            },
+          ),
           Expanded(
               child: TextField(
             enabled: !_isSearching,
@@ -119,7 +104,8 @@ class _TopBarState extends State<TopBar> {
           timer.cancel();
           timer = null;
         }
-        timer = Timer(Duration(milliseconds: localSettings.searchDelay*1000), _search);
+        timer = Timer(
+            Duration(milliseconds: localSettings.searchDelay * 1000), _search);
       }
     });
     _searchingStreamSubscribe =
