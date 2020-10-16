@@ -1,12 +1,12 @@
 import 'package:flutter/foundation.dart';
 import 'package:ombiapp/contracts/media_content_request.dart';
-import 'package:ombiapp/model/request/content/requests/season.dart';
+import 'package:ombiapp/model/request/content/requests/season_request.dart';
 
-class SeriesContentRequestPodo extends MediaContentRequest {
+class SeriesContentRequest extends MediaContentRequest {
   final bool requestAll, lastSeason, firstSeason;
   List<SeasonRequest> seasons;
 
-  SeriesContentRequestPodo(
+  SeriesContentRequest(
       {@required num id,
       this.requestAll = false,
       this.lastSeason = false,
@@ -25,6 +25,6 @@ class SeriesContentRequestPodo extends MediaContentRequest {
 
   @override
   String toString() {
-    return 'SeriesContentRequestPodo{id: $id, requestAll: $requestAll, lastSeason: $lastSeason, firstSeason: $firstSeason, seasons: $seasons}';
+    return 'SeriesContentRequest{id: $id, requestAll: $requestAll, lastSeason: $lastSeason, firstSeason: $firstSeason, seasons: $seasons}';
   }
 }

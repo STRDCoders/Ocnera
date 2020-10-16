@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:ombiapp/model/request/login.dart';
+import 'package:ombiapp/model/request/login_request.dart';
 import 'package:ombiapp/services/network/authorization/login_bloc.dart';
 import 'package:ombiapp/services/secure_storage_service.dart';
 import 'package:ombiapp/utils/utilsImpl.dart';
@@ -85,7 +85,7 @@ class _LoginFormState extends State<LoginForm> {
       _loading = true;
     });
     if (_formKey.currentState.validate()) {
-      await widget._bloc.login(LoginRequestPodo(
+      await widget._bloc.login(LoginRequest(
           _usernameController.text, _passwordController.text, true, false));
       _loading = false;
     }
