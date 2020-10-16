@@ -16,9 +16,7 @@ import 'api_provider.dart';
 
 abstract class RepositoryAPI {
   Future<User> getIdentity();
-
   Future<LoginResponseDto> login(LoginRequest loginRequestPodo);
-
   Future<bool> testConnection(String address);
   Future<ContentWrapper> contentSearch(
       {String query, bool defaultSearch, @required MediaContentType type});
