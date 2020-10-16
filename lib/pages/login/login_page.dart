@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:ombiapp/model/network_error.dart';
-import 'package:ombiapp/model/response/LoginResponsePodo.dart';
+import 'package:ombiapp/model/response/login_response.dart';
 import 'package:ombiapp/pages/login/login_form.dart';
 import 'package:ombiapp/services/login_service.dart';
 import 'package:ombiapp/services/network/authorization/login_bloc.dart';
@@ -45,7 +45,7 @@ class _LoginPageState extends State<LoginPage> {
               StreamBuilder(
                   stream: _bloc.loginStream,
                   builder: (BuildContext context,
-                      AsyncSnapshot<LoginResponsePodo> snapshot) {
+                      AsyncSnapshot<LoginResponseDto> snapshot) {
                     switch (snapshot.connectionState) {
                       case ConnectionState.active:
                         if (snapshot.hasError) {
@@ -79,7 +79,7 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  void login(LoginResponsePodo loginResponsePodo) async {
+  void login(LoginResponseDto loginResponsePodo) async {
     await loginManager.login(loginResponsePodo);
     WidgetsBinding.instance.addPostFrameCallback(
         (_) => RouterService.navigate(context, Routes.ROOT));
