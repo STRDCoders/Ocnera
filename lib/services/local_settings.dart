@@ -10,10 +10,10 @@ extension LocalSettingsTypeExtension on LocalSettingsType {
   static String _value(LocalSettingsType val) {
     switch (val) {
       case LocalSettingsType.SEARCH_DELAY:
-        return "search_delay";
+        return 'search_delay';
         break;
       case LocalSettingsType.CONTENT_TYPE:
-        return "content_type";
+        return 'content_type';
       default:
         throw UnsupportedException();
     }
