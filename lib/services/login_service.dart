@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:ombiapp/model/response/LoginResponsePodo.dart';
+import 'package:ombiapp/model/response/LoginResponseDto.dart';
 import 'package:ombiapp/model/response/user.dart';
 import 'package:ombiapp/services/secure_storage_service.dart';
 
@@ -32,7 +32,7 @@ class LoginService {
     await secureStorage.removeAllData();
   }
 
-  Future<void> login(LoginResponsePodo loginResponsePodo) async {
+  Future<void> login(LoginResponseDto loginResponsePodo) async {
     await secureStorage.saveData(
         StorageKeys.TOKEN.value, loginResponsePodo.key);
     await secureStorage.saveData(

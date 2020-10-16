@@ -1,15 +1,16 @@
 import 'package:ombiapp/model/network_error.dart';
 import 'package:ombiapp/model/request/login.dart';
-import 'package:ombiapp/model/response/LoginResponsePodo.dart';
+import 'package:ombiapp/model/response/LoginResponseDto.dart';
 import 'package:ombiapp/services/network/repository.dart';
 import 'package:rxdart/rxdart.dart';
 
 class LoginBloc {
-  final _loginSubject = PublishSubject<LoginResponsePodo>();
-  Stream<LoginResponsePodo> get loginStream => _loginSubject.stream;
+  final _loginSubject = PublishSubject<LoginResponseDto>();
+
+  Stream<LoginResponseDto> get loginStream => _loginSubject.stream;
 
   login(LoginRequestPodo loginRequestPodo) async {
-    LoginResponsePodo res = await repo.login(loginRequestPodo);
+    LoginResponseDto res = await repo.login(loginRequestPodo);
     switch (res.statusCode) {
       case 200:
         {

@@ -5,7 +5,7 @@ import 'package:ombiapp/contracts/media_content.dart';
 import 'package:ombiapp/contracts/media_content_request.dart';
 import 'package:ombiapp/contracts/media_content_type.dart';
 import 'package:ombiapp/model/request/login.dart';
-import 'package:ombiapp/model/response/LoginResponsePodo.dart';
+import 'package:ombiapp/model/response/LoginResponseDto.dart';
 import 'package:ombiapp/model/response/media_content/content_wrapper.dart';
 import 'package:ombiapp/model/response/media_content/movie/movie.dart';
 import 'package:ombiapp/model/response/media_content/requests/media_content_request.dart';
@@ -45,25 +45,25 @@ class ApiProvider implements RepositoryAPI {
     this._dio = new Dio(fetchBaseOptions(url));
   }
 
-  Future<LoginResponsePodo> login(LoginRequestPodo loginRequestPodo) async {
+  Future<LoginResponseDto> login(LoginRequestPodo loginRequestPodo) async {
     try {
       print(
           "Logging in.. using link: ${GlobalConfiguration().getValue('API_LINK_LOGIN_LOGIN')}");
       Response response = await _dio.post(
           GlobalConfiguration().getValue('API_LINK_LOGIN_LOGIN'),
           data: loginRequestPodo);
-      return LoginResponsePodo.fromJson(
+      return LoginResponseDto.fromJson(
           response.data, loginRequestPodo.username);
     } on DioError catch (e) {
       print(e);
       switch (e.type) {
         case DioErrorType.RESPONSE:
           {
-            return LoginResponsePodo(e.response.statusCode);
+            return LoginResponseDto(e.response.statusCode);
           }
         default:
           {
-            return LoginResponsePodo(-1);
+            return LoginResponseDto(-1);
           }
           break;
       }
