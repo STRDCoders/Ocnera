@@ -4,11 +4,11 @@ import 'package:global_configuration/global_configuration.dart';
 import 'package:ombiapp/contracts/media_content.dart';
 import 'package:ombiapp/contracts/media_content_request.dart';
 import 'package:ombiapp/contracts/media_content_type.dart';
-import 'package:ombiapp/model/request/login.dart';
-import 'package:ombiapp/model/response/LoginResponseDto.dart';
+import 'package:ombiapp/model/request/login_request.dart';
+import 'package:ombiapp/model/response/login_response.dart';
 import 'package:ombiapp/model/response/media_content/content_wrapper.dart';
 import 'package:ombiapp/model/response/media_content/movie/movie.dart';
-import 'package:ombiapp/model/response/media_content/requests/media_content_request.dart';
+import 'package:ombiapp/model/response/media_content/requests/media_content_request_response.dart';
 import 'package:ombiapp/model/response/media_content/series/series.dart';
 import 'package:ombiapp/model/response/user.dart';
 import 'package:ombiapp/services/network/repository.dart';
@@ -45,7 +45,7 @@ class ApiProvider implements RepositoryAPI {
     this._dio = new Dio(fetchBaseOptions(url));
   }
 
-  Future<LoginResponseDto> login(LoginRequestPodo loginRequestPodo) async {
+  Future<LoginResponseDto> login(LoginRequest loginRequestPodo) async {
     try {
       print(
           "Logging in.. using link: ${GlobalConfiguration().getValue('API_LINK_LOGIN_LOGIN')}");

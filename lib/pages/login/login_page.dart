@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:ombiapp/model/network_error.dart';
-import 'package:ombiapp/model/response/LoginResponseDto.dart';
+import 'package:ombiapp/model/response/login_response.dart';
 import 'package:ombiapp/pages/login/login_form.dart';
 import 'package:ombiapp/services/login_service.dart';
 import 'package:ombiapp/services/network/authorization/login_bloc.dart';

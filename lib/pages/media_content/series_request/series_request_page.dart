@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:ombiapp/contracts/media_content_status.dart';
-import 'package:ombiapp/model/request/content/requests/episode.dart';
-import 'package:ombiapp/model/request/content/requests/season.dart';
-import 'package:ombiapp/model/request/content/requests/series.dart';
+import 'package:ombiapp/model/request/content/requests/episode_request.dart';
+import 'package:ombiapp/model/request/content/requests/season_request.dart';
+import 'package:ombiapp/model/request/content/requests/series_request.dart';
 import 'package:ombiapp/model/response/media_content/series/series.dart';
 import 'package:ombiapp/model/screen_arguments/series_requests_episode.dart';
 import 'package:ombiapp/pages/media_content/series_request/season_panel.dart';
@@ -207,8 +207,8 @@ class _SeriesRequestSelectionState extends State<SeriesRequestPage> {
       sRequest.add(
           SeasonRequest(key, value.map((e) => EpisodeRequest(e)).toList()));
     });
-    SeriesContentRequestPodo request = SeriesContentRequestPodo(
-        id: widget.seriesContent.id, seasons: sRequest);
+    SeriesContentRequest request =
+        SeriesContentRequest(id: widget.seriesContent.id, seasons: sRequest);
     requestManager.requestContent(widget.seriesContent, request);
   }
 

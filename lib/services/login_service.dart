@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:ombiapp/model/response/LoginResponseDto.dart';
+import 'package:ombiapp/model/response/login_response.dart';
 import 'package:ombiapp/model/response/user.dart';
 import 'package:ombiapp/services/secure_storage_service.dart';
 
