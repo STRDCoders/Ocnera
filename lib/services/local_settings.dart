@@ -1,3 +1,5 @@
+import 'package:ombiapp/utils/logger.dart';
+import 'package:ombiapp/utils/unsupported_exception.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 enum LocalSettingsType { SEARCH_DELAY }
@@ -8,8 +10,9 @@ extension LocalSettingsTypeExtension on LocalSettingsType {
       case LocalSettingsType.SEARCH_DELAY:
         return "search_delay";
         break;
+      default:
+        throw UnsupportedException();
     }
-    return "";
   }
 
   String get value => _value(this);
@@ -17,7 +20,6 @@ extension LocalSettingsTypeExtension on LocalSettingsType {
 
 class LocalSettings {
   SharedPreferences _prefs;
-  static const saved_nutrition_separator = "~_";
 
   var _defaultValues = <LocalSettingsType, dynamic>{
     LocalSettingsType.SEARCH_DELAY: 1
@@ -33,21 +35,17 @@ class LocalSettings {
     print("Key: $key , Val: $value, Type: $type");
     print(type);
     switch (type) {
-      case "bool":
+      case 'bool':
         await _prefs.setBool(key, value);
         break;
-      case "int":
+      case 'int':
         await _prefs.setInt(key, value);
         break;
-      case "String":
+      case 'String':
         await _prefs.setString(key, value);
         break;
-      case "_GrowableList<String>":
-      case "List<String>":
-        await _prefs.setStringList('saved_nutrition', value);
-        break;
       default:
-        print("SUKA");
+        throw UnsupportedException();
         break;
     }
   }
@@ -68,7 +66,7 @@ class LocalSettings {
   Future<void> _setDefault() async {
     _defaultValues.forEach((key, value) async {
       if (!_prefs.containsKey(key.value)) {
-        print("CREATING CONFIG FOR: ${key.value}");
+        logger.d("CREATING CONFIG FOR: ${key.value}, value: $value");
         await _createDefault(key.value, value);
       }
     });
