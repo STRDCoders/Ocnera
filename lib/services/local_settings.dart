@@ -1,15 +1,19 @@
+import 'package:enum_to_string/enum_to_string.dart';
+import 'package:ombiapp/contracts/media_content_type.dart';
 import 'package:ombiapp/utils/logger.dart';
 import 'package:ombiapp/utils/unsupported_exception.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-enum LocalSettingsType { SEARCH_DELAY }
+enum LocalSettingsType { SEARCH_DELAY, CONTENT_TYPE }
 
 extension LocalSettingsTypeExtension on LocalSettingsType {
   static String _value(LocalSettingsType val) {
     switch (val) {
       case LocalSettingsType.SEARCH_DELAY:
-        return "search_delay";
+        return 'search_delay';
         break;
+      case LocalSettingsType.CONTENT_TYPE:
+        return 'content_type';
       default:
         throw UnsupportedException();
     }
@@ -22,7 +26,9 @@ class LocalSettings {
   SharedPreferences _prefs;
 
   var _defaultValues = <LocalSettingsType, dynamic>{
-    LocalSettingsType.SEARCH_DELAY: 1
+    LocalSettingsType.SEARCH_DELAY: 1,
+    LocalSettingsType.CONTENT_TYPE:
+        EnumToString.convertToString(MediaContentType.MOVIE)
   };
 
   Future<void> init() async {
@@ -52,8 +58,17 @@ class LocalSettings {
 
   int get searchDelay => _prefs.getInt(LocalSettingsType.SEARCH_DELAY.value);
 
+  MediaContentType get contentType => EnumToString.fromString(
+      MediaContentType.values,
+      _prefs.getString(LocalSettingsType.CONTENT_TYPE.value));
+
   Future<void> updateSearchDelay(int val) async {
     await _prefs.setInt(LocalSettingsType.SEARCH_DELAY.value, val);
+  }
+
+  Future<void> updateContentType(MediaContentType contentType) async {
+    await _prefs.setString(LocalSettingsType.CONTENT_TYPE.value,
+        EnumToString.convertToString(contentType));
   }
 
   Future<void> resetDefault() async {
