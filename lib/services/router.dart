@@ -9,6 +9,7 @@ import 'package:ombiapp/pages/page_container.dart';
 import 'package:ombiapp/pages/root.dart';
 import 'package:ombiapp/pages/search/search.dart';
 import 'package:ombiapp/utils/unsupported_exception.dart';
+import 'package:ombiapp/pages/settings/settings_page.dart';
 
 enum Routes {
   ROOT,
@@ -107,5 +108,7 @@ Route<dynamic> generateRoute(RouteSettings settings) {
         builder: (context) => (SeriesRequestPage(
               seriesContent: settings.arguments,
             )));
-  return MaterialPageRoute(builder: (context) => PageContainer(ErrorPage()));
+  else if(settings.name == Routes.SETTINGS.value)
+    return MaterialPageRoute(builder: (context) => PageContainer(SettingsPage()));
+    return MaterialPageRoute(builder: (context) => PageContainer(ErrorPage()));
 }

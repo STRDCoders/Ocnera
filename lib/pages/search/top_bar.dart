@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ombiapp/contracts/media_content_type.dart';
+import 'package:ombiapp/services/local_settings.dart';
 import 'package:ombiapp/services/search_service.dart';
 import 'package:ombiapp/widgets/popup_item.dart';
 
@@ -112,14 +113,13 @@ class _TopBarState extends State<TopBar> {
   void initState() {
     // Default search on page load
     contentSearchManager.search(type: _contentSearchType, defaultContent: true);
-
     _editingController.addListener(() {
       if (_editingController.text.isNotEmpty) {
         if (timer != null) {
           timer.cancel();
           timer = null;
         }
-        timer = Timer(Duration(milliseconds: 500), _search);
+        timer = Timer(Duration(milliseconds: localSettings.searchDelay*1000), _search);
       }
     });
     _searchingStreamSubscribe =

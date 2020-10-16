@@ -1,9 +1,9 @@
-class LoginRequestPodo {
+class LoginRequest {
   String username, password;
   bool rememberMe;
   bool usePlexOAuth;
 
-  LoginRequestPodo(
+  LoginRequest(
       this.username, this.password, this.rememberMe, this.usePlexOAuth);
 
   Map<String, dynamic> toJson() => {

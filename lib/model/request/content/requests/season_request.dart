@@ -1,4 +1,4 @@
-import 'package:ombiapp/model/request/content/requests/episode.dart';
+import 'package:ombiapp/model/request/content/requests/episode_request.dart';
 
 class SeasonRequest {
   final num _id;
