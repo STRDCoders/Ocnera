@@ -45,7 +45,7 @@ class _SettingsPageState extends State<SettingsPage> {
                   title: Text('Search Delay'),
                   icon: Icon(Icons.youtube_searched_for),
                   input: DigitInputField(
-                    callback: _settingsService.updateLearnImgCount,
+                    callback: _settingsService.updateSearchDelay,
                     controller: _searchDelayController,
                     formatter: DigitTextInputFormatter(1, 5),
                   ),
