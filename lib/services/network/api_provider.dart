@@ -31,24 +31,25 @@ class ApiProvider implements RepositoryAPI {
         receiveTimeout: 8000,
         sendTimeout: 8000,
         headers: {
-          'Content-Type': "application/json-patch+json",
+          'Content-Type': 'application/json-patch+json',
           'Authorization':
-              "Bearer ${secureStorage.values[StorageKeys.TOKEN.value]}"
+              'Bearer ${secureStorage.values[StorageKeys.TOKEN.value]}'
         });
     return options;
   }
 
   void updateDio() {
     String url =
-        UtilsImpl.buildLink(secureStorage.values[StorageKeys.ADDRESS.value]);
-    print("Dio Using IP: $url");
+    UtilsImpl.buildLink(secureStorage.values[StorageKeys.ADDRESS.value]);
+    print('Dio Using IP: $url');
     this._httpClient = new Dio(fetchBaseOptions(url));
   }
 
   Future<LoginResponseDto> login(LoginRequest loginRequestPodo) async {
     try {
       print(
-          "Logging in.. using link: ${GlobalConfiguration().getValue('API_LINK_LOGIN_LOGIN')}");
+          'Logging in... using link: ${GlobalConfiguration().getValue(
+              'API_LINK_LOGIN_LOGIN')}');
       Response response = await _httpClient.post(
           GlobalConfiguration().getValue('API_LINK_LOGIN_LOGIN'),
           data: loginRequestPodo);
@@ -116,7 +117,7 @@ class ApiProvider implements RepositoryAPI {
       if (defaultSearch)
         res = await _httpClient.get(type.defaultContentLink);
       else
-        res = await _httpClient.get("${type.queryLink}/$query");
+        res = await _httpClient.get('${type.queryLink}/$query');
       List<num> content = List();
       //The API sometime returns string when no content found/something unknown happens
       if (res.data is String) return ContentWrapper(200, List());
@@ -143,11 +144,11 @@ class ApiProvider implements RepositoryAPI {
   /// Fetch extended information on the given contentID
   Future<MediaContent> contentIdSearch(
       num contentID, MediaContentType type) async {
-    Response res = await _httpClient.get("${type.infoLink}/$contentID");
+    Response res = await _httpClient.get('${type.infoLink}/$contentID');
     if (res.statusCode != 200) {
       logger.e(
-          "Content search: $contentID($type) returned status code: ${res
-              .statusCode}");
+          'Content search: $contentID($type) returned status code: ${res
+              .statusCode}');
       return null;
     }
     switch (type) {
