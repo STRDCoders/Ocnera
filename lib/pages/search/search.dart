@@ -20,6 +20,7 @@ class SearchPage extends StatefulWidget {
 
 class _SearchPageState extends State<SearchPage> {
   List<StreamSubscription> _subscription = List();
+  final ScrollController _scrollController = ScrollController();
 
   @override
   Widget build(BuildContext context) {
@@ -30,6 +31,7 @@ class _SearchPageState extends State<SearchPage> {
         Positioned.fill(child: AnimatedBackground()),
         Positioned.fill(child: Particles(3)),
         CustomScrollView(
+          controller: _scrollController,
           slivers: <Widget>[
             TopBar(),
             StreamBuilder(
@@ -96,7 +98,7 @@ class _SearchPageState extends State<SearchPage> {
                   ? data.message
                   : "Content has been requested!"))));
     }));
-
+    _subscription.add(contentSearchManager.isSearching.listen(_resetScroll));
     super.initState();
   }
 
@@ -104,5 +106,13 @@ class _SearchPageState extends State<SearchPage> {
   void dispose() {
     for (var sub in _subscription) sub.cancel();
     super.dispose();
+  }
+
+  void _resetScroll(bool isSearching) {
+    _scrollController.animateTo(
+      0.0,
+      curve: Curves.easeOut,
+      duration: const Duration(milliseconds: 300),
+    );
   }
 }
