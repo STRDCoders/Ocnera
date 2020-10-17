@@ -35,7 +35,7 @@ class _SettingsPageState extends State<SettingsPage> {
 
   Future<void> resetDefaultSettings() async {
     await _settingsService.resetSettingToDefault();
-    await resetControllerData();
+    resetControllerData();
     WidgetsBinding.instance.addPostFrameCallback((_) => Scaffold.of(context)
         .showSnackBar(SnackBar(
             content: Text(('Reset to default settings successfully!')))));
