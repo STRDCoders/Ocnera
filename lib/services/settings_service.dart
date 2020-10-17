@@ -13,4 +13,8 @@ class SettingsService {
   Future<void> updateContentType(MediaContentType mediaContentType) async {
     await localSettings.updateContentType(mediaContentType);
   }
+
+  Future<void> resetSettingToDefault() async {
+    await localSettings.resetDefault();
+  }
 }
