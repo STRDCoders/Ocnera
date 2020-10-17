@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class AppTheme {
   static const APP_BACKGROUND = Color.fromARGB(245, 31, 31, 31);
   static const DATA_BACKGROUND = Colors.white12;
-
+  static const BUTTON_COLOR = Colors.orange;
   static theme(BuildContext context) => ThemeData(
 //TODO - fix color of copy/paste buttons.
         popupMenuTheme: PopupMenuThemeData(
@@ -19,7 +19,7 @@ class AppTheme {
         buttonTheme: ButtonThemeData(
             colorScheme:
                 Theme.of(context).colorScheme.copyWith(secondary: Colors.white),
-            buttonColor: Colors.orange,
+            buttonColor: BUTTON_COLOR,
             disabledColor: Colors.grey.withOpacity(0.7),
             textTheme: ButtonTextTheme.accent),
         textTheme: TextTheme(
