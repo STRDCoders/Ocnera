@@ -59,6 +59,13 @@ Future<void> configureLogger() async {
   logger.i("Generating folder for local images");
   logger.i(path);
   await Directory(path).create(recursive: true);
-  Fimber.plantTree(
-      FimberFileTree("$path/appLog.log", logLevels: ['I', 'W', 'E']));
+  var fileTree = TimedRollingFileTree(
+      timeSpan: TimedRollingFileTree.hourlyTime,
+      filenamePrefix: '$path/appLog_',
+      filenamePostfix: '.log',
+      logLevels: ['I', 'W', 'E']);
+  fileTree.maxHistoryFiles = 3;
+
+  Fimber.plantTree(fileTree);
+  // "$path/appLog.log", logLevels: ['I', 'W', 'E']));
 }
