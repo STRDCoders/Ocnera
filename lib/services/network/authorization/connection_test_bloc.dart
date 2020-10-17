@@ -1,4 +1,5 @@
 import 'package:ombiapp/services/network/repository.dart';
+import 'package:ombiapp/utils/logger.dart';
 import 'package:rxdart/rxdart.dart';
 
 class ConnectionTestBloc {
@@ -8,7 +9,7 @@ class ConnectionTestBloc {
 
   connect(String address) async {
     bool res = await repo.testConnection(address);
-    print("Server status response is $res");
+    logger.d("Server status response is $res");
     _connectionTestSubject.sink.add(res);
   }
 

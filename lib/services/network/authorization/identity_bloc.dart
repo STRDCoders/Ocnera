@@ -34,7 +34,7 @@ class IdentityBloc {
   }
 
   dispose() {
-    print('disposing identify stream');
+    logger.d('disposing identify stream');
     _identitySubject.close();
   }
 }

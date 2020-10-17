@@ -38,8 +38,6 @@ class LocalSettings {
 
   Future<void> _createDefault(key, value) async {
     var type = value.runtimeType.toString();
-    print("Key: $key , Val: $value, Type: $type");
-    print(type);
     switch (type) {
       case 'bool':
         await _prefs.setBool(key, value);

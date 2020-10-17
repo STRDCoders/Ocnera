@@ -2,6 +2,7 @@ import 'package:ombiapp/model/network_error.dart';
 import 'package:ombiapp/model/request/login_request.dart';
 import 'package:ombiapp/model/response/login_response.dart';
 import 'package:ombiapp/services/network/repository.dart';
+import 'package:ombiapp/utils/logger.dart';
 import 'package:rxdart/rxdart.dart';
 
 class LoginBloc {
@@ -33,7 +34,7 @@ class LoginBloc {
   }
 
   dispose() {
-    print('disposing login stream');
+    logger.d('disposing login stream');
     _loginSubject.close();
   }
 }

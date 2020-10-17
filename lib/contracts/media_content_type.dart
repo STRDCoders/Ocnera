@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:global_configuration/global_configuration.dart';
+import 'package:ombiapp/utils/logger.dart';
 import 'package:ombiapp/utils/unsupported_exception.dart';
 
 enum MediaContentType { MOVIE, SERIES }
@@ -89,7 +90,7 @@ extension ContentTypeExtention on MediaContentType {
           throw UnsupportedException();
       }
     } catch (e) {
-      print(e);
+      logger.e(e);
       return null;
     }
   }

@@ -40,14 +40,14 @@ class ApiProvider implements RepositoryAPI {
 
   void updateDio() {
     String url =
-    UtilsImpl.buildLink(secureStorage.values[StorageKeys.ADDRESS.value]);
-    print('Dio Using IP: $url');
+        UtilsImpl.buildLink(secureStorage.values[StorageKeys.ADDRESS.value]);
+    logger.d('Dio Using IP: $url');
     this._httpClient = new Dio(fetchBaseOptions(url));
   }
 
   Future<LoginResponseDto> login(LoginRequest loginRequestPodo) async {
     try {
-      print(
+      logger.d(
           'Logging in... using link: ${GlobalConfiguration().getValue(
               'API_LINK_LOGIN_LOGIN')}');
       Response response = await _httpClient.post(
@@ -56,7 +56,7 @@ class ApiProvider implements RepositoryAPI {
       return LoginResponseDto.fromJson(
           response.data, loginRequestPodo.username);
     } on DioError catch (e) {
-      print(e);
+      logger.e(e);
       switch (e.type) {
         case DioErrorType.RESPONSE:
           {
@@ -77,6 +77,7 @@ class ApiProvider implements RepositoryAPI {
           .get(GlobalConfiguration().getValue('API_LINK_IDENTITY_CURRENT'));
       return User.fromJson(response.data);
     } on DioError catch (e) {
+      logger.e(e);
       switch (e.type) {
         case DioErrorType.RESPONSE:
           {
@@ -98,7 +99,8 @@ class ApiProvider implements RepositoryAPI {
       Response response = await tmpClient
           .get(GlobalConfiguration().getValue('API_LINK_CONNECTION_TEST'));
       return response.statusCode == 200;
-    } on DioError {
+    } on DioError catch (e) {
+      logger.e(e);
       return false;
     }
   }
@@ -126,7 +128,7 @@ class ApiProvider implements RepositoryAPI {
 
       return ContentWrapper(200, content);
     } on DioError catch (e) {
-      print(e);
+      logger.e(e);
       switch (e.type) {
         case DioErrorType.RESPONSE:
           {
@@ -169,10 +171,9 @@ class ApiProvider implements RepositoryAPI {
     try {
       Response response =
       await _httpClient.post(type.requestLink, data: request.toJson());
-      print(response.data);
       return MediaContentRequestResponse.fromJson(response.data, request.id);
     } on DioError catch (e) {
-      print(e);
+      logger.e(e);
       switch (e.type) {
         case DioErrorType.RESPONSE:
           {

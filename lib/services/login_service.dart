@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:ombiapp/model/response/login_response.dart';
 import 'package:ombiapp/model/response/user.dart';
 import 'package:ombiapp/services/secure_storage_service.dart';
+import 'package:ombiapp/utils/logger.dart';
 
 import 'network/authorization/identity_bloc.dart';
 import 'network/repository.dart';
@@ -21,7 +22,7 @@ class LoginService {
   }
 
   Future<void> saveAddress(String address) async {
-    print("Saving $address");
+    logger.d("Saving $address");
     await secureStorage.saveData(StorageKeys.ADDRESS.value, address);
     repo.updateDio();
   }

@@ -25,7 +25,6 @@ class AppDrawer extends StatelessWidget {
               IconButton(
                 icon: Icon(Icons.exit_to_app),
                 onPressed: () async {
-                  print('pressed');
                   await loginManager.disconnect();
                   Navigator.of(context)
                       .pop(); // Pop the Drawer itself before passing the page context to navigator.

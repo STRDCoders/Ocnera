@@ -8,8 +8,9 @@ import 'package:ombiapp/pages/media_content/series_request/series_request_page.d
 import 'package:ombiapp/pages/page_container.dart';
 import 'package:ombiapp/pages/root.dart';
 import 'package:ombiapp/pages/search/search.dart';
-import 'package:ombiapp/utils/unsupported_exception.dart';
 import 'package:ombiapp/pages/settings/settings_page.dart';
+import 'package:ombiapp/utils/logger.dart';
+import 'package:ombiapp/utils/unsupported_exception.dart';
 
 enum Routes {
   ROOT,
@@ -83,7 +84,7 @@ class RouterService {
 
 /// Register routes to main app
 Route<dynamic> generateRoute(RouteSettings settings) {
-  print("Routing to: ${settings.name}");
+  logger.d("Routing to: ${settings.name}");
   // Using if/else instead of switch/case since case expressions must be constant, which is not the case
   if (settings.name == Routes.ROOT.value || settings.name == "/")
     return MaterialPageRoute(builder: (context) => RootPage());

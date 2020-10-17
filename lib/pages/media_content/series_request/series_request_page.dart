@@ -12,6 +12,7 @@ import 'package:ombiapp/model/screen_arguments/series_requests_episode.dart';
 import 'package:ombiapp/pages/media_content/series_request/season_panel.dart';
 import 'package:ombiapp/pages/media_content/series_request/season_panel_tile.dart';
 import 'package:ombiapp/services/request_service.dart';
+import 'package:ombiapp/utils/logger.dart';
 import 'package:ombiapp/utils/theme.dart';
 import 'package:rxdart/rxdart.dart';
 
@@ -55,7 +56,7 @@ class _SeriesRequestSelectionState extends State<SeriesRequestPage> {
   @override
   void dispose() {
     super.dispose();
-    print("Disposing series requests");
+    logger.d("Disposing series requests");
     _streamSubscription.forEach((sub) => sub.cancel());
     _requests.close();
   }
