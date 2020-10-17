@@ -87,7 +87,9 @@ class _LoginFormState extends State<LoginForm> {
     if (_formKey.currentState.validate()) {
       await widget._bloc.login(LoginRequest(
           _usernameController.text, _passwordController.text, true, false));
-      _loading = false;
+      setState(() {
+        _loading = false;
+      });
     }
   }
 }

@@ -21,13 +21,13 @@ class LoginBloc {
       case 401:
         {
           _loginSubject.sink.addError(NetworkError(
-              res.statusCode, "One of the credentials is incorrect!"));
+              res.statusCode, 'One of the credentials is incorrect!'));
         }
         break;
       default:
         {
           _loginSubject.sink.addError(
-              NetworkError(res.statusCode, "An unknown error has occurred."));
+              NetworkError(res.statusCode, 'An unknown error has occurred.'));
         }
     }
   }
