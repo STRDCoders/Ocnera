@@ -37,7 +37,7 @@ class UtilsImpl {
     var height = getScreenHeight(context, false);
     for (var i = 1; i < SCREEN_SIZE_RESOLUTION.length; i++) {
       if (height < SCREEN_SIZE_RESOLUTION[i]) {
-        logger.d(ScreenSize.values[i - 1]);
+        logger.d('${ScreenSize.values[i - 1]}');
         return ScreenSize.values[i - 1];
       }
     }

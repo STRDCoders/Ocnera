@@ -1,3 +1,3 @@
-import 'package:logger/logger.dart';
+import 'package:fimber_io/fimber_io.dart';
 
-final logger = Logger(level: Level.debug);
+final logger = FimberLog("App_Logger");

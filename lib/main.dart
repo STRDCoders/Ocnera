@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:fimber_io/fimber_io.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:global_configuration/global_configuration.dart';
@@ -9,6 +10,7 @@ import 'package:ombiapp/services/router.dart';
 import 'package:ombiapp/services/secure_storage_service.dart';
 import 'package:ombiapp/utils/logger.dart';
 import 'package:ombiapp/utils/theme.dart';
+import 'package:path_provider/path_provider.dart';
 
 class OcneraApp extends StatelessWidget {
   @override
@@ -24,6 +26,7 @@ class OcneraApp extends StatelessWidget {
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await GlobalConfiguration().loadFromAsset("config");
+  await configureLogger();
   SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.top]);
   // SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
   //   statusBarColor: AppTheme.APP_BACKGROUND.withOpacity(1),
@@ -47,4 +50,15 @@ Future<void> main() async {
   await localSettings.init();
 
   runApp(OcneraApp());
+}
+
+Future<void> configureLogger() async {
+  Fimber.plantTree(DebugTree());
+  Directory extDir = await getApplicationDocumentsDirectory();
+  String path = '${extDir.path}/${GlobalConfiguration().getValue('LOG_DIR')}';
+  logger.i("Generating folder for local images");
+  logger.i(path);
+  await Directory(path).create(recursive: true);
+  Fimber.plantTree(
+      FimberFileTree("$path/appLog.log", logLevels: ['I', 'W', 'E']));
 }
