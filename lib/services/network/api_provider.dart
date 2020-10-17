@@ -18,7 +18,7 @@ import 'package:ombiapp/utils/unsupported_exception.dart';
 import 'package:ombiapp/utils/utilsImpl.dart';
 
 class ApiProvider implements RepositoryAPI {
-  Dio _dio;
+  Dio _httpClient;
 
   ApiProvider() {
     updateDio();
@@ -31,25 +31,26 @@ class ApiProvider implements RepositoryAPI {
         receiveTimeout: 8000,
         sendTimeout: 8000,
         headers: {
-          'Content-Type': "application/json-patch+json",
+          'Content-Type': 'application/json-patch+json',
           'Authorization':
-              "Bearer ${secureStorage.values[StorageKeys.TOKEN.value]}"
+              'Bearer ${secureStorage.values[StorageKeys.TOKEN.value]}'
         });
     return options;
   }
 
   void updateDio() {
     String url =
-        UtilsImpl.buildLink(secureStorage.values[StorageKeys.ADDRESS.value]);
-    print("Dio Using IP: $url");
-    this._dio = new Dio(fetchBaseOptions(url));
+    UtilsImpl.buildLink(secureStorage.values[StorageKeys.ADDRESS.value]);
+    print('Dio Using IP: $url');
+    this._httpClient = new Dio(fetchBaseOptions(url));
   }
 
   Future<LoginResponseDto> login(LoginRequest loginRequestPodo) async {
     try {
       print(
-          "Logging in.. using link: ${GlobalConfiguration().getValue('API_LINK_LOGIN_LOGIN')}");
-      Response response = await _dio.post(
+          'Logging in... using link: ${GlobalConfiguration().getValue(
+              'API_LINK_LOGIN_LOGIN')}');
+      Response response = await _httpClient.post(
           GlobalConfiguration().getValue('API_LINK_LOGIN_LOGIN'),
           data: loginRequestPodo);
       return LoginResponseDto.fromJson(
@@ -72,7 +73,7 @@ class ApiProvider implements RepositoryAPI {
 
   Future<User> getIdentity() async {
     try {
-      Response response = await _dio
+      Response response = await _httpClient
           .get(GlobalConfiguration().getValue('API_LINK_IDENTITY_CURRENT'));
       return User.fromJson(response.data);
     } on DioError catch (e) {
@@ -114,9 +115,9 @@ class ApiProvider implements RepositoryAPI {
     try {
       Response res;
       if (defaultSearch)
-        res = await _dio.get(type.defaultContentLink);
+        res = await _httpClient.get(type.defaultContentLink);
       else
-        res = await _dio.get("${type.queryLink}/$query");
+        res = await _httpClient.get('${type.queryLink}/$query');
       List<num> content = List();
       //The API sometime returns string when no content found/something unknown happens
       if (res.data is String) return ContentWrapper(200, List());
@@ -143,10 +144,11 @@ class ApiProvider implements RepositoryAPI {
   /// Fetch extended information on the given contentID
   Future<MediaContent> contentIdSearch(
       num contentID, MediaContentType type) async {
-    Response res = await _dio.get("${type.infoLink}/$contentID");
+    Response res = await _httpClient.get('${type.infoLink}/$contentID');
     if (res.statusCode != 200) {
       logger.e(
-          "Content search: $contentID($type) returned status code: ${res.statusCode}");
+          'Content search: $contentID($type) returned status code: ${res
+              .statusCode}');
       return null;
     }
     switch (type) {
@@ -166,7 +168,7 @@ class ApiProvider implements RepositoryAPI {
       MediaContentRequest request, MediaContentType type) async {
     try {
       Response response =
-          await _dio.post(type.requestLink, data: request.toJson());
+      await _httpClient.post(type.requestLink, data: request.toJson());
       print(response.data);
       return MediaContentRequestResponse.fromJson(response.data, request.id);
     } on DioError catch (e) {
