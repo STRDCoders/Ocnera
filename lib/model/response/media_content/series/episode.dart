@@ -1,4 +1,4 @@
-import 'package:ombiapp/contracts/media_content_status.dart';
+import 'package:ocnera/contracts/media_content_status.dart';
 
 class Episode {
   num _number;

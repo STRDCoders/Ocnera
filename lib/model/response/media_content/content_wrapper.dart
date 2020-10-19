@@ -1,4 +1,4 @@
-import 'package:ombiapp/contracts/network_response.dart';
+import 'package:ocnera/contracts/network_response.dart';
 
 /// Wrap content objects with NetworkResponse for error handling.
 class ContentWrapper extends NetworkResponse {

@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:ombiapp/utils/input_formatter.dart';
+import 'package:ocnera/utils/input_formatter.dart';
 
 class DigitInputField extends StatefulWidget {
   final TextEditingController controller;

@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:ombiapp/contracts/media_content.dart';
-import 'package:ombiapp/pages/media_content/request_buttons.dart';
-import 'package:ombiapp/utils/unsupported_exception.dart';
+import 'package:ocnera/contracts/media_content.dart';
+import 'package:ocnera/pages/media_content/request_buttons.dart';
+import 'package:ocnera/utils/unsupported_exception.dart';
 
 enum MediaContentStatus {
   AVAILABLE,

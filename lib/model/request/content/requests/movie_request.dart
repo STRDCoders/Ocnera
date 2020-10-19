@@ -1,4 +1,4 @@
-import 'package:ombiapp/contracts/media_content_request.dart';
+import 'package:ocnera/contracts/media_content_request.dart';
 
 class MovieRequest extends MediaContentRequest {
   MovieRequest(num id) : super(id);

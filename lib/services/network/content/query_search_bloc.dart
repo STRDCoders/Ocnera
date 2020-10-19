@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:ombiapp/contracts/media_content.dart';
-import 'package:ombiapp/contracts/media_content_type.dart';
-import 'package:ombiapp/model/network_error.dart';
-import 'package:ombiapp/model/response/media_content/content_wrapper.dart';
-import 'package:ombiapp/services/network/repository.dart';
-import 'package:ombiapp/utils/logger.dart';
+import 'package:ocnera/contracts/media_content.dart';
+import 'package:ocnera/contracts/media_content_type.dart';
+import 'package:ocnera/model/network_error.dart';
+import 'package:ocnera/model/response/media_content/content_wrapper.dart';
+import 'package:ocnera/services/network/repository.dart';
+import 'package:ocnera/utils/logger.dart';
 import 'package:rxdart/rxdart.dart';
 
 class QuerySearchBloc {
@@ -12,6 +12,7 @@ class QuerySearchBloc {
 
   //Notify the subscribers when a search job is finished.
   final _searching = PublishSubject<bool>();
+
   Stream<MediaContent> get searchStream => _searchSubject.stream;
 
   Stream<bool> get isSearching => _searching.stream;

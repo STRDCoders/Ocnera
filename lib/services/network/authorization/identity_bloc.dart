@@ -1,11 +1,12 @@
-import 'package:ombiapp/model/network_error.dart';
-import 'package:ombiapp/model/response/user.dart';
-import 'package:ombiapp/services/network/repository.dart';
-import 'package:ombiapp/utils/logger.dart';
+import 'package:ocnera/model/network_error.dart';
+import 'package:ocnera/model/response/user.dart';
+import 'package:ocnera/services/network/repository.dart';
+import 'package:ocnera/utils/logger.dart';
 import 'package:rxdart/rxdart.dart';
 
 class IdentityBloc {
   final _identitySubject = PublishSubject<User>();
+
   Stream<User> get identityStream => _identitySubject.stream;
 
   identify() async {

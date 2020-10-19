@@ -1,4 +1,4 @@
-import 'package:ombiapp/model/request/content/requests/episode_request.dart';
+import 'package:ocnera/model/request/content/requests/episode_request.dart';
 
 class SeasonRequest {
   final num _id;

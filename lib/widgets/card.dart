@@ -1,13 +1,14 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:ombiapp/utils/theme.dart';
-import 'package:ombiapp/utils/utilsImpl.dart';
+import 'package:ocnera/utils/theme.dart';
+import 'package:ocnera/utils/utilsImpl.dart';
 
 class CardTemplate extends StatefulWidget {
   final Widget child;
   final Function onTap;
   final double ratio;
+
   const CardTemplate(
       {Key key,
       @required this.child,

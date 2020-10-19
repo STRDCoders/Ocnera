@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:ombiapp/services/login_service.dart';
-import 'package:ombiapp/services/router.dart';
-import 'package:ombiapp/utils/theme.dart';
+import 'package:ocnera/services/login_service.dart';
+import 'package:ocnera/services/router.dart';
+import 'package:ocnera/utils/theme.dart';
 
 class AppDrawer extends StatelessWidget {
   @override

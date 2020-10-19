@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:ombiapp/contracts/media_content_status.dart';
-import 'package:ombiapp/model/screen_arguments/series_requests_episode.dart';
-import 'package:ombiapp/pages/media_content/series_request/season_panel.dart';
+import 'package:ocnera/contracts/media_content_status.dart';
+import 'package:ocnera/model/screen_arguments/series_requests_episode.dart';
+import 'package:ocnera/pages/media_content/series_request/season_panel.dart';
 
 class SeasonExpansionTile extends StatefulWidget {
   final SeasonExpansionPanel item;

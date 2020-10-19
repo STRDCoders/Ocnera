@@ -3,13 +3,13 @@ import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:ombiapp/contracts/media_content.dart';
-import 'package:ombiapp/contracts/media_content_type.dart';
-import 'package:ombiapp/model/request/content/requests/movie_request.dart';
-import 'package:ombiapp/model/response/media_content/requests/media_content_request_response.dart';
-import 'package:ombiapp/model/response/media_content/series/series.dart';
-import 'package:ombiapp/services/request_service.dart';
-import 'package:ombiapp/services/router.dart';
+import 'package:ocnera/contracts/media_content.dart';
+import 'package:ocnera/contracts/media_content_type.dart';
+import 'package:ocnera/model/request/content/requests/movie_request.dart';
+import 'package:ocnera/model/response/media_content/requests/media_content_request_response.dart';
+import 'package:ocnera/model/response/media_content/series/series.dart';
+import 'package:ocnera/services/request_service.dart';
+import 'package:ocnera/services/router.dart';
 
 class StatusButton extends StatelessWidget {
   final String text;

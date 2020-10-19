@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:ombiapp/model/request/login_request.dart';
-import 'package:ombiapp/services/network/authorization/login_bloc.dart';
-import 'package:ombiapp/services/secure_storage_service.dart';
-import 'package:ombiapp/utils/utilsImpl.dart';
+import 'package:ocnera/model/request/login_request.dart';
+import 'package:ocnera/services/network/authorization/login_bloc.dart';
+import 'package:ocnera/services/secure_storage_service.dart';
+import 'package:ocnera/utils/utilsImpl.dart';
 
 class LoginForm extends StatefulWidget {
   final LoginBloc _bloc;

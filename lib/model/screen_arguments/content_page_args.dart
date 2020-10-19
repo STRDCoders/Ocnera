@@ -1,4 +1,4 @@
-import 'package:ombiapp/contracts/media_content.dart';
+import 'package:ocnera/contracts/media_content.dart';
 
 /// Arguments required for the Movie content page.
 class MovieContentArguments {

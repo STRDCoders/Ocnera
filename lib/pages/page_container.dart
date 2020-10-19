@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ombiapp/widgets/drawer.dart';
+import 'package:ocnera/widgets/drawer.dart';
 
 /// Widget template for the basic app layout.
 ///

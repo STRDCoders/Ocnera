@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
-import 'package:ombiapp/contracts/media_content_request.dart';
-import 'package:ombiapp/model/request/content/requests/season_request.dart';
+import 'package:ocnera/contracts/media_content_request.dart';
+import 'package:ocnera/model/request/content/requests/season_request.dart';
 
 class SeriesContentRequest extends MediaContentRequest {
   final bool requestAll, lastSeason, firstSeason;
