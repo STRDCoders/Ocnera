@@ -4,12 +4,12 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:ombiapp/pages/search/content_card.dart';
-import 'package:ombiapp/services/animation/particle_painter.dart';
-import 'package:ombiapp/services/request_service.dart';
-import 'package:ombiapp/services/search_service.dart';
-import 'package:ombiapp/utils/theme.dart';
-import 'package:ombiapp/utils/utilsImpl.dart';
+import 'package:ocnera/pages/search/content_card.dart';
+import 'package:ocnera/services/animation/particle_painter.dart';
+import 'package:ocnera/services/request_service.dart';
+import 'package:ocnera/services/search_service.dart';
+import 'package:ocnera/utils/theme.dart';
+import 'package:ocnera/utils/utilsImpl.dart';
 
 import 'top_bar.dart';
 

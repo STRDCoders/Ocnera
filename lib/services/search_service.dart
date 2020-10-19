@@ -1,9 +1,9 @@
 import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
-import 'package:ombiapp/contracts/media_content.dart';
-import 'package:ombiapp/contracts/media_content_type.dart';
-import 'package:ombiapp/services/network/content/query_search_bloc.dart';
+import 'package:ocnera/contracts/media_content.dart';
+import 'package:ocnera/contracts/media_content_type.dart';
+import 'package:ocnera/services/network/content/query_search_bloc.dart';
 
 class SearchManager {
   QuerySearchBloc _bloc = QuerySearchBloc();

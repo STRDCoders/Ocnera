@@ -1,10 +1,10 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:ombiapp/contracts/media_content_type.dart';
-import 'package:ombiapp/pages/search/content_type_popup.dart';
-import 'package:ombiapp/services/local_settings.dart';
-import 'package:ombiapp/services/search_service.dart';
+import 'package:ocnera/contracts/media_content_type.dart';
+import 'package:ocnera/pages/search/content_type_popup.dart';
+import 'package:ocnera/services/local_settings.dart';
+import 'package:ocnera/services/search_service.dart';
 
 class TopBar extends StatefulWidget {
   @override

@@ -1,7 +1,7 @@
-import 'package:ombiapp/model/network_error.dart';
-import 'package:ombiapp/model/request/login_request.dart';
-import 'package:ombiapp/model/response/login_response.dart';
-import 'package:ombiapp/services/network/repository.dart';
+import 'package:ocnera/model/network_error.dart';
+import 'package:ocnera/model/request/login_request.dart';
+import 'package:ocnera/model/response/login_response.dart';
+import 'package:ocnera/services/network/repository.dart';
 import 'package:rxdart/rxdart.dart';
 
 class LoginBloc {

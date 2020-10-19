@@ -3,16 +3,16 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:ombiapp/contracts/media_content_status.dart';
-import 'package:ombiapp/model/request/content/requests/episode_request.dart';
-import 'package:ombiapp/model/request/content/requests/season_request.dart';
-import 'package:ombiapp/model/request/content/requests/series_request.dart';
-import 'package:ombiapp/model/response/media_content/series/series.dart';
-import 'package:ombiapp/model/screen_arguments/series_requests_episode.dart';
-import 'package:ombiapp/pages/media_content/series_request/season_panel.dart';
-import 'package:ombiapp/pages/media_content/series_request/season_panel_tile.dart';
-import 'package:ombiapp/services/request_service.dart';
-import 'package:ombiapp/utils/theme.dart';
+import 'package:ocnera/contracts/media_content_status.dart';
+import 'package:ocnera/model/request/content/requests/episode_request.dart';
+import 'package:ocnera/model/request/content/requests/season_request.dart';
+import 'package:ocnera/model/request/content/requests/series_request.dart';
+import 'package:ocnera/model/response/media_content/series/series.dart';
+import 'package:ocnera/model/screen_arguments/series_requests_episode.dart';
+import 'package:ocnera/pages/media_content/series_request/season_panel.dart';
+import 'package:ocnera/pages/media_content/series_request/season_panel_tile.dart';
+import 'package:ocnera/services/request_service.dart';
+import 'package:ocnera/utils/theme.dart';
 import 'package:rxdart/rxdart.dart';
 
 class SeriesRequestPage extends StatefulWidget {

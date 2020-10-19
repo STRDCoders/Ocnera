@@ -1,7 +1,7 @@
 import 'package:enum_to_string/enum_to_string.dart';
-import 'package:ombiapp/contracts/media_content_type.dart';
-import 'package:ombiapp/utils/logger.dart';
-import 'package:ombiapp/utils/unsupported_exception.dart';
+import 'package:ocnera/contracts/media_content_type.dart';
+import 'package:ocnera/utils/logger.dart';
+import 'package:ocnera/utils/unsupported_exception.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 enum LocalSettingsType { SEARCH_DELAY, CONTENT_TYPE }

@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:ombiapp/utils/theme.dart';
+import 'package:ocnera/utils/theme.dart';
 
 class ConfirmButton extends StatefulWidget {
   final Widget title;

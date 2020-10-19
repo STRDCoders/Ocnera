@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:global_configuration/global_configuration.dart';
-import 'package:ombiapp/contracts/media_content.dart';
-import 'package:ombiapp/contracts/media_content_status.dart';
-import 'package:ombiapp/contracts/media_content_type.dart';
-import 'package:ombiapp/widgets/rating.dart';
+import 'package:ocnera/contracts/media_content.dart';
+import 'package:ocnera/contracts/media_content_status.dart';
+import 'package:ocnera/contracts/media_content_type.dart';
+import 'package:ocnera/widgets/rating.dart';
 
 class MovieContent extends MediaContent {
   bool _adult;

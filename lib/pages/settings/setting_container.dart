@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:list_tile_more_customizable/list_tile_more_customizable.dart';
-import 'package:ombiapp/utils/utilsImpl.dart';
+import 'package:ocnera/utils/utilsImpl.dart';
 
 class SettingContainer extends StatelessWidget {
   final Icon icon;

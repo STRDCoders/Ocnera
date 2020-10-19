@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:ombiapp/contracts/media_content_type.dart';
-import 'package:ombiapp/widgets/popup_item.dart';
+import 'package:ocnera/contracts/media_content_type.dart';
+import 'package:ocnera/widgets/popup_item.dart';
 
 class ContentTypePopUp extends StatelessWidget {
   final Function onSelected;

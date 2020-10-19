@@ -2,11 +2,11 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:ombiapp/model/response/login_response.dart';
-import 'package:ombiapp/pages/login/login_form.dart';
-import 'package:ombiapp/services/login_service.dart';
-import 'package:ombiapp/services/network/authorization/login_bloc.dart';
-import 'package:ombiapp/services/router.dart';
+import 'package:ocnera/model/response/login_response.dart';
+import 'package:ocnera/pages/login/login_form.dart';
+import 'package:ocnera/services/login_service.dart';
+import 'package:ocnera/services/network/authorization/login_bloc.dart';
+import 'package:ocnera/services/router.dart';
 
 class LoginPage extends StatefulWidget {
   @override

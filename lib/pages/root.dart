@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:ombiapp/model/response/user.dart';
-import 'package:ombiapp/pages/page_container.dart';
-import 'package:ombiapp/services/login_service.dart';
-import 'package:ombiapp/services/router.dart';
+import 'package:ocnera/model/response/user.dart';
+import 'package:ocnera/pages/page_container.dart';
+import 'package:ocnera/services/login_service.dart';
+import 'package:ocnera/services/router.dart';
 
 ///
 /// This widget determines whether the user is logged in,

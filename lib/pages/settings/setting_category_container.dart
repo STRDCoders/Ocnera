@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:ombiapp/pages/settings/setting_container.dart';
+import 'package:ocnera/pages/settings/setting_container.dart';
 
 class SettingCategoryContainer extends StatelessWidget {
   final String title;

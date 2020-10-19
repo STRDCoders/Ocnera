@@ -1,5 +1,5 @@
-import 'package:ombiapp/contracts/media_content_type.dart';
-import 'package:ombiapp/services/local_settings.dart';
+import 'package:ocnera/contracts/media_content_type.dart';
+import 'package:ocnera/services/local_settings.dart';
 
 class SettingsService {
   String get searchDelay => localSettings.searchDelay.toString();
