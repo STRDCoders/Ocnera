@@ -28,7 +28,7 @@ class QuerySearchBloc {
       @required MediaContentType type}) async {
     _searching.sink.add(true);
     num s = DateTime.now().millisecondsSinceEpoch;
-    logger.d("Searching for query: $query");
+    logger.i("Searching for query: $query");
     ContentWrapper res;
 
     res = await repo.contentSearch(

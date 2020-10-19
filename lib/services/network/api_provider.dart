@@ -56,7 +56,7 @@ class ApiProvider implements RepositoryAPI {
       return LoginResponseDto.fromJson(
           response.data, loginRequestPodo.username);
     } on DioError catch (e) {
-      logger.e('Error caught: ', ex: e);
+      logger.e('Error caught: ${e.message}', ex: e);
       switch (e.type) {
         case DioErrorType.RESPONSE:
           {
@@ -100,7 +100,7 @@ class ApiProvider implements RepositoryAPI {
           .get(GlobalConfiguration().getValue('API_LINK_CONNECTION_TEST'));
       return response.statusCode == 200;
     } on DioError catch (e) {
-      logger.e('Error caught: ', ex: e);
+      logger.e('Error caught: ${e.message}', ex: e);
       return false;
     }
   }
@@ -128,7 +128,7 @@ class ApiProvider implements RepositoryAPI {
 
       return ContentWrapper(200, content);
     } on DioError catch (e) {
-      logger.e('Error caught: ', ex: e);
+      logger.e('Error caught: ${e.message}', ex: e);
       switch (e.type) {
         case DioErrorType.RESPONSE:
           {
@@ -173,7 +173,7 @@ class ApiProvider implements RepositoryAPI {
       await _httpClient.post(type.requestLink, data: request.toJson());
       return MediaContentRequestResponse.fromJson(response.data, request.id);
     } on DioError catch (e) {
-      logger.e('Error caught: ', ex: e);
+      logger.e('Error caught: ${e.message}', ex: e);
       switch (e.type) {
         case DioErrorType.RESPONSE:
           {

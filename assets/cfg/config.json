@@ -13,5 +13,6 @@
   "API_LINK_SEARCH_MOVIE_DEFAULT_CONTENT": "search/movie/popular",
   "API_LINK_REQUEST_NEW_MOVIE": "request/movie",
   "API_LINK_REQUEST_NEW_SERIES": "request/tv",
-  "LOG_DIR": "Logs"
+  "LOG_DIR": "Logs",
+  "LOG_HISTORY_FILES": 3
 }
