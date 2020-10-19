@@ -1,6 +1,7 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:ombiapp/model/network_error.dart';
 import 'package:ombiapp/model/response/login_response.dart';
 import 'package:ombiapp/pages/login/login_form.dart';
 import 'package:ombiapp/services/login_service.dart';
@@ -14,17 +15,20 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   LoginBloc _bloc;
+  LoginForm _form;
+  StreamSubscription _subscription;
 
   @override
   void initState() {
     super.initState();
-    print("Init login bloc");
     _bloc = LoginBloc();
+    _form = LoginForm(_bloc);
+    _subscription = _bloc.loginStream.listen(login, onError: loginFailed);
   }
 
   @override
   void dispose() {
-    print("disposing login page");
+    _subscription.cancel();
     _bloc.dispose();
     super.dispose();
   }
@@ -39,35 +43,14 @@ class _LoginPageState extends State<LoginPage> {
             children: <Widget>[
               Container(
                 padding: EdgeInsets.fromLTRB(0, 100, 0, 20),
-                child: Text("Login",
+                child: Text('Login',
                     style: TextStyle(color: Colors.white, fontSize: 40)),
               ),
-              StreamBuilder(
-                  stream: _bloc.loginStream,
-                  builder: (BuildContext context,
-                      AsyncSnapshot<LoginResponseDto> snapshot) {
-                    switch (snapshot.connectionState) {
-                      case ConnectionState.active:
-                        if (snapshot.hasError) {
-                          NetworkError error = snapshot.error;
-                          WidgetsBinding.instance.addPostFrameCallback((_) =>
-                              Scaffold.of(context).showSnackBar(
-                                  SnackBar(content: Text(error.message))));
-                        }
-                        break;
-                      case ConnectionState.done:
-                        print(snapshot.data);
-                        login(snapshot.data);
-                        break;
-                      default:
-                        {}
-                    }
-                    return LoginForm(_bloc);
-                  }),
+              _form,
             ],
           ),
           FlatButton(
-            child: Text("Switch Server"),
+            child: Text('Switch Server'),
             onPressed: () async {
               await loginManager.removeAddress();
               RouterService.navigate(context, Routes.ROOT);
@@ -79,9 +62,12 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  void login(LoginResponseDto loginResponsePodo) async {
+  loginFailed(data) {
+    Scaffold.of(context).showSnackBar(SnackBar(content: Text(data.message)));
+  }
+
+  Future<void> login(LoginResponseDto loginResponsePodo) async {
     await loginManager.login(loginResponsePodo);
-    WidgetsBinding.instance.addPostFrameCallback(
-        (_) => RouterService.navigate(context, Routes.ROOT));
+    RouterService.navigate(context, Routes.ROOT);
   }
 }

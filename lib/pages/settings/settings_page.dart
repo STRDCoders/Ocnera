@@ -4,6 +4,7 @@ import 'package:ombiapp/pages/settings/setting_category_container.dart';
 import 'package:ombiapp/pages/settings/setting_container.dart';
 import 'package:ombiapp/services/settings_service.dart';
 import 'package:ombiapp/utils/input_formatter.dart';
+import 'package:ombiapp/widgets/confirmation_button.dart';
 import 'package:ombiapp/widgets/digit_form_field.dart';
 
 class SettingsPage extends StatefulWidget {
@@ -18,14 +19,26 @@ class _SettingsPageState extends State<SettingsPage> {
   @override
   void initState() {
     super.initState();
-    _searchDelayController =
-        TextEditingController(text: _settingsService.searchDelay);
+    resetControllerData();
   }
 
   @override
   void dispose() {
     _searchDelayController.dispose();
     super.dispose();
+  }
+
+  void resetControllerData() {
+    _searchDelayController =
+        TextEditingController(text: _settingsService.searchDelay);
+  }
+
+  Future<void> resetDefaultSettings() async {
+    await _settingsService.resetSettingToDefault();
+    resetControllerData();
+    WidgetsBinding.instance.addPostFrameCallback((_) => Scaffold.of(context)
+        .showSnackBar(SnackBar(
+            content: Text(('Reset to default settings successfully!')))));
   }
 
   @override
@@ -67,6 +80,25 @@ class _SettingsPageState extends State<SettingsPage> {
               ]),
           SizedBox(
             height: 5,
+          ),
+          SettingCategoryContainer(
+            title: 'Global',
+            settings: [
+              SettingContainer(
+                  title: Text('Reset Default'),
+                  subtitle: Text('Double tap to reset settings'),
+                  inputWidth: 0.25,
+                  icon: Icon(Icons.restore),
+                  input: ConfirmButton(
+                    title: Text('Reset'),
+                    confirmationTitle: Text('Confirm'),
+                    onPressed: () {
+                      setState(() {
+                        resetDefaultSettings();
+                      });
+                    },
+                  ))
+            ],
           ),
         ])));
   }
