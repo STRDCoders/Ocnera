@@ -80,8 +80,6 @@ extension ContentTypeExtention on MediaContentType {
     try {
       switch (type) {
         case MediaContentType.MOVIE:
-          return DateTime.parse(date);
-          break;
         case MediaContentType.SERIES:
           return DateTime.parse(date);
           break;
