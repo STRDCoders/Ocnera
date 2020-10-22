@@ -10,6 +10,7 @@ import 'package:ocnera/services/request_service.dart';
 import 'package:ocnera/services/search_service.dart';
 import 'package:ocnera/utils/theme.dart';
 import 'package:ocnera/utils/utilsImpl.dart';
+import 'package:rxdart/rxdart.dart';
 
 import 'top_bar.dart';
 
@@ -20,7 +21,9 @@ class SearchPage extends StatefulWidget {
 
 class _SearchPageState extends State<SearchPage> {
   List<StreamSubscription> _subscription = List();
+  PublishSubject<void> _rescanSubject = PublishSubject();
   final ScrollController _scrollController = ScrollController();
+  TopBar _topBar;
 
   @override
   Widget build(BuildContext context) {
@@ -30,66 +33,71 @@ class _SearchPageState extends State<SearchPage> {
       children: <Widget>[
         Positioned.fill(child: AnimatedBackground()),
         Positioned.fill(child: Particles(3)),
-        CustomScrollView(
-          controller: _scrollController,
-          slivers: <Widget>[
-            TopBar(),
-            StreamBuilder(
-                stream: contentSearchManager.isSearching,
-                builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
-                  // ConnectionState will be "waiting" when initializing the page.
-                  if (snapshot.connectionState == ConnectionState.waiting ||
-                      snapshot.hasData && snapshot.data)
-                    return SliverToBoxAdapter(
-                        child: Container(
-                            height: UtilsImpl.getScreenHeight(context, true),
-                            color: AppTheme.APP_BACKGROUND.withOpacity(0.4),
-                            padding: EdgeInsets.all(30),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: <Widget>[
-                                SpinKitDualRing(
-                                  size: 30,
-                                  color: Colors.white,
-                                  lineWidth: 3,
-                                )
-                              ],
-                            )));
-                  if (contentSearchManager.searchItems.isNotEmpty) {
-                    var iter = contentSearchManager.searchItems.values;
-                    return SliverList(
-                        delegate: SliverChildBuilderDelegate(
-                      (context, index) => ContentCard(
-                          ratio: screenRatio,
-                          index: index,
-                          content: iter.elementAt(index)),
-                      childCount: iter.length,
-                    ));
-                  }
-                  return SliverToBoxAdapter(
-                      child: Container(
-                          height: UtilsImpl.getScreenHeight(context, true),
-                          color: AppTheme.APP_BACKGROUND.withOpacity(0.4),
-                          child: Padding(
-                            padding: EdgeInsets.all(20),
-                            child: Column(
-                              children: <Widget>[
-                                Text(
-                                  "No results",
-                                  style: TextStyle(fontSize: 18),
-                                )
-                              ],
-                            ),
-                          )));
-                }),
-          ],
-        )
+        RefreshIndicator(
+            onRefresh: rescan,
+            child: CustomScrollView(
+              controller: _scrollController,
+              slivers: <Widget>[
+                _topBar,
+                StreamBuilder(
+                    stream: contentSearchManager.isSearching,
+                    builder:
+                        (BuildContext context, AsyncSnapshot<bool> snapshot) {
+                      // ConnectionState will be "waiting" when initializing the page.
+                      if (snapshot.connectionState == ConnectionState.waiting ||
+                          snapshot.hasData && snapshot.data)
+                        return SliverToBoxAdapter(
+                            child: Container(
+                                height:
+                                    UtilsImpl.getScreenHeight(context, true),
+                                color: AppTheme.APP_BACKGROUND.withOpacity(0.4),
+                                padding: EdgeInsets.all(30),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: <Widget>[
+                                    SpinKitDualRing(
+                                      size: 30,
+                                      color: Colors.white,
+                                      lineWidth: 3,
+                                    )
+                                  ],
+                                )));
+                      if (contentSearchManager.searchItems.isNotEmpty) {
+                        var iter = contentSearchManager.searchItems.values;
+                        return SliverList(
+                            delegate: SliverChildBuilderDelegate(
+                          (context, index) => ContentCard(
+                              ratio: screenRatio,
+                              index: index,
+                              content: iter.elementAt(index)),
+                          childCount: iter.length,
+                        ));
+                      }
+                      return SliverToBoxAdapter(
+                          child: Container(
+                              height: UtilsImpl.getScreenHeight(context, true),
+                              color: AppTheme.APP_BACKGROUND.withOpacity(0.4),
+                              child: Padding(
+                                padding: EdgeInsets.all(20),
+                                child: Column(
+                                  children: <Widget>[
+                                    Text(
+                                      "No results",
+                                      style: TextStyle(fontSize: 18),
+                                    )
+                                  ],
+                                ),
+                              )));
+                    }),
+              ],
+            ))
       ],
     );
   }
 
   @override
   void initState() {
+    _topBar = TopBar(scanTrigger: _rescanSubject.stream);
     _subscription.add(requestManager.requestStream.listen((data) {
       setState(() {});
       WidgetsBinding.instance.addPostFrameCallback((_) => Scaffold.of(context)
@@ -105,6 +113,7 @@ class _SearchPageState extends State<SearchPage> {
   @override
   void dispose() {
     for (var sub in _subscription) sub.cancel();
+    _rescanSubject.close();
     super.dispose();
   }
 
@@ -114,5 +123,9 @@ class _SearchPageState extends State<SearchPage> {
       curve: Curves.easeOut,
       duration: const Duration(milliseconds: 300),
     );
+  }
+
+  Future<void> rescan() async {
+    _rescanSubject.add(null);
   }
 }
