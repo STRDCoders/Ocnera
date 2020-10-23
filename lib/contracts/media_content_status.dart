@@ -10,7 +10,8 @@ enum MediaContentStatus {
   REQUESTED,
   MISSING,
   APPROVED,
-  PROCESSING
+  PROCESSING,
+  REMOVED
 }
 
 extension ContentStatusExtention on MediaContentStatus {
@@ -23,7 +24,7 @@ extension ContentStatusExtention on MediaContentStatus {
         return "Partly Available";
         break;
       case MediaContentStatus.MISSING:
-        return "Missing";
+        return "Request";
         break;
 
       case MediaContentStatus.PROCESSING:
@@ -31,6 +32,8 @@ extension ContentStatusExtention on MediaContentStatus {
       case MediaContentStatus.APPROVED:
         return "Processing";
         break;
+      case MediaContentStatus.REMOVED:
+        return "Removed";
       default:
         throw UnsupportedException();
     }
@@ -52,7 +55,6 @@ extension ContentStatusExtention on MediaContentStatus {
           );
 
         break;
-
       case MediaContentStatus.PROCESSING:
       case MediaContentStatus.APPROVED:
       case MediaContentStatus.REQUESTED:
@@ -61,8 +63,10 @@ extension ContentStatusExtention on MediaContentStatus {
           color: Colors.cyan,
         );
         break;
+      case MediaContentStatus.REMOVED:
       case MediaContentStatus.MISSING:
         return RequestButton(
+          text: _title(content.contentStatus),
           content: content,
         );
       default:
