@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:ocnera/contracts/media_content_type.dart';
 import 'package:ocnera/widgets/popup_item.dart';
@@ -18,12 +19,18 @@ class ContentTypePopUp extends StatelessWidget {
             PopupMenuItem<MediaContentType>(
               value: MediaContentType.MOVIE,
               child: PopupItem(
-                  icon: Icon(MediaContentType.MOVIE.icon, color: Colors.white,), text: "Movies"),
+                  icon: Icon(
+                    MediaContentType.MOVIE.icon,
+                    color: Colors.white,
+                  ),
+                  text: 'MOVIES'.tr()),
             ),
             PopupMenuItem<MediaContentType>(
                 value: MediaContentType.SERIES,
                 child: PopupItem(
-                    icon: Icon(MediaContentType.SERIES.icon, color: Colors.white), text: "Series"))
+                    icon: Icon(
+                        MediaContentType.SERIES.icon, color: Colors.white),
+                    text: 'SERIES'.tr()))
           ];
         },
         onSelected: onSelected);

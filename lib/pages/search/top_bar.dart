@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:ocnera/contracts/media_content_type.dart';
 import 'package:ocnera/pages/search/content_type_popup.dart';
@@ -50,7 +51,7 @@ class _TopBarState extends State<TopBar> {
             controller: _editingController,
             cursorColor: Colors.orange,
             decoration: InputDecoration(
-              hintText: "Search..",
+              hintText: 'SEARCH_TOP_BAR'.tr(),
               //TODO - The values should be of enum "ContentType" instead of string.
             ),
             style: TextStyle(color: Colors.white),
