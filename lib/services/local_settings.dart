@@ -38,6 +38,7 @@ class LocalSettings {
 
   Future<void> _createDefault(key, value) async {
     var type = value.runtimeType.toString();
+    logger.d('Key: $key , Val: $value, Type: $type');
     switch (type) {
       case 'bool':
         await _prefs.setBool(key, value);
