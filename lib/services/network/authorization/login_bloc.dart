@@ -2,6 +2,7 @@ import 'package:ocnera/model/network_error.dart';
 import 'package:ocnera/model/request/login_request.dart';
 import 'package:ocnera/model/response/login_response.dart';
 import 'package:ocnera/services/network/repository.dart';
+import 'package:ocnera/utils/logger.dart';
 import 'package:rxdart/rxdart.dart';
 
 class LoginBloc {

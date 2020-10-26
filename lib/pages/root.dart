@@ -4,6 +4,7 @@ import 'package:ocnera/model/response/user.dart';
 import 'package:ocnera/pages/page_container.dart';
 import 'package:ocnera/services/login_service.dart';
 import 'package:ocnera/services/router.dart';
+import 'package:ocnera/utils/logger.dart';
 
 ///
 /// This widget determines whether the user is logged in,

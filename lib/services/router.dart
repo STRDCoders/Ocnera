@@ -9,6 +9,7 @@ import 'package:ocnera/pages/page_container.dart';
 import 'package:ocnera/pages/root.dart';
 import 'package:ocnera/pages/search/search.dart';
 import 'package:ocnera/pages/settings/settings_page.dart';
+import 'package:ocnera/utils/logger.dart';
 import 'package:ocnera/utils/unsupported_exception.dart';
 
 enum Routes {

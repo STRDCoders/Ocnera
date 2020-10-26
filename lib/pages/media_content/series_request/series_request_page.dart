@@ -12,6 +12,7 @@ import 'package:ocnera/model/screen_arguments/series_requests_episode.dart';
 import 'package:ocnera/pages/media_content/series_request/season_panel.dart';
 import 'package:ocnera/pages/media_content/series_request/season_panel_tile.dart';
 import 'package:ocnera/services/request_service.dart';
+import 'package:ocnera/utils/logger.dart';
 import 'package:ocnera/utils/theme.dart';
 import 'package:rxdart/rxdart.dart';
 

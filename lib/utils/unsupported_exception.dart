@@ -1,4 +1,4 @@
-import 'package:ombiapp/utils/logger.dart';
+import 'package:ocnera/utils/logger.dart';
 
 class UnsupportedException implements Exception {
   String _message;

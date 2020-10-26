@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:ocnera/model/response/login_response.dart';
 import 'package:ocnera/model/response/user.dart';
 import 'package:ocnera/services/secure_storage_service.dart';
+import 'package:ocnera/utils/logger.dart';
 
 import 'network/authorization/identity_bloc.dart';
 import 'network/repository.dart';
