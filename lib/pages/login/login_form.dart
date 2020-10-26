@@ -70,10 +70,10 @@ class _LoginFormState extends State<LoginForm> {
       ),
       RaisedButton(
         onPressed: login,
-        color: Colors.orange,
-        textColor: Colors.white,
-        child: Text("Login"),
-      )
+              color: Colors.orange,
+              textColor: Colors.white,
+              child: Text('LOGIN_BUTTON'.tr()),
+            )
     ])
         : SpinKitFoldingCube(
       size: 50,

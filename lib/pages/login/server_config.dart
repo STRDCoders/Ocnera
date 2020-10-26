@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ocnera/services/login_service.dart';
@@ -49,14 +50,13 @@ class _ServerConfigState extends State<ServerConfig> {
                   children: <Widget>[
                     Column(
                       children: <Widget>[
-                        Text("Welcome!",
+                        Text('WELCOME'.tr(),
                             style:
                                 TextStyle(color: Colors.orange, fontSize: 40)),
-                        Text("Please enter your Ombi server address,",
+                        Text('ENTER_SERVER_INFO'.tr(),
                             style:
                                 TextStyle(color: Colors.white, fontSize: 15)),
-                        Text(
-                            "The information supplied will only be stored locally."),
+                        Text('INFO_STORED_WARNING'.tr()),
                         SizedBox(
                           height: 10,
                         ),
@@ -77,7 +77,7 @@ class _ServerConfigState extends State<ServerConfig> {
                                         focusedBorder: InputBorder.none,
                                         prefixIcon: Icon(Icons.cloud),
 //                          border: InputBorder.none,
-                                        hintText: 'Server Address'),
+                                        hintText: 'SERVER_ADDRESS'.tr()),
                                   ),
                                 ],
                               )),
@@ -96,7 +96,7 @@ class _ServerConfigState extends State<ServerConfig> {
                             child: Row(
                               mainAxisSize: MainAxisSize.min,
                               children: <Widget>[
-                                Text("Next"),
+                                Text('NEXT_BUTTON'.tr()),
                                 Icon(Icons.navigate_next)
                               ],
                             ),
@@ -118,7 +118,7 @@ class _ServerConfigState extends State<ServerConfig> {
       setState(() {
         _loading = false;
         Scaffold.of(context).showSnackBar(SnackBar(
-            content: Text("Server connection could not be established!")));
+            content: Text('SERVER_CONNECTION_ERROR'.tr())));
       });
   }
 }
