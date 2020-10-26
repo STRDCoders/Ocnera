@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -39,7 +40,7 @@ class RequestButton extends StatefulWidget {
   const RequestButton(
       {Key key,
       @required this.content,
-      this.text = "Request",
+      this.text = 'Request',
       this.color = Colors.orange})
       : super(key: key);
 
@@ -63,7 +64,7 @@ class _RequestButtonState extends State<RequestButton> {
           WidgetsBinding.instance.addPostFrameCallback((_) =>
               Scaffold.of(context).showSnackBar(SnackBar(
                   content: Text((res.statusCode != 200)
-                      ? "An unexpected error has occurred!"
+                      ? 'UNEXPECTED_ERROR'.tr()
                       : res.errorMessage))));
           _searching = false;
         }

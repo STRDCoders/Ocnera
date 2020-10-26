@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ocnera/contracts/media_content.dart';
@@ -17,19 +18,19 @@ extension ContentStatusExtention on MediaContentStatus {
   String _title(MediaContentStatus status) {
     switch (status) {
       case MediaContentStatus.AVAILABLE:
-        return "Available";
+        return 'CONTENT_AVAILABLE'.tr();
         break;
       case MediaContentStatus.PARTLY_AVAILABLE:
-        return "Partly Available";
+        return 'CONTENT_PARTLY_AVAILABLE'.tr();
         break;
       case MediaContentStatus.MISSING:
-        return "Missing";
+        return 'CONTENT_MISSING'.tr();
         break;
 
       case MediaContentStatus.PROCESSING:
       case MediaContentStatus.REQUESTED:
       case MediaContentStatus.APPROVED:
-        return "Processing";
+        return 'REQUEST_PROCESSING'.tr();
         break;
       default:
         throw UnsupportedException();
@@ -45,11 +46,11 @@ extension ContentStatusExtention on MediaContentStatus {
         );
         break;
       case MediaContentStatus.PARTLY_AVAILABLE:
-          return RequestButton(
-            content: content,
-            text: _title(content.contentStatus),
-            color: Colors.cyan,
-          );
+        return RequestButton(
+          content: content,
+          text: _title(content.contentStatus),
+          color: Colors.cyan,
+        );
 
         break;
 
@@ -74,5 +75,6 @@ extension ContentStatusExtention on MediaContentStatus {
   }
 
   String get title => _title(this);
+
   Widget button(MediaContent content) => _button(content);
 }
