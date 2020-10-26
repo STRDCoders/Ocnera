@@ -53,7 +53,7 @@ class _ServerConfigState extends State<ServerConfig> {
                         Text('WELCOME'.tr(),
                             style:
                                 TextStyle(color: Colors.orange, fontSize: 40)),
-                        Text('ENTER_SERVER_INFO'.tr(),
+                        Text('ENTER_SERVER_ADDRESS'.tr(),
                             style:
                                 TextStyle(color: Colors.white, fontSize: 15)),
                         Text('INFO_STORED_WARNING'.tr()),

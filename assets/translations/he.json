@@ -18,7 +18,7 @@
   "NO_RESULTS": "לא נמצאו תוצאות",
   "SERVER_CONNECTION_ERROR": "ארעה שגיאה בעת ניסון התחברות לשרת!",
   "WELCOME": "ברוכים הבאים!",
-  "ENTER_SERVER_INFO": "אנא הכנס את כתובת שרת הOmbi שלך,",
+  "ENTER_SERVER_ADDRESS": "אנא הכנס את כתובת שרת הOmbi שלך,",
   "INFO_STORED_WARNING": "המידע שנרשם יישמר אך ורק מקומית על המכשיר.",
   "SERVER_ADDRESS": "הכנס כתובת שרת",
   "NEXT_BUTTON": "שלב הבא",

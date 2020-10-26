@@ -18,7 +18,7 @@
   "NO_RESULTS": "No results",
   "SERVER_CONNECTION_ERROR": "Server connection could not be established!",
   "WELCOME": "Welcome!",
-  "ENTER_SERVER_INFO": "Please enter your Ombi server address,",
+  "ENTER_SERVER_ADDRESS": "Please enter your Ombi server address,",
   "INFO_STORED_WARNING": "The information supplied will only be stored locally.",
   "SERVER_ADDRESS": "Server Address",
   "NEXT_BUTTON": "Next",
