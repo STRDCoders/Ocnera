@@ -55,7 +55,7 @@ class _TopBarState extends State<TopBar> {
             controller: _editingController,
             cursorColor: Colors.orange,
             decoration: InputDecoration(
-              hintText: 'SEARCH_TOP_BAR'.tr(),
+              hintText: 'SEARCH_INPUT_PLACEHOLDER'.tr(),
               //TODO - The values should be of enum "ContentType" instead of string.
             ),
             style: TextStyle(color: Colors.white),
