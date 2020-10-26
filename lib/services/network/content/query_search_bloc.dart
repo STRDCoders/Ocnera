@@ -66,7 +66,7 @@ class QuerySearchBloc {
   }
 
   dispose() {
-    logger.d('disposing identify stream');
+    logger.d('disposing search stream');
     _searchSubject.close();
     _searching.close();
   }
