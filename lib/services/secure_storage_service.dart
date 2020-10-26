@@ -33,7 +33,7 @@ class SecureStorage {
   }
 
   saveData(String key, String val) async {
-    logger.d("Saving secure data '$key' as '$val'");
+    logger.d("Saving secure data '$key' ");
     _values[key] = val;
     await _storage.write(key: key, value: val);
   }
