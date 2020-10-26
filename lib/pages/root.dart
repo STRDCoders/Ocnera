@@ -51,7 +51,7 @@ class _RootPageState extends State<RootPage> {
                   height: 50,
                 ),
                 Text(
-                  "LOADING".tr(),
+                  'LOADING'.tr(),
                   style: TextStyle(color: Colors.white, fontSize: 30),
                 )
               ]));
