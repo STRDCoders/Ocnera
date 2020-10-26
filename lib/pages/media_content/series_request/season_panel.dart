@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:ombiapp/contracts/media_content_status.dart';
-import 'package:ombiapp/model/response/media_content/series/episode.dart';
-import 'package:ombiapp/model/response/media_content/series/seasone.dart';
-import 'package:ombiapp/model/screen_arguments/series_requests_episode.dart';
-import 'package:ombiapp/utils/utilsImpl.dart';
+import 'package:ocnera/contracts/media_content_status.dart';
+import 'package:ocnera/model/response/media_content/series/episode.dart';
+import 'package:ocnera/model/response/media_content/series/seasone.dart';
+import 'package:ocnera/model/screen_arguments/series_requests_episode.dart';
+import 'package:ocnera/utils/utilsImpl.dart';
 import 'package:rxdart/rxdart.dart';
 
 class SeasonExpansionPanel {

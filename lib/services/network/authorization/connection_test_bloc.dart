@@ -1,5 +1,4 @@
-import 'package:ombiapp/services/network/repository.dart';
-import 'package:ombiapp/utils/logger.dart';
+import 'package:ocnera/services/network/repository.dart';
 import 'package:rxdart/rxdart.dart';
 
 class ConnectionTestBloc {

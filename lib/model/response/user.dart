@@ -1,4 +1,4 @@
-import 'package:ombiapp/contracts/network_response.dart';
+import 'package:ocnera/contracts/network_response.dart';
 
 class User extends NetworkResponse {
   String _id, _userName, _alias, _email;

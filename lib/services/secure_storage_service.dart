@@ -1,6 +1,5 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:ombiapp/utils/logger.dart';
-import 'package:ombiapp/utils/unsupported_exception.dart';
+import 'package:ocnera/utils/unsupported_exception.dart';
 
 enum StorageKeys { TOKEN, USERNAME, ADDRESS }
 

@@ -4,11 +4,11 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:ombiapp/contracts/media_content.dart';
-import 'package:ombiapp/contracts/media_content_status.dart';
-import 'package:ombiapp/model/screen_arguments/content_page_args.dart';
-import 'package:ombiapp/services/router.dart';
-import 'package:ombiapp/widgets/card.dart';
+import 'package:ocnera/contracts/media_content.dart';
+import 'package:ocnera/contracts/media_content_status.dart';
+import 'package:ocnera/model/screen_arguments/content_page_args.dart';
+import 'package:ocnera/services/router.dart';
+import 'package:ocnera/widgets/card.dart';
 
 class ContentCard extends StatefulWidget {
   final num index;

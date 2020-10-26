@@ -1,9 +1,9 @@
 import 'dart:async';
 
-import 'package:ombiapp/contracts/media_content.dart';
-import 'package:ombiapp/contracts/media_content_request.dart';
-import 'package:ombiapp/model/response/media_content/requests/media_content_request_response.dart';
-import 'package:ombiapp/services/network/repository.dart';
+import 'package:ocnera/contracts/media_content.dart';
+import 'package:ocnera/contracts/media_content_request.dart';
+import 'package:ocnera/model/response/media_content/requests/media_content_request_response.dart';
+import 'package:ocnera/services/network/repository.dart';
 import 'package:rxdart/rxdart.dart';
 
 class RequestContentBloc {

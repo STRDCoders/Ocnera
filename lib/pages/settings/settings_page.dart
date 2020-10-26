@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:ombiapp/pages/search/content_type_popup.dart';
-import 'package:ombiapp/pages/settings/setting_category_container.dart';
-import 'package:ombiapp/pages/settings/setting_container.dart';
-import 'package:ombiapp/services/settings_service.dart';
-import 'package:ombiapp/utils/input_formatter.dart';
-import 'package:ombiapp/widgets/confirmation_button.dart';
-import 'package:ombiapp/widgets/digit_form_field.dart';
+import 'package:ocnera/pages/search/content_type_popup.dart';
+import 'package:ocnera/pages/settings/setting_category_container.dart';
+import 'package:ocnera/pages/settings/setting_container.dart';
+import 'package:ocnera/services/settings_service.dart';
+import 'package:ocnera/utils/input_formatter.dart';
+import 'package:ocnera/widgets/confirmation_button.dart';
+import 'package:ocnera/widgets/digit_form_field.dart';
 
 class SettingsPage extends StatefulWidget {
   @override

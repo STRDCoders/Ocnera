@@ -4,12 +4,12 @@ import 'package:fimber_io/fimber_io.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:global_configuration/global_configuration.dart';
-import 'package:ombiapp/services/local_settings.dart';
-import 'package:ombiapp/services/network/http_override.dart';
-import 'package:ombiapp/services/router.dart';
-import 'package:ombiapp/services/secure_storage_service.dart';
-import 'package:ombiapp/utils/logger.dart';
-import 'package:ombiapp/utils/theme.dart';
+import 'package:ocnera/services/local_settings.dart';
+import 'package:ocnera/services/network/http_override.dart';
+import 'package:ocnera/services/router.dart';
+import 'package:ocnera/services/secure_storage_service.dart';
+import 'package:ocnera/utils/logger.dart';
+import 'package:ocnera/utils/theme.dart';
 import 'package:path_provider/path_provider.dart';
 
 class OcneraApp extends StatelessWidget {

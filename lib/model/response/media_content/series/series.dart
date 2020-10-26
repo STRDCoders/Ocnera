@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
-import 'package:ombiapp/contracts/media_content.dart';
-import 'package:ombiapp/contracts/media_content_status.dart';
-import 'package:ombiapp/contracts/media_content_type.dart';
-import 'package:ombiapp/model/response/media_content/series/seasone.dart';
+import 'package:ocnera/contracts/media_content.dart';
+import 'package:ocnera/contracts/media_content_status.dart';
+import 'package:ocnera/contracts/media_content_type.dart';
+import 'package:ocnera/model/response/media_content/series/seasone.dart';
 
 class SeriesContent extends MediaContent {
   /// Is show running

@@ -2,11 +2,11 @@ import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:ombiapp/services/login_service.dart';
-import 'package:ombiapp/services/network/authorization/connection_test_bloc.dart';
-import 'package:ombiapp/services/router.dart';
-import 'package:ombiapp/services/secure_storage_service.dart';
-import 'package:ombiapp/utils/utilsImpl.dart';
+import 'package:ocnera/services/login_service.dart';
+import 'package:ocnera/services/network/authorization/connection_test_bloc.dart';
+import 'package:ocnera/services/router.dart';
+import 'package:ocnera/services/secure_storage_service.dart';
+import 'package:ocnera/utils/utilsImpl.dart';
 
 class ServerConfig extends StatefulWidget {
   @override

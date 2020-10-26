@@ -1,4 +1,4 @@
-import 'package:ombiapp/contracts/network_response.dart';
+import 'package:ocnera/contracts/network_response.dart';
 
 class MediaContentRequestResponse extends NetworkResponse {
   bool result, isError;

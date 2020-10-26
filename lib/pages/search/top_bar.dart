@@ -1,12 +1,16 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:ombiapp/contracts/media_content_type.dart';
-import 'package:ombiapp/pages/search/content_type_popup.dart';
-import 'package:ombiapp/services/local_settings.dart';
-import 'package:ombiapp/services/search_service.dart';
+import 'package:ocnera/contracts/media_content_type.dart';
+import 'package:ocnera/pages/search/content_type_popup.dart';
+import 'package:ocnera/services/local_settings.dart';
+import 'package:ocnera/services/search_service.dart';
 
 class TopBar extends StatefulWidget {
+  final Stream<void> scanTrigger;
+
+  const TopBar({Key key, @required this.scanTrigger}) : super(key: key);
+
   @override
   _TopBarState createState() => _TopBarState();
 }
@@ -17,7 +21,7 @@ class _TopBarState extends State<TopBar> {
   // Used to avoid requests spam while typing in search bar.
   Timer timer;
   TextEditingController _editingController = TextEditingController();
-  StreamSubscription _searchingStreamSubscribe;
+  List<StreamSubscription> _subscriptions = List();
 
   //Save last search query to see if anything changed on event.
   String _lastSearchQuery = "";
@@ -72,15 +76,17 @@ class _TopBarState extends State<TopBar> {
   ///
   /// In case the [categoryChange] is true, it means the category of the content has been changed
   /// therefor it needs to be requested with the new [_contentSearchType].
-  void _search({bool categoryChange = false}) {
-    if (_editingController.text.trim().isEmpty && categoryChange) {
+  ///
+  /// In case the [rescan] is true, it means a refresh has been requested,
+  /// therefor a new search with the current state is required.
+  void _search({bool categoryChange: false, bool rescan: false}) {
+    if (_editingController.text.trim().isEmpty && (categoryChange || rescan)) {
       defaultSearch();
       _lastSearchQuery = "";
-    }
-
-    if (_editingController.text.trim().isNotEmpty &&
-        (_lastSearchQuery != _editingController.text.trim() ||
-            categoryChange)) {
+    } else if (rescan ||
+        (_editingController.text.trim().isNotEmpty &&
+            (_lastSearchQuery != _editingController.text.trim() ||
+                categoryChange))) {
       contentSearchManager.search(
           query: _editingController.text, type: _contentSearchType);
       _lastSearchQuery = _editingController.text.trim();
@@ -90,7 +96,7 @@ class _TopBarState extends State<TopBar> {
   @override
   void dispose() {
     _editingController.dispose();
-    _searchingStreamSubscribe.cancel();
+    _subscriptions.forEach((element) => element.cancel);
     super.dispose();
   }
 
@@ -108,12 +114,14 @@ class _TopBarState extends State<TopBar> {
             Duration(milliseconds: localSettings.searchDelay * 1000), _search);
       }
     });
-    _searchingStreamSubscribe =
-        contentSearchManager.isSearching.listen((event) {
+    _subscriptions.add(contentSearchManager.isSearching.listen((event) {
       setState(() {
         _isSearching = event;
       });
-    });
+    }));
+    _subscriptions.add(widget.scanTrigger.listen((e) {
+      _search(rescan: true);
+    }));
     super.initState();
   }
 

@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
-import 'package:ombiapp/contracts/media_content_status.dart';
-import 'package:ombiapp/contracts/media_content_type.dart';
+import 'package:ocnera/contracts/media_content_status.dart';
+import 'package:ocnera/contracts/media_content_type.dart';
 
 abstract class MediaContent {
   String title, banner, background, overview;

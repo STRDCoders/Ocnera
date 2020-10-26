@@ -1,4 +1,4 @@
-import 'package:ombiapp/contracts/network_response.dart';
+import 'package:ocnera/contracts/network_response.dart';
 
 class LoginResponseDto extends NetworkResponse {
   String _username;
@@ -23,10 +23,4 @@ class LoginResponseDto extends NetworkResponse {
   String get key => _key;
 
   String get expireDate => _expireDate;
-
-// @override
-// getObject() {
-//   // TODO: implement getObject
-//   throw UnimplementedError();
-// }
 }

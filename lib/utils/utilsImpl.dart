@@ -2,10 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:global_configuration/global_configuration.dart';
 import 'package:intl/intl.dart';
-import 'package:ombiapp/utils/unsupported_exception.dart';
-
-import 'grid.dart';
-import 'logger.dart';
 
 class UtilsImpl {
   static num timestamp() => DateTime.now().millisecondsSinceEpoch;
@@ -32,15 +28,4 @@ class UtilsImpl {
   }
 
   static final DateFormat dateFormat = DateFormat('MM-yyyy');
-
-  static ScreenSize getScreenType(BuildContext context) {
-    var height = getScreenHeight(context, false);
-    for (var i = 1; i < SCREEN_SIZE_RESOLUTION.length; i++) {
-      if (height < SCREEN_SIZE_RESOLUTION[i]) {
-        logger.d('${ScreenSize.values[i - 1]}');
-        return ScreenSize.values[i - 1];
-      }
-    }
-    throw UnsupportedException();
-  }
 }

@@ -1,21 +1,21 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:global_configuration/global_configuration.dart';
-import 'package:ombiapp/contracts/media_content.dart';
-import 'package:ombiapp/contracts/media_content_request.dart';
-import 'package:ombiapp/contracts/media_content_type.dart';
-import 'package:ombiapp/model/request/login_request.dart';
-import 'package:ombiapp/model/response/login_response.dart';
-import 'package:ombiapp/model/response/media_content/content_wrapper.dart';
-import 'package:ombiapp/model/response/media_content/movie/movie.dart';
-import 'package:ombiapp/model/response/media_content/requests/media_content_request_response.dart';
-import 'package:ombiapp/model/response/media_content/series/series.dart';
-import 'package:ombiapp/model/response/user.dart';
-import 'package:ombiapp/services/network/repository.dart';
-import 'package:ombiapp/services/secure_storage_service.dart';
-import 'package:ombiapp/utils/logger.dart';
-import 'package:ombiapp/utils/unsupported_exception.dart';
-import 'package:ombiapp/utils/utilsImpl.dart';
+import 'package:ocnera/contracts/media_content.dart';
+import 'package:ocnera/contracts/media_content_request.dart';
+import 'package:ocnera/contracts/media_content_type.dart';
+import 'package:ocnera/model/request/login_request.dart';
+import 'package:ocnera/model/response/login_response.dart';
+import 'package:ocnera/model/response/media_content/content_wrapper.dart';
+import 'package:ocnera/model/response/media_content/movie/movie.dart';
+import 'package:ocnera/model/response/media_content/requests/media_content_request_response.dart';
+import 'package:ocnera/model/response/media_content/series/series.dart';
+import 'package:ocnera/model/response/user.dart';
+import 'package:ocnera/services/network/repository.dart';
+import 'package:ocnera/services/secure_storage_service.dart';
+import 'package:ocnera/utils/logger.dart';
+import 'package:ocnera/utils/unsupported_exception.dart';
+import 'package:ocnera/utils/utilsImpl.dart';
 
 class ApiProvider implements RepositoryAPI {
   Dio _httpClient;

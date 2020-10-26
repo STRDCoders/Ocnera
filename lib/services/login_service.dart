@@ -1,9 +1,8 @@
 import 'dart:async';
 
-import 'package:ombiapp/model/response/login_response.dart';
-import 'package:ombiapp/model/response/user.dart';
-import 'package:ombiapp/services/secure_storage_service.dart';
-import 'package:ombiapp/utils/logger.dart';
+import 'package:ocnera/model/response/login_response.dart';
+import 'package:ocnera/model/response/user.dart';
+import 'package:ocnera/services/secure_storage_service.dart';
 
 import 'network/authorization/identity_bloc.dart';
 import 'network/repository.dart';

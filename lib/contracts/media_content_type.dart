@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:global_configuration/global_configuration.dart';
-import 'package:ombiapp/utils/unsupported_exception.dart';
+import 'package:ocnera/utils/unsupported_exception.dart';
 
 enum MediaContentType { MOVIE, SERIES }
 
@@ -80,8 +80,6 @@ extension ContentTypeExtention on MediaContentType {
     try {
       switch (type) {
         case MediaContentType.MOVIE:
-          return DateTime.parse(date);
-          break;
         case MediaContentType.SERIES:
           return DateTime.parse(date);
           break;
