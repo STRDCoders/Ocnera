@@ -52,10 +52,9 @@ Future<void> main() async {
 
   // runApp(OcneraApp());
   runApp(EasyLocalization(
-      supportedLocales: [Locale('he', 'IL')],
+      supportedLocales: [Locale('he', 'IL'), Locale('en', 'US')],
       path: 'assets/translations',
       startLocale: Locale('he', ''),
       fallbackLocale: Locale('en', 'US'),
       child: OcneraApp()));
 }
-
