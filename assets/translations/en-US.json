@@ -33,7 +33,6 @@
   "RESET_BUTTON": "Reset",
   "RESET_BUTTON_CONFIRM": "Confirm",
   "RESET_SUCCESSFUL": "The Settings reset completed successfully!",
-  "__SNACK_BAR_SECTION__": "Snack bar related translations",
   "CONTENT_REQUEST_SUCCESSFULLY": "Content has been requested!",
   "UNEXPECTED_ERROR": "An unexpected error has occurred!"
 }
