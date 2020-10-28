@@ -4,16 +4,16 @@ import 'package:fimber_io/fimber_io.dart';
 import 'package:global_configuration/global_configuration.dart';
 import 'package:path_provider/path_provider.dart';
 
-final logger = FimberLog("App_Logger");
+final logger = FimberLog('App_Logger');
 
 Future<void> configureLogger() async {
   Fimber.plantTree(DebugTree());
   Directory extDir = await getApplicationDocumentsDirectory();
   String path = '${extDir.path}/${GlobalConfiguration().getValue('LOG_DIR')}';
-  logger.i("Generating folder for local images $path");
+  logger.i('Generating folder for local images $path');
   await Directory(path).create(recursive: true);
   deletePreviousFiles(path,
-      fileCount: GlobalConfiguration().getValue("LOG_HISTORY_FILES"));
+      fileCount: GlobalConfiguration().getValue('LOG_HISTORY_FILES'));
   var fileTree = TimedRollingFileTree(
       timeSpan: TimedRollingFileTree.dailyTime,
       filenamePrefix: '$path/appLog_',

@@ -14,7 +14,7 @@ import 'package:ocnera/utils/theme.dart';
 class OcneraApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    logger.d("MAIN APP");
+    logger.d('MAIN APP');
     return MaterialApp(
       localizationsDelegates: context.localizationDelegates,
       supportedLocales: context.supportedLocales,
@@ -27,7 +27,7 @@ class OcneraApp extends StatelessWidget {
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await GlobalConfiguration().loadFromAsset("config");
+  await GlobalConfiguration().loadFromAsset('config');
   await configureLogger();
   SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.top]);
   // SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
