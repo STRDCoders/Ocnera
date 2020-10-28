@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ocnera/services/login_service.dart';
@@ -46,7 +47,7 @@ class AppDrawer extends StatelessWidget {
               Icons.search,
               color: Colors.white70,
             ),
-            title: Text('Search Page'),
+            title: Text('SEARCH_PAGE'.tr()),
             onTap: () {
               // Update the state of the app
               // ...
@@ -55,22 +56,22 @@ class AppDrawer extends StatelessWidget {
               RouterService.navigate(context, Routes.SEARCH);
             },
           ),
-          ListTile(
-            leading: Icon(
-              Icons.settings,
-              color: Colors.white70,
-            ),
-            title: Text('Settings'),
-            onTap: () {
-              // Update the state of the app
-              // ...
-              // Then close the drawer
-              Navigator.pop(context);
-              RouterService.navigate(context, Routes.SETTINGS);
-            },
+              ListTile(
+                leading: Icon(
+                  Icons.settings,
+                  color: Colors.white70,
+                ),
+                title: Text('SETTINGS_PAGE'.tr()),
+                onTap: () {
+                  // Update the state of the app
+                  // ...
+                  // Then close the drawer
+                  Navigator.pop(context);
+                  RouterService.navigate(context, Routes.SETTINGS);
+                },
+              ),
+            ],
           ),
-        ],
-      ),
-    ));
+        ));
   }
 }

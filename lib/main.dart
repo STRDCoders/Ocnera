@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:fimber_io/fimber_io.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:global_configuration/global_configuration.dart';
@@ -17,6 +18,9 @@ class OcneraApp extends StatelessWidget {
   Widget build(BuildContext context) {
     logger.d("MAIN APP");
     return MaterialApp(
+      localizationsDelegates: context.localizationDelegates,
+      supportedLocales: context.supportedLocales,
+      locale: context.locale,
       theme: AppTheme.theme(context),
       onGenerateRoute: generateRoute,
     );
@@ -49,7 +53,12 @@ Future<void> main() async {
   await secureStorage.init();
   await localSettings.init();
 
-  runApp(OcneraApp());
+  // runApp(OcneraApp());
+  runApp(EasyLocalization(
+      supportedLocales: [Locale('he', 'IL'), Locale('en', 'US')],
+      path: 'assets/translations',
+      fallbackLocale: Locale('en', 'US'),
+      child: OcneraApp()));
 }
 
 Future<void> configureLogger() async {

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -39,45 +40,45 @@ class _LoginFormState extends State<LoginForm> {
   Widget build(BuildContext context) {
     return !_loading
         ? Column(children: <Widget>[
-            Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(5),
-                color: Colors.white,
-              ),
-              width: UtilsImpl.getScreenWidth(context) * 0.85,
-              child: Form(
-                  key: _formKey,
-                  child: Column(
-                    children: <Widget>[
-                      TextFormField(
-                        controller: _usernameController,
+      Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(5),
+          color: Colors.white,
+        ),
+        width: UtilsImpl.getScreenWidth(context) * 0.85,
+        child: Form(
+            key: _formKey,
+            child: Column(
+              children: <Widget>[
+                TextFormField(
+                  controller: _usernameController,
                         decoration: InputDecoration(
                             prefixIcon: Icon(Icons.perm_identity),
-                            hintText: 'Username'),
+                            hintText: 'USERNAME'.tr()),
                       ),
-                      TextFormField(
-                        controller: _passwordController,
-                        obscureText: true,
-                        decoration: InputDecoration(
-                            prefixIcon: Icon(Icons.lock), hintText: 'Password'),
-                      ),
-                    ],
-                  )),
-            ),
-            SizedBox(
-              height: 5,
-            ),
-            RaisedButton(
-              onPressed: login,
+                TextFormField(
+                  controller: _passwordController,
+                  obscureText: true,
+                  decoration: InputDecoration(
+                      prefixIcon: Icon(Icons.lock), hintText: 'PASSWORD'.tr()),
+                ),
+              ],
+            )),
+      ),
+      SizedBox(
+        height: 5,
+      ),
+      RaisedButton(
+        onPressed: login,
               color: Colors.orange,
               textColor: Colors.white,
-              child: Text("Login"),
+              child: Text('LOGIN_BUTTON'.tr()),
             )
-          ])
+    ])
         : SpinKitFoldingCube(
-            size: 50,
-            color: Colors.white,
-          );
+      size: 50,
+      color: Colors.white,
+    );
   }
 
   void login() async {

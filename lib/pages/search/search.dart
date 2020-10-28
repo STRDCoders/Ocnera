@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:ui';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -82,7 +83,7 @@ class _SearchPageState extends State<SearchPage> {
                                 child: Column(
                                   children: <Widget>[
                                     Text(
-                                      "No results",
+                                      'NO_RESULTS'.tr(),
                                       style: TextStyle(fontSize: 18),
                                     )
                                   ],
