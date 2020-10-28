@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:fimber_io/fimber_io.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -11,7 +10,6 @@ import 'package:ocnera/services/router.dart';
 import 'package:ocnera/services/secure_storage_service.dart';
 import 'package:ocnera/utils/logger.dart';
 import 'package:ocnera/utils/theme.dart';
-import 'package:path_provider/path_provider.dart';
 
 class OcneraApp extends StatelessWidget {
   @override
@@ -59,42 +57,4 @@ Future<void> main() async {
       path: 'assets/translations',
       fallbackLocale: Locale('en', 'US'),
       child: OcneraApp()));
-}
-
-Future<void> configureLogger() async {
-  Fimber.plantTree(DebugTree());
-  Directory extDir = await getApplicationDocumentsDirectory();
-  String path = '${extDir.path}/${GlobalConfiguration().getValue('LOG_DIR')}';
-  logger.i("Generating folder for local images $path");
-  await Directory(path).create(recursive: true);
-  deletePreviousFiles(path,
-      fileCount: GlobalConfiguration().getValue("LOG_HISTORY_FILES"));
-  var fileTree = TimedRollingFileTree(
-      timeSpan: TimedRollingFileTree.dailyTime,
-      filenamePrefix: '$path/appLog_',
-      filenamePostfix: '.log',
-      logLevels: ['I', 'W', 'E']);
-
-  Fimber.plantTree(fileTree);
-}
-
-void deletePreviousFiles(String path, {int fileCount = 3}) {
-  var logDir = Directory(path);
-  var files = logDir.listSync();
-  files.forEach((element) {
-    if (shouldFileBeDeleted(element, fileCount)) {
-      element.deleteSync();
-    }
-  });
-}
-
-bool shouldFileBeDeleted(FileSystemEntity file, int fileCount) {
-  var fileStats = file.statSync();
-  final now = DateTime.now();
-  var date = fileStats.modified;
-  if (now.difference(date).inHours >= fileCount) {
-    return true;
-  }
-
-  return false;
 }
