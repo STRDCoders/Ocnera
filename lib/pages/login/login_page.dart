@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:ocnera/model/response/login_response.dart';
@@ -43,14 +44,14 @@ class _LoginPageState extends State<LoginPage> {
             children: <Widget>[
               Container(
                 padding: EdgeInsets.fromLTRB(0, 100, 0, 20),
-                child: Text('Login',
+                child: Text('LOGIN_TITLE'.tr(),
                     style: TextStyle(color: Colors.white, fontSize: 40)),
               ),
               _form,
             ],
           ),
           FlatButton(
-            child: Text('Switch Server'),
+            child: Text('SWITCH_SERVER'.tr()),
             onPressed: () async {
               await loginManager.removeAddress();
               RouterService.navigate(context, Routes.ROOT);
