@@ -11,7 +11,8 @@ enum MediaContentStatus {
   REQUESTED,
   MISSING,
   APPROVED,
-  PROCESSING
+  PROCESSING,
+  REMOVED
 }
 
 extension ContentStatusExtention on MediaContentStatus {
@@ -32,6 +33,8 @@ extension ContentStatusExtention on MediaContentStatus {
       case MediaContentStatus.APPROVED:
         return 'REQUEST_PROCESSING'.tr();
         break;
+      case MediaContentStatus.REMOVED:
+        return "Removed";
       default:
         throw UnsupportedException();
     }
@@ -53,7 +56,6 @@ extension ContentStatusExtention on MediaContentStatus {
         );
 
         break;
-
       case MediaContentStatus.PROCESSING:
       case MediaContentStatus.APPROVED:
       case MediaContentStatus.REQUESTED:
@@ -62,8 +64,14 @@ extension ContentStatusExtention on MediaContentStatus {
           color: Colors.cyan,
         );
         break;
+      case MediaContentStatus.REMOVED:
+        return StatusButton(
+          text: _title(content.contentStatus),
+          color: Colors.redAccent,
+        );
       case MediaContentStatus.MISSING:
         return RequestButton(
+          text: _title(content.contentStatus),
           content: content,
         );
       default:
@@ -75,6 +83,5 @@ extension ContentStatusExtention on MediaContentStatus {
   }
 
   String get title => _title(this);
-
   Widget button(MediaContent content) => _button(content);
 }
