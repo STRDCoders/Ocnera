@@ -64,6 +64,10 @@ extension ContentStatusExtention on MediaContentStatus {
         );
         break;
       case MediaContentStatus.REMOVED:
+        return StatusButton(
+          text: _title(content.contentStatus),
+          color: Colors.redAccent,
+        );
       case MediaContentStatus.MISSING:
         return RequestButton(
           text: _title(content.contentStatus),
