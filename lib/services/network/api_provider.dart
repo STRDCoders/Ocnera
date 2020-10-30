@@ -48,15 +48,14 @@ class ApiProvider implements RepositoryAPI {
   Future<LoginResponseDto> login(LoginRequest loginRequestPodo) async {
     try {
       logger.d(
-          'Logging in... using link: ${GlobalConfiguration().getValue(
-              'API_LINK_LOGIN_LOGIN')}');
+          'Logging in... using link: ${GlobalConfiguration().getValue('API_LINK_LOGIN_LOGIN')}');
       Response response = await _httpClient.post(
           GlobalConfiguration().getValue('API_LINK_LOGIN_LOGIN'),
           data: loginRequestPodo);
       return LoginResponseDto.fromJson(
           response.data, loginRequestPodo.username);
-    } on DioError catch (e) {
-      logger.e('Error caught: ${e.message}', ex: e);
+    } on DioError catch (e, s) {
+      logger.e('Error caught: ${e.message}\n$s');
       switch (e.type) {
         case DioErrorType.RESPONSE:
           {
@@ -127,8 +126,8 @@ class ApiProvider implements RepositoryAPI {
       res.data.forEach((e) => {if (e['id'] != 0) content.add(e['id'])});
 
       return ContentWrapper(200, content);
-    } on DioError catch (e) {
-      logger.e('Error caught: ${e.message}', ex: e);
+    } on DioError catch (e, s) {
+      logger.e('Error caught: ${e.message}\n$s');
       switch (e.type) {
         case DioErrorType.RESPONSE:
           {
@@ -172,8 +171,8 @@ class ApiProvider implements RepositoryAPI {
       Response response =
       await _httpClient.post(type.requestLink, data: request.toJson());
       return MediaContentRequestResponse.fromJson(response.data, request.id);
-    } on DioError catch (e) {
-      logger.e('Error caught: ${e.message}', ex: e);
+    } on DioError catch (e, s) {
+      logger.e('Error caught: ${e.message}\n$s');
       switch (e.type) {
         case DioErrorType.RESPONSE:
           {

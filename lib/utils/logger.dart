@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:fimber_io/fimber_io.dart';
+import 'package:flutter_fimber/flutter_fimber.dart';
 import 'package:global_configuration/global_configuration.dart';
 import 'package:path_provider/path_provider.dart';
 
@@ -14,13 +15,12 @@ Future<void> configureLogger() async {
   await Directory(path).create(recursive: true);
   deletePreviousFiles(path,
       fileCount: GlobalConfiguration().getValue('LOG_HISTORY_FILES'));
-  var fileTree = TimedRollingFileTree(
+
+  Fimber.plantTree(TimedRollingFileTree(
       timeSpan: TimedRollingFileTree.dailyTime,
       filenamePrefix: '$path/appLog_',
       filenamePostfix: '.log',
-      logLevels: ['I', 'W', 'E']);
-
-  Fimber.plantTree(fileTree);
+      logLevels: ['I', 'W', 'E']));
 }
 
 void deletePreviousFiles(String path, {int fileCount = 3}) {

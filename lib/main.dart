@@ -29,6 +29,9 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await GlobalConfiguration().loadFromAsset('config');
   await configureLogger();
+  FlutterError.onError = (FlutterErrorDetails details) {
+    logger.e("Error caught @flutter: ${details.exception}\n${details.stack}");
+  };
   SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.top]);
   // SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
   //   statusBarColor: AppTheme.APP_BACKGROUND.withOpacity(1),
