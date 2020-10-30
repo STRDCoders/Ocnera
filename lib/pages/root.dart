@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:ocnera/model/response/user.dart';
@@ -20,7 +21,7 @@ class _RootPageState extends State<RootPage> {
   Widget build(BuildContext context) {
     if (!loginManager.isServerConfigured())
       WidgetsBinding.instance.addPostFrameCallback(
-          (_) => RouterService.navigate(context, Routes.SERVER_LOGIN));
+              (_) => RouterService.navigate(context, Routes.SERVER_LOGIN));
     return StreamBuilder(
         stream: loginManager.identityStream,
         builder: (BuildContext context, AsyncSnapshot<User> snapshot) {
@@ -29,11 +30,11 @@ class _RootPageState extends State<RootPage> {
               if (snapshot.hasError) {
                 print('Switching to Login page');
                 WidgetsBinding.instance.addPostFrameCallback(
-                    (_) => RouterService.navigate(context, Routes.LOGIN));
+                        (_) => RouterService.navigate(context, Routes.LOGIN));
               } else if (snapshot.hasData) {
                 print('Switching to Search Page');
                 WidgetsBinding.instance.addPostFrameCallback(
-                    (_) => RouterService.navigate(context, Routes.SEARCH));
+                        (_) => RouterService.navigate(context, Routes.SEARCH));
               }
               break;
             default:
@@ -50,7 +51,7 @@ class _RootPageState extends State<RootPage> {
                   height: 50,
                 ),
                 Text(
-                  "Loading...",
+                  'LOADING'.tr(),
                   style: TextStyle(color: Colors.white, fontSize: 30),
                 )
               ]));
