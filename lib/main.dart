@@ -14,7 +14,6 @@ import 'package:ocnera/utils/theme.dart';
 class OcneraApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // appLogger.log(LoggerTypes.DEBUG,'MAIN APP');
     appLogger.log(LoggerTypes.DEBUG, 'MAIN APP');
     return MaterialApp(
       localizationsDelegates: context.localizationDelegates,
