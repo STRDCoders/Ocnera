@@ -14,7 +14,8 @@ import 'package:ocnera/utils/theme.dart';
 class OcneraApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    logger.d('MAIN APP');
+    // appLogger.log(LoggerTypes.DEBUG,'MAIN APP');
+    appLogger.log(LoggerTypes.DEBUG, 'MAIN APP');
     return MaterialApp(
       localizationsDelegates: context.localizationDelegates,
       supportedLocales: context.supportedLocales,
@@ -28,9 +29,10 @@ class OcneraApp extends StatelessWidget {
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await GlobalConfiguration().loadFromAsset('config');
-  await configureLogger();
+  await appLogger.configureLogger();
   FlutterError.onError = (FlutterErrorDetails details) {
-    logger.e("Error caught @flutter: ${details.exception}\n${details.stack}");
+    appLogger.log(LoggerTypes.ERROR, 'Error caught @flutter:',
+        stacktrace: details.stack, exception: details.exception);
   };
   SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.top]);
   // SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(

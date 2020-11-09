@@ -56,7 +56,7 @@ class _SeriesRequestSelectionState extends State<SeriesRequestPage> {
   @override
   void dispose() {
     super.dispose();
-    logger.d("Disposing series requests");
+    appLogger.log(LoggerTypes.DEBUG, "Disposing series requests");
     _streamSubscription.forEach((sub) => sub.cancel());
     _requests.close();
   }

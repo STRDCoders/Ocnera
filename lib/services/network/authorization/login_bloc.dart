@@ -34,7 +34,7 @@ class LoginBloc {
   }
 
   dispose() {
-    logger.d('disposing login stream');
+    appLogger.log(LoggerTypes.DEBUG, 'disposing login stream');
     _loginSubject.close();
   }
 }

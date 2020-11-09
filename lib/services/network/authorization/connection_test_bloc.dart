@@ -9,7 +9,7 @@ class ConnectionTestBloc {
 
   connect(String address) async {
     bool res = await repo.testConnection(address);
-    logger.d("Server status response is $res");
+    appLogger.log(LoggerTypes.DEBUG, "Server status response is $res");
     _connectionTestSubject.sink.add(res);
   }
 

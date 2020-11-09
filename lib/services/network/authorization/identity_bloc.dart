@@ -11,7 +11,7 @@ class IdentityBloc {
 
   identify() async {
     User res = await repo.getIdentity();
-    logger.d("response for login: $res");
+    appLogger.log(LoggerTypes.DEBUG, "response for login: $res");
     switch (res.statusCode) {
       case 200:
         {
@@ -35,7 +35,7 @@ class IdentityBloc {
   }
 
   dispose() {
-    logger.d('disposing identify stream');
+    appLogger.log(LoggerTypes.DEBUG, 'disposing identify stream');
     _identitySubject.close();
   }
 }

@@ -29,7 +29,7 @@ class QuerySearchBloc {
       @required MediaContentType type}) async {
     _searching.sink.add(true);
     num s = DateTime.now().millisecondsSinceEpoch;
-    logger.i("Searching for query: $query");
+    appLogger.log(LoggerTypes.INFO, 'Searching for query: $query');
     ContentWrapper res;
 
     res = await repo.contentSearch(
@@ -48,8 +48,10 @@ class QuerySearchBloc {
             _searchSubject.sink.add(content);
           }
           _searching.sink.add(false);
-          logger.d(
-              "Search job took: ${(DateTime.now().millisecondsSinceEpoch - s) / 1000} seconds");
+          appLogger.log(LoggerTypes.DEBUG,
+              "Search job took: ${(DateTime
+                  .now()
+                  .millisecondsSinceEpoch - s) / 1000} seconds");
         }
         break;
       case 401:
@@ -67,7 +69,7 @@ class QuerySearchBloc {
   }
 
   dispose() {
-    logger.d('disposing search stream');
+    appLogger.log(LoggerTypes.DEBUG, 'disposing search stream');
     _searchSubject.close();
     _searching.close();
   }

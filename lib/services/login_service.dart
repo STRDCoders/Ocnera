@@ -22,7 +22,7 @@ class LoginService {
   }
 
   Future<void> saveAddress(String address) async {
-    logger.d('Saving $address');
+    appLogger.log(LoggerTypes.DEBUG, 'Saving $address');
     await secureStorage.saveData(StorageKeys.ADDRESS.value, address);
     repo.updateDio();
   }

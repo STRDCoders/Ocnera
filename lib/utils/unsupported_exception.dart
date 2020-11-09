@@ -5,7 +5,7 @@ class UnsupportedException implements Exception {
 
   UnsupportedException([String message = 'Unsupported Section']) {
     this._message = message;
-    logger.e(message);
+    appLogger.log(LoggerTypes.ERROR, message);
   }
 
   @override

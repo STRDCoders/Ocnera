@@ -33,13 +33,13 @@ class SecureStorage {
   }
 
   saveData(String key, String val) async {
-    logger.d("Saving secure data '$key' ");
+    appLogger.log(LoggerTypes.DEBUG, "Saving secure data '$key' ");
     _values[key] = val;
     await _storage.write(key: key, value: val);
   }
 
   Future<void> removeData(String key) async {
-    logger.d("removing $key");
+    appLogger.log(LoggerTypes.DEBUG, 'removing $key');
     _values.remove(key);
     await _storage.delete(key: key);
   }
@@ -47,7 +47,7 @@ class SecureStorage {
   Map<String, String> get values => _values;
 
   removeAllData() async {
-    logger.d("Deleting all saved data");
+    appLogger.log(LoggerTypes.DEBUG, 'Deleting all saved data');
     _values = Map();
     await _storage.deleteAll();
   }

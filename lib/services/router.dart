@@ -84,7 +84,7 @@ class RouterService {
 
 /// Register routes to main app
 Route<dynamic> generateRoute(RouteSettings settings) {
-  logger.d("Routing to: ${settings.name}");
+  appLogger.log(LoggerTypes.DEBUG, 'Routing to: ${settings.name}');
   // Using if/else instead of switch/case since case expressions must be constant, which is not the case
   if (settings.name == Routes.ROOT.value || settings.name == "/")
     return MaterialPageRoute(builder: (context) => RootPage());

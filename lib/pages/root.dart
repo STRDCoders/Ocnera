@@ -59,7 +59,7 @@ class _RootPageState extends State<RootPage> {
 
   @override
   void initState() {
-    logger.d('init root ');
+    appLogger.log(LoggerTypes.DEBUG, 'init root ');
     super.initState();
     if (loginManager.isServerConfigured()) loginManager.identify();
   }
@@ -67,6 +67,6 @@ class _RootPageState extends State<RootPage> {
   @override
   void dispose() {
     super.dispose();
-    logger.d('disposing root');
+    appLogger.log(LoggerTypes.DEBUG, 'disposing root');
   }
 }
