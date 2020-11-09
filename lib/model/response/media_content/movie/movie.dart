@@ -9,16 +9,27 @@ import 'package:ocnera/widgets/rating.dart';
 class MovieContent extends MediaContent {
   bool _adult;
   String _language;
+  String _plexUrl;
+  String _embyUrl;
 
   bool get adult => _adult;
 
+  get plexUrl => _plexUrl;
+
   get language => _language;
+
+  get embyUrl => _embyUrl;
 
   MovieContent.fromJson(Map<String, dynamic> json) {
     var contentStatus;
-    if (json['available'])
-      contentStatus = MediaContentStatus.AVAILABLE;
-    else if (json['requested'])
+    // Check plexUrl as well as the reported status, since sometimes the content
+    // may no longer be available but the status is still set as 'available'
+    if (json['available']) {
+      if (json['plexUrl'] != null || json['embyUrl'] != null)
+        contentStatus = MediaContentStatus.AVAILABLE;
+      else
+        contentStatus = MediaContentStatus.REMOVED;
+    } else if (json['requested'])
       contentStatus = MediaContentStatus.REQUESTED;
     else
       contentStatus = MediaContentStatus.MISSING;
@@ -39,6 +50,8 @@ class MovieContent extends MediaContent {
 
     this._adult = json['adult'];
     this._language = json['originalLanguage'];
+    this._plexUrl = json['plexUrl'];
+    this._embyUrl = json['embyUrl'];
   }
 
   @override
