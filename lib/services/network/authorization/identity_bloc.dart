@@ -11,7 +11,7 @@ class IdentityBloc {
 
   identify() async {
     User res = await repo.getIdentity();
-    appLogger.log(LoggerTypes.DEBUG, "response for login: $res");
+    appLogger.log(LoggerTypes.DEBUG, 'response for login: $res');
     switch (res.statusCode) {
       case 200:
         {
@@ -22,13 +22,13 @@ class IdentityBloc {
       case 401:
         {
           _identitySubject.sink.addError(NetworkError(
-              res.statusCode, "One of the credentials is incorrect!"));
+              res.statusCode, 'One of the credentials is incorrect!'));
         }
         break;
       default:
         {
           _identitySubject.sink.addError(
-              NetworkError(res.statusCode, "An unknown error has occurred."));
+              NetworkError(res.statusCode, 'An unknown error has occurred.'));
           //TODO - Sink error
         }
     }

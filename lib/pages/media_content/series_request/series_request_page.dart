@@ -56,7 +56,7 @@ class _SeriesRequestSelectionState extends State<SeriesRequestPage> {
   @override
   void dispose() {
     super.dispose();
-    appLogger.log(LoggerTypes.DEBUG, "Disposing series requests");
+    appLogger.log(LoggerTypes.DEBUG, 'Disposing series requests');
     _streamSubscription.forEach((sub) => sub.cancel());
     _requests.close();
   }
@@ -99,7 +99,7 @@ class _SeriesRequestSelectionState extends State<SeriesRequestPage> {
                             height: 30,
                             child: FlatButton(
                               child: Text(
-                                "Select All",
+                                'Select All',
                                 style: TextStyle(fontSize: 10),
                               ),
                               onPressed: requestAll,
@@ -115,7 +115,7 @@ class _SeriesRequestSelectionState extends State<SeriesRequestPage> {
                                     )
                                   : FlatButton(
                                       child: Text(
-                                        "Submit",
+                                        'Submit',
                                         style: TextStyle(fontSize: 10),
                                       ),
                                       onPressed: submitRequest,

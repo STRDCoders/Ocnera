@@ -87,7 +87,7 @@ class OcneraLogger {
     var fileStats = file.statSync();
     final now = DateTime.now();
     var date = fileStats.modified;
-    if (now.difference(date).inHours >= fileCount) {
+    if (now.difference(date).inDays >= fileCount) {
       return true;
     }
     return false;

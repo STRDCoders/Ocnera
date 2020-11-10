@@ -49,21 +49,19 @@ class QuerySearchBloc {
           }
           _searching.sink.add(false);
           appLogger.log(LoggerTypes.DEBUG,
-              "Search job took: ${(DateTime
-                  .now()
-                  .millisecondsSinceEpoch - s) / 1000} seconds");
+              'Search job took: ${(DateTime.now().millisecondsSinceEpoch - s) / 1000} seconds');
         }
         break;
       case 401:
         {
           _searchSubject.sink.addError(NetworkError(
-              res.statusCode, "One of the credentials is incorrect!"));
+              res.statusCode, 'One of the credentials is incorrect!'));
         }
         break;
       default:
         {
           _searchSubject.sink.addError(
-              NetworkError(res.statusCode, "An unknown error has occurred."));
+              NetworkError(res.statusCode, 'An unknown error has occurred.'));
         }
     }
   }
