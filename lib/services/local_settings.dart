@@ -38,8 +38,7 @@ class LocalSettings {
 
   Future<void> _createDefault(key, value) async {
     var type = value.runtimeType.toString();
-    print("Key: $key , Val: $value, Type: $type");
-    print(type);
+    appLogger.log(LoggerTypes.DEBUG, 'Key: $key , Val: $value, Type: $type');
     switch (type) {
       case 'bool':
         await _prefs.setBool(key, value);
@@ -81,7 +80,8 @@ class LocalSettings {
   Future<void> _setDefault() async {
     _defaultValues.forEach((key, value) async {
       if (!_prefs.containsKey(key.value)) {
-        logger.d("CREATING CONFIG FOR: ${key.value}, value: $value");
+        appLogger.log(LoggerTypes.DEBUG,
+            'CREATING CONFIG FOR: ${key.value}, value: $value');
         await _createDefault(key.value, value);
       }
     });

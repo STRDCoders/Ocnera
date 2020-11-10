@@ -1,4 +1,5 @@
 import 'package:ocnera/services/network/repository.dart';
+import 'package:ocnera/utils/logger.dart';
 import 'package:rxdart/rxdart.dart';
 
 class ConnectionTestBloc {
@@ -8,7 +9,7 @@ class ConnectionTestBloc {
 
   connect(String address) async {
     bool res = await repo.testConnection(address);
-    print("Server status response is $res");
+    appLogger.log(LoggerTypes.DEBUG, "Server status response is $res");
     _connectionTestSubject.sink.add(res);
   }
 

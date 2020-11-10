@@ -12,6 +12,7 @@ import 'package:ocnera/model/screen_arguments/series_requests_episode.dart';
 import 'package:ocnera/pages/media_content/series_request/season_panel.dart';
 import 'package:ocnera/pages/media_content/series_request/season_panel_tile.dart';
 import 'package:ocnera/services/request_service.dart';
+import 'package:ocnera/utils/logger.dart';
 import 'package:ocnera/utils/theme.dart';
 import 'package:rxdart/rxdart.dart';
 
@@ -55,7 +56,7 @@ class _SeriesRequestSelectionState extends State<SeriesRequestPage> {
   @override
   void dispose() {
     super.dispose();
-    print("Disposing series requests");
+    appLogger.log(LoggerTypes.DEBUG, 'Disposing series requests');
     _streamSubscription.forEach((sub) => sub.cancel());
     _requests.close();
   }
@@ -98,7 +99,7 @@ class _SeriesRequestSelectionState extends State<SeriesRequestPage> {
                             height: 30,
                             child: FlatButton(
                               child: Text(
-                                "Select All",
+                                'Select All',
                                 style: TextStyle(fontSize: 10),
                               ),
                               onPressed: requestAll,
@@ -114,7 +115,7 @@ class _SeriesRequestSelectionState extends State<SeriesRequestPage> {
                                     )
                                   : FlatButton(
                                       child: Text(
-                                        "Submit",
+                                        'Submit',
                                         style: TextStyle(fontSize: 10),
                                       ),
                                       onPressed: submitRequest,

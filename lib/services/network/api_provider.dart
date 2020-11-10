@@ -40,14 +40,14 @@ class ApiProvider implements RepositoryAPI {
 
   void updateDio() {
     String url =
-    UtilsImpl.buildLink(secureStorage.values[StorageKeys.ADDRESS.value]);
-    print('Dio Using IP: $url');
+        UtilsImpl.buildLink(secureStorage.values[StorageKeys.ADDRESS.value]);
+    appLogger.log(LoggerTypes.DEBUG, 'Dio Using IP: $url');
     this._httpClient = new Dio(fetchBaseOptions(url));
   }
 
   Future<LoginResponseDto> login(LoginRequest loginRequestPodo) async {
     try {
-      print(
+      appLogger.log(LoggerTypes.DEBUG,
           'Logging in... using link: ${GlobalConfiguration().getValue(
               'API_LINK_LOGIN_LOGIN')}');
       Response response = await _httpClient.post(
@@ -55,8 +55,9 @@ class ApiProvider implements RepositoryAPI {
           data: loginRequestPodo);
       return LoginResponseDto.fromJson(
           response.data, loginRequestPodo.username);
-    } on DioError catch (e) {
-      print(e);
+    } on DioError catch (e, s) {
+      appLogger.log(LoggerTypes.ERROR, 'Error caught:',
+          stacktrace: s, exception: e);
       switch (e.type) {
         case DioErrorType.RESPONSE:
           {
@@ -77,6 +78,7 @@ class ApiProvider implements RepositoryAPI {
           .get(GlobalConfiguration().getValue('API_LINK_IDENTITY_CURRENT'));
       return User.fromJson(response.data);
     } on DioError catch (e) {
+      appLogger.log(LoggerTypes.WARNING, 'Wrong credentials!');
       switch (e.type) {
         case DioErrorType.RESPONSE:
           {
@@ -98,7 +100,9 @@ class ApiProvider implements RepositoryAPI {
       Response response = await tmpClient
           .get(GlobalConfiguration().getValue('API_LINK_CONNECTION_TEST'));
       return response.statusCode == 200;
-    } on DioError {
+    } on DioError catch (e) {
+      appLogger.log(LoggerTypes.ERROR, 'Error caught: ${e.message}',
+          exception: e);
       return false;
     }
   }
@@ -125,8 +129,8 @@ class ApiProvider implements RepositoryAPI {
       res.data.forEach((e) => {if (e['id'] != 0) content.add(e['id'])});
 
       return ContentWrapper(200, content);
-    } on DioError catch (e) {
-      print(e);
+    } on DioError catch (e, s) {
+      appLogger.log(LoggerTypes.ERROR, 'Error caught: ${e.message}\n$s');
       switch (e.type) {
         case DioErrorType.RESPONSE:
           {
@@ -146,7 +150,7 @@ class ApiProvider implements RepositoryAPI {
       num contentID, MediaContentType type) async {
     Response res = await _httpClient.get('${type.infoLink}/$contentID');
     if (res.statusCode != 200) {
-      logger.e(
+      appLogger.log(LoggerTypes.ERROR,
           'Content search: $contentID($type) returned status code: ${res
               .statusCode}');
       return null;
@@ -169,10 +173,9 @@ class ApiProvider implements RepositoryAPI {
     try {
       Response response =
       await _httpClient.post(type.requestLink, data: request.toJson());
-      print(response.data);
       return MediaContentRequestResponse.fromJson(response.data, request.id);
-    } on DioError catch (e) {
-      print(e);
+    } on DioError catch (e, s) {
+      appLogger.log(LoggerTypes.ERROR, 'Error caught: ${e.message}\n$s');
       switch (e.type) {
         case DioErrorType.RESPONSE:
           {

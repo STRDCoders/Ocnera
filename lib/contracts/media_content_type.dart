@@ -87,7 +87,6 @@ extension ContentTypeExtention on MediaContentType {
           throw UnsupportedException();
       }
     } catch (e) {
-      print(e);
       return null;
     }
   }

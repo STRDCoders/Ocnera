@@ -16,7 +16,6 @@ class RequestContentBloc {
       MediaContent content, MediaContentRequest request) async {
     MediaContentRequestResponse res =
         await repo.requestContent(request, content.contentType);
-    print(res);
     if (res.statusCode != 200 || res.isError) {
       _requestSubject.sink.addError(res);
       return;

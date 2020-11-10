@@ -5,6 +5,7 @@ import 'package:ocnera/model/response/user.dart';
 import 'package:ocnera/pages/page_container.dart';
 import 'package:ocnera/services/login_service.dart';
 import 'package:ocnera/services/router.dart';
+import 'package:ocnera/utils/logger.dart';
 
 ///
 /// This widget determines whether the user is logged in,
@@ -28,11 +29,9 @@ class _RootPageState extends State<RootPage> {
           switch (snapshot.connectionState) {
             case ConnectionState.active:
               if (snapshot.hasError) {
-                print('Switching to Login page');
                 WidgetsBinding.instance.addPostFrameCallback(
                         (_) => RouterService.navigate(context, Routes.LOGIN));
               } else if (snapshot.hasData) {
-                print('Switching to Search Page');
                 WidgetsBinding.instance.addPostFrameCallback(
                         (_) => RouterService.navigate(context, Routes.SEARCH));
               }
@@ -60,7 +59,7 @@ class _RootPageState extends State<RootPage> {
 
   @override
   void initState() {
-    print('init root ');
+    appLogger.log(LoggerTypes.DEBUG, 'init root ');
     super.initState();
     if (loginManager.isServerConfigured()) loginManager.identify();
   }
@@ -68,6 +67,6 @@ class _RootPageState extends State<RootPage> {
   @override
   void dispose() {
     super.dispose();
-    print('disposing root');
+    appLogger.log(LoggerTypes.DEBUG, 'disposing root');
   }
 }
