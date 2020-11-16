@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -99,7 +100,7 @@ class _SeriesRequestSelectionState extends State<SeriesRequestPage> {
                             height: 30,
                             child: FlatButton(
                               child: Text(
-                                'Select All',
+                                'SELECT_ALL'.tr(),
                                 style: TextStyle(fontSize: 10),
                               ),
                               onPressed: requestAll,
@@ -115,7 +116,7 @@ class _SeriesRequestSelectionState extends State<SeriesRequestPage> {
                                     )
                                   : FlatButton(
                                       child: Text(
-                                        'Submit',
+                                        'SUBMIT'.tr(),
                                         style: TextStyle(fontSize: 10),
                                       ),
                                       onPressed: submitRequest,

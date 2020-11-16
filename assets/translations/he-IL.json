@@ -34,5 +34,12 @@
   "RESET_BUTTON_CONFIRM": "אשר",
   "RESET_SUCCESSFUL": "האיפוס להגדרות ברירת המחדל הסתיים בהצלחה!",
   "CONTENT_REQUEST_SUCCESSFULLY": "בקשת התוכן בוצעה!",
-  "UNEXPECTED_ERROR": "ארעה שגיאה בלתי צפויה!"
+  "UNEXPECTED_ERROR": "ארעה שגיאה בלתי צפויה!",
+  "WRONG_CREDENTIALS": "אחד הפרטים שהכנסת שגוי!",
+  "UNKNOWN_ERROR": "ארעה שגיאה לא ידועה.",
+  "SELECT_ALL": "בחר הכל",
+  "SUBMIT": "שלח",
+  "SEASON": "עונה",
+  "CANCEL": "בטל",
+  "EPISODES_SELECTED": "פרקים נבחרו"
 }

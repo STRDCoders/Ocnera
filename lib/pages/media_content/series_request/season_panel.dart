@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:ocnera/contracts/media_content_status.dart';
 import 'package:ocnera/model/response/media_content/series/episode.dart';
@@ -17,18 +18,17 @@ class SeasonExpansionPanel {
   List<num> missingEpisodes = List();
   final PublishSubject<EpisodeRequestAction> notifyRequest;
 
-  SeasonExpansionPanel(
-      {this.expended = false,
-      @required this.season,
-      @required this.requestList,
-      @required this.notifyRequest}) {
+  SeasonExpansionPanel({this.expended = false,
+    @required this.season,
+    @required this.requestList,
+    @required this.notifyRequest}) {
     season.episodes.forEach((element) {
       if (element.status == MediaContentStatus.MISSING)
         missingEpisodes.add(element.number);
     });
   }
 
-  Widget get header => Text("Season ${season.number}");
+  Widget get header => Text('${'SEASON'.tr()} ${season.number}');
 
   Widget get body => _buildBody();
 
@@ -46,11 +46,10 @@ class SeasonExpansionPanelUI extends StatefulWidget {
   final List<num> requestList;
   final PublishSubject<EpisodeRequestAction> notifyRequest;
 
-  const SeasonExpansionPanelUI(
-      {Key key,
-      @required this.season,
-      @required this.requestList,
-      @required this.notifyRequest})
+  const SeasonExpansionPanelUI({Key key,
+    @required this.season,
+    @required this.requestList,
+    @required this.notifyRequest})
       : super(key: key);
 
   @override
@@ -75,7 +74,7 @@ class _SeasonExpansionPanelUIState extends State<SeasonExpansionPanelUI> {
           child: ListView.builder(
             itemBuilder: (BuildContext context, int index) {
               bool requested =
-                  widget.requestList.contains(episodes[index].number);
+              widget.requestList.contains(episodes[index].number);
               return ListTile(
                 title: Text(episodes[index].title),
                 leading: Text(
@@ -84,22 +83,22 @@ class _SeasonExpansionPanelUIState extends State<SeasonExpansionPanelUI> {
                 trailing: (episodes[index].status != MediaContentStatus.MISSING)
                     ? null
                     : IconButton(
-                        icon:
-                            (requested) ? Icon(Icons.remove) : Icon(Icons.add),
-                        onPressed: () {
-                          if (requested) {
-                            widget.notifyRequest.sink.add(EpisodeRequestAction(
-                                remove: true,
-                                seasonId: widget.season.number,
-                                episodeId: episodes[index].number));
-                            return;
-                          }
-                          widget.notifyRequest.sink.add(EpisodeRequestAction(
-                              remove: false,
-                              seasonId: widget.season.number,
-                              episodeId: episodes[index].number));
-                        },
-                      ),
+                  icon:
+                  (requested) ? Icon(Icons.remove) : Icon(Icons.add),
+                  onPressed: () {
+                    if (requested) {
+                      widget.notifyRequest.sink.add(EpisodeRequestAction(
+                          remove: true,
+                          seasonId: widget.season.number,
+                          episodeId: episodes[index].number));
+                      return;
+                    }
+                    widget.notifyRequest.sink.add(EpisodeRequestAction(
+                        remove: false,
+                        seasonId: widget.season.number,
+                        episodeId: episodes[index].number));
+                  },
+                ),
                 subtitle: Text(episodes[index].status.title),
               );
             },

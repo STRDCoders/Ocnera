@@ -34,5 +34,12 @@
   "RESET_BUTTON_CONFIRM": "Confirm",
   "RESET_SUCCESSFUL": "The Settings reset completed successfully!",
   "CONTENT_REQUEST_SUCCESSFULLY": "Content has been requested!",
-  "UNEXPECTED_ERROR": "An unexpected error has occurred!"
+  "UNEXPECTED_ERROR": "An unexpected error has occurred!",
+  "WRONG_CREDENTIALS": "One of the credentials is incorrect!",
+  "UNKNOWN_ERROR": "An unknown error has occurred.",
+  "SELECT_ALL": "Select All",
+  "SUBMIT": "Submit",
+  "SEASON": "Season",
+  "CANCEL": "Cancel",
+  "EPISODES_SELECTED": "episodes selected"
 }
