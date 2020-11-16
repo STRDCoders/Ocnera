@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:ocnera/model/network_error.dart';
 import 'package:ocnera/model/response/user.dart';
 import 'package:ocnera/services/network/repository.dart';
@@ -21,14 +22,14 @@ class IdentityBloc {
         break;
       case 401:
         {
-          _identitySubject.sink.addError(NetworkError(
-              res.statusCode, 'One of the credentials is incorrect!'));
+          _identitySubject.sink
+              .addError(NetworkError(res.statusCode, 'WRONG_CREDENTIALS'.tr()));
         }
         break;
       default:
         {
-          _identitySubject.sink.addError(
-              NetworkError(res.statusCode, 'An unknown error has occurred.'));
+          _identitySubject.sink
+              .addError(NetworkError(res.statusCode, 'UNKNOWN_ERROR'.tr()));
           //TODO - Sink error
         }
     }

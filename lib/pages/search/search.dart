@@ -5,6 +5,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:ocnera/generated/locale_keys.g.dart';
 import 'package:ocnera/pages/search/content_card.dart';
 import 'package:ocnera/services/animation/particle_painter.dart';
 import 'package:ocnera/services/request_service.dart';
@@ -83,7 +84,7 @@ class _SearchPageState extends State<SearchPage> {
                                 child: Column(
                                   children: <Widget>[
                                     Text(
-                                      'NO_RESULTS'.tr(),
+                                      LocaleKeys.NO_RESULTS.tr(),
                                       style: TextStyle(fontSize: 18),
                                     )
                                   ],
@@ -101,11 +102,16 @@ class _SearchPageState extends State<SearchPage> {
     _topBar = TopBar(scanTrigger: _rescanSubject.stream);
     _subscription.add(requestManager.requestStream.listen((data) {
       setState(() {});
-      WidgetsBinding.instance.addPostFrameCallback((_) => Scaffold.of(context)
-          .showSnackBar(SnackBar(
+      WidgetsBinding.instance.addPostFrameCallback(
+          (_) => Scaffold.of(context).showSnackBar(SnackBar(
               content: Text(data.message != null
                   ? data.message
-                  : "Content has been requested!"))));
+                  // ----------------------------------------------------------------------------------------------------------------
+                  // --TODO: is this more readable than 'CONTENT_REQUEST_SUCCESSFULLY'.tr()                                        --
+                  // --To auto generate code completion we need to use command:                                                    --
+                  // --flutter pub run easy_localization:generate -f keys -o locale_keys.g.dart --source-dir ./assets/translations/--
+                  // ----------------------------------------------------------------------------------------------------------------
+                  : LocaleKeys.CONTENT_REQUEST_SUCCESSFULLY.tr()))));
     }));
     _subscription.add(contentSearchManager.isSearching.listen(_resetScroll));
     super.initState();

@@ -1,0 +1,49 @@
+// DO NOT EDIT. This is code generated via package:easy_localization/generate.dart
+
+abstract class LocaleKeys {
+  static const CONTENT_AVAILABLE = 'CONTENT_AVAILABLE';
+  static const CONTENT_PARTLY_AVAILABLE = 'CONTENT_PARTLY_AVAILABLE';
+  static const CONTENT_REQUEST = 'CONTENT_REQUEST';
+  static const CONTENT_MISSING = 'CONTENT_MISSING';
+  static const REQUEST_PROCESSING = 'REQUEST_PROCESSING';
+  static const LOGIN_TITLE = 'LOGIN_TITLE';
+  static const LOGIN_BUTTON = 'LOGIN_BUTTON';
+  static const SWITCH_SERVER = 'SWITCH_SERVER';
+  static const MOVIES = 'MOVIES';
+  static const SERIES = 'SERIES';
+  static const SEARCH_INPUT_PLACEHOLDER = 'SEARCH_INPUT_PLACEHOLDER';
+  static const USERNAME = 'USERNAME';
+  static const PASSWORD = 'PASSWORD';
+  static const SEARCH_PAGE = 'SEARCH_PAGE';
+  static const SETTINGS_PAGE = 'SETTINGS_PAGE';
+  static const LOADING = 'LOADING';
+  static const NO_RESULTS = 'NO_RESULTS';
+  static const SERVER_CONNECTION_ERROR = 'SERVER_CONNECTION_ERROR';
+  static const WELCOME = 'WELCOME';
+  static const ENTER_SERVER_ADDRESS = 'ENTER_SERVER_ADDRESS';
+  static const INFO_STORED_WARNING = 'INFO_STORED_WARNING';
+  static const SERVER_ADDRESS = 'SERVER_ADDRESS';
+  static const NEXT_BUTTON = 'NEXT_BUTTON';
+  static const SETTING_PAGE_TITLE = 'SETTING_PAGE_TITLE';
+  static const SEARCH_SYSTEM_TITLE = 'SEARCH_SYSTEM_TITLE';
+  static const SEARCH_DELAY = 'SEARCH_DELAY';
+  static const SEARCH_DELAY_INFO = 'SEARCH_DELAY_INFO';
+  static const DEFAULT_CONTENT = 'DEFAULT_CONTENT';
+  static const DEFAULT_CONTENT_INFO = 'DEFAULT_CONTENT_INFO';
+  static const RESET_DEFAULTS = 'RESET_DEFAULTS';
+  static const RESET_DEFAULTS_INFO = 'RESET_DEFAULTS_INFO';
+  static const RESET_BUTTON = 'RESET_BUTTON';
+  static const RESET_BUTTON_CONFIRM = 'RESET_BUTTON_CONFIRM';
+  static const RESET_SUCCESSFUL = 'RESET_SUCCESSFUL';
+  static const CONTENT_REQUEST_SUCCESSFULLY = 'CONTENT_REQUEST_SUCCESSFULLY';
+  static const UNEXPECTED_ERROR = 'UNEXPECTED_ERROR';
+  static const WRONG_CREDENTIALS = 'WRONG_CREDENTIALS';
+  static const UNKNOWN_ERROR = 'UNKNOWN_ERROR';
+  static const SELECT_ALL = 'SELECT_ALL';
+  static const SUBMIT = 'SUBMIT';
+  static const SEASON = 'SEASON';
+  static const CANCEL = 'CANCEL';
+  static const EPISODES_SELECTED = 'EPISODES_SELECTED';
+  static const CONTENT_REQUESTED_SUCCESSFULLY =
+      'CONTENT_REQUESTED_SUCCESSFULLY';
+}
