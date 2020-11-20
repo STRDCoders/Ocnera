@@ -5,7 +5,7 @@ name: Deployment
 on:
   push:
     branches:
-      - '*'
+      - 'test'
 
     # on: push    # Default will running for every branch.
 
