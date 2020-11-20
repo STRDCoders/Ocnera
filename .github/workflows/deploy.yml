@@ -35,9 +35,13 @@ jobs:
         run: |
           git config --global user.name 'STRDCoders'
           git config --global user.email 'strdcoders@users.noreply.github.com'
-          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
           git commit -am "Bump Release"
           git push
+      - name: Approve Pull Request
+        uses: juliangruber/approve-pull-request-action@v1
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          number: 1
   build:
     # This job will run on ubuntu virtual machine
     runs-on: ubuntu-latest
