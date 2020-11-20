@@ -8,7 +8,7 @@ on:
       - '*'
 
 jobs:
-  build:
+  tests:
     # This job will run on ubuntu virtual machine
     runs-on: ubuntu-latest
     steps:
