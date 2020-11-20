@@ -26,14 +26,9 @@ jobs:
         with:
           channel: 'beta' # 'dev', 'alpha', default to: 'stable'
           # flutter-version: '1.12.x' # you can also specify exact version of flutter
-
       # Get flutter dependencies.
       - run: flutter pub get
-      - run: pub global activate cider
-      - run: export PATH="$PATH:`pwd`/flutter/bin"
-      - run: export PATH="$PATH:`pwd`/bin/cache/dart-sdk/bin"
-      - run: export PATH="$PATH:`pwd`/.pub-cache/bin"
-      - run: cider bump patch
+      - run: flutter pub run cider bump patch
       # Build apk.
       - run: flutter build apk
 
