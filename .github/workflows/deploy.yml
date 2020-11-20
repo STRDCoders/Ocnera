@@ -29,7 +29,8 @@ jobs:
 
       # Get flutter dependencies.
       - run: flutter pub get
-
+      - run: pub global activate cider
+      - run: cider bump patch
       # Build apk.
       - run: flutter build apk
 
